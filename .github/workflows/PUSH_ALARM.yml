@@ -1,0 +1,30 @@
+name: slack alarm when master or dev is pushed
+
+on: 
+  push:
+    branches:
+      - master
+      - dev
+
+jobs:
+  Send_Slack_Alarm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Post to a slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          payload: |
+            {
+              "GITHUB_BRANCH" : "${{ steps.extract_branch.outputs.branch }}",
+              "GITHUB_REPOSITORY" : "${{ github.server_url }}/${{ github.repository }}/tree/${{ steps.extract_branch.outputs.branch }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
+
+

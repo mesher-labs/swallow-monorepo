@@ -1,0 +1,17 @@
+node_modules
+coverage
+coverage.json
+
+env
+
+.openzeppelin/unknown-31337.json
+.openzeppelin/unknown-1337.json
+
+#Hardhat files
+cache
+artifacts
+typechain
+
+.DS_Store
+
+./typechain

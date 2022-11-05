@@ -1,0 +1,6 @@
+node_modules
+artifacts
+cache
+coverage
+scripts/test/kleva-abi.ts
+scripts/test/getBytecode.ts

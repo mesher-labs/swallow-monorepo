@@ -1,0 +1,125 @@
+name: time-capsule continuous integration 
+
+on: pull_request
+
+jobs:
+  Contract_Build_Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.14.2"
+          cache: "yarn"
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/contract/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/contract/yarn.lock') }}
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/contract/artifacts"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/contract/hardhat.config.ts') }}
+
+      - name: Install Root dependencies
+        working-directory: .
+        run: yarn install --frozen-lockfile --production
+
+      - name: Install Contract dependencies
+        working-directory: ./contract
+        run: yarn install --frozen-lockfile -D
+
+      - name: Build
+        run: yarn build
+        working-directory: ./contract
+        env:
+          DEPLOYER_ACCOUNT: ${{ secrets.HARDHAT_LOCAL_DEPLOYER_ACCOUNT }}
+          DEPLOYER_PRIVATE_KEY: ${{ secrets.HARDHAT_LOCAL_DEPLOYER_PRIVATE_KEY }}
+          NETWORK: ${{ secrets.HARDHAT_NETWORK }}
+
+      - name: Test
+        run: yarn test
+        working-directory: ./contract
+        env:
+          DEPLOYER_ACCOUNT: ${{ secrets.HARDHAT_LOCAL_DEPLOYER_ACCOUNT }}
+          DEPLOYER_PRIVATE_KEY: ${{ secrets.HARDHAT_LOCAL_DEPLOYER_PRIVATE_KEY }}
+          NETWORK: ${{ secrets.HARDHAT_NETWORK }}
+      
+      - name: Report to slack when fail
+        id: slack
+        if: job.status == 'failure'
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          payload: |
+            {
+              "GITHUB_URL" : "${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL_GITHUB_ACTION_FAILURE}}
+
+  Client_Build_Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.14.2"
+          cache: "yarn"
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/client/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/client/yarn.lock') }}
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/client/.next"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/client/next.config.js') }}
+
+      - name: Install Root dependencies
+        working-directory: .
+        run: yarn install --frozen-lockfile --production
+
+      - name: Install Client dependencies
+        working-directory: ./client
+        run: yarn install --frozen-lockfile -D
+
+      - name: Test
+        working-directory: ./client
+        run: yarn test
+
+      - name: Build
+        env:
+          NODE_ENV: production
+          NETWORK: cypress
+        working-directory: ./client
+        run: yarn build
+      
+      - name: Report to slack when fail
+        id: slack
+        if: job.status == 'failure'
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          payload: |
+            {
+              "GITHUB_URL" : "${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL_GITHUB_ACTION_FAILURE}}
