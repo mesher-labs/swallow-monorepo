@@ -3,7 +3,7 @@ import { AxiosRequestConfig } from "axios";
 import { URLS } from "../constants/urls";
 import qs from 'qs'
 
-interface SwapQuoteParams {
+export interface SwapQuoteParams {
   sellToken: string;
   buyToken: string,
   sellAmount: string,
@@ -20,4 +20,5 @@ class ZeroXApiService extends BaseApiService {
     return this.axiosInstance.get(`swap/v1/quote?${qs.stringify(params)}`, config);
   }
 }
+
 export default new ZeroXApiService();
