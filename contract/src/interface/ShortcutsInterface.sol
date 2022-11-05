@@ -7,8 +7,7 @@ interface ShortcutsInterface {
     }
 
     /// @dev selector and contractAddr is only for ShortCutType.Transaction
-    struct ShortCutsDto {
-        string id;
+    struct ShortCut {
         string name;
         string endpoint;
         string selector;
@@ -17,9 +16,9 @@ interface ShortcutsInterface {
         string shortCutsType;
     }
 
-    function getAllShortCuts() external view returns (ShortCutsDto[] memory shortcuts);
+    function getAllShortCuts() external view returns (ShortCut[] memory);
 
-    function getShortCutsWithID(string memory id) external view returns (ShortCutsDto memory shortcuts);
+    function getShortCutByIndex(uint256 index) external view returns (ShortCut memory);
 
-    function addShortCuts(ShortCutsDto memory shortcut) external;
+    function addShortCut(ShortCut memory dto) external;
 }
