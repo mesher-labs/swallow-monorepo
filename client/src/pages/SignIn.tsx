@@ -31,9 +31,10 @@ const S = {
     border-radius: 34.5px;
     background: transparent;
     margin-top: 30px;
-    /* padding-top: 22px;
-    padding-left: 30px; */
+    padding-left: 30px;
     color: ${COLORS.darkGray};
+    font-weight: 400;
+    font-size: 24px;
     width: 100%;
     height: 69px;
   `,
@@ -48,6 +49,7 @@ const S = {
     margin-top: 44px;
     font-size: 28px;
     font-weight: 700;
+    cursor: pointer;
   `,
 };
 export const SignIn = () => (
@@ -56,7 +58,7 @@ export const SignIn = () => (
     <S.SubTitle>Swallowing all DeFi</S.SubTitle>
     <S.Form>
       <S.FormTitle>Make your own tag of address</S.FormTitle>
-      <S.FormInput />
+      <S.FormInput placeholder="ex) @eth_sf" />
       <S.FormButton>sign in</S.FormButton>
     </S.Form>
   </>
