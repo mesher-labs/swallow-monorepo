@@ -9,8 +9,8 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      {/* <Header /> */}
-      <SignIn />
+      <Header />
+      {/* <SignIn /> */}
     </>
   );
 }
