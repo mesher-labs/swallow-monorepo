@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { COLORS } from "../../common/constants/colors"
+import date from 'date-and-time';
 
 const S = {
   Title: styled.h1`
@@ -14,9 +15,12 @@ const S = {
   `,
 }
 
-export const RightHeader = () => (
-  <div>
-    <S.SubTitle>Friday, Nov 05</S.SubTitle>
-    <S.Title>2:36</S.Title>
-  </div>
-)
+export const RightHeader = () => {
+  const now = new Date();
+  return (
+    <div>
+      <S.SubTitle>{date.format(now, 'dddd, MMM DD')}</S.SubTitle>
+      <S.Title>{date.format(now, 'H:m')}</S.Title>
+    </div>
+  )
+}

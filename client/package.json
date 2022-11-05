@@ -11,7 +11,11 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "axios": "^1.1.3",
+<<<<<<< HEAD
     "lodash-es": "^4.17.21",
+=======
+    "date-and-time": "^2.4.1",
+>>>>>>> 70b75ffdd72ae6d495ac9e74789ed2d1d86f899c
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
