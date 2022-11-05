@@ -22,8 +22,7 @@ enum Command {
   COMPILE = "compile",
   TEST = "test",
 }
-const { NETWORK, DEPLOYER_ACCOUNT, DEPLOYER_PRIVATE_KEY, CHAIN_ID, RPC_URL, PROVIDER_API_ID, PROVIDER_API_KEY } =
-  process.env;
+const { NETWORK, DEPLOYER_ACCOUNT, DEPLOYER_PRIVATE_KEY, CHAIN_ID, RPC_URL } = process.env;
 
 async function validateENV() {
   const isBuilding = process.argv[2] === Command.COMPILE;
@@ -42,7 +41,7 @@ async function validateENV() {
       throw new Error("env is empty");
     }
     if (NETWORK === Network.mumbai.toString() || NETWORK === Network.polygon.toString()) {
-      if (!PROVIDER_API_ID || !PROVIDER_API_KEY) {
+      if (!RPC_URL) {
         throw new Error("env is empty");
       }
     }
@@ -81,14 +80,14 @@ const config: HardhatUserConfig = {
       tags: ["hardhat", "test"],
       chainId: 1337,
     },
-    // mumbai: {
-    //   url: process.env.RPC_URL || "",
-    //   accounts: [process.env.PRIVATE_KEY || "0"],
-    // },
-    // polygon: {
-    //   url: process.env.RPC_URL || "",
-    //   accounts: [process.env.PRIVATE_KEY || "0"],
-    // },
+    mumbai: {
+      url: process.env.RPC_URL || "",
+      accounts: [process.env.DEPLOYER_PRIVATE_KEY || "0"],
+    },
+    polygon: {
+      url: process.env.RPC_URL || "",
+      accounts: [process.env.DEPLOYER_PRIVATE_KEY || "0"],
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
