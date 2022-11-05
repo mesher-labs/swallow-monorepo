@@ -1,0 +1,123 @@
+[
+  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "string", "name": "endpoint", "type": "string" },
+          { "internalType": "string", "name": "selector", "type": "string" },
+          {
+            "internalType": "address",
+            "name": "contractAddr",
+            "type": "address"
+          },
+          {
+            "components": [
+              { "internalType": "string", "name": "name", "type": "string" },
+              { "internalType": "string", "name": "value", "type": "string" }
+            ],
+            "internalType": "struct ShortcutsInterface.UserParams[]",
+            "name": "userParams",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "string",
+            "name": "shortCutsType",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct ShortcutsInterface.ShortCut",
+        "name": "dto",
+        "type": "tuple"
+      }
+    ],
+    "name": "addShortCut",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "admin",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllShortCuts",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "string", "name": "endpoint", "type": "string" },
+          { "internalType": "string", "name": "selector", "type": "string" },
+          {
+            "internalType": "address",
+            "name": "contractAddr",
+            "type": "address"
+          },
+          {
+            "components": [
+              { "internalType": "string", "name": "name", "type": "string" },
+              { "internalType": "string", "name": "value", "type": "string" }
+            ],
+            "internalType": "struct ShortcutsInterface.UserParams[]",
+            "name": "userParams",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "string",
+            "name": "shortCutsType",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct ShortcutsInterface.ShortCut[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "index", "type": "uint256" }
+    ],
+    "name": "getShortCutByIndex",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "string", "name": "endpoint", "type": "string" },
+          { "internalType": "string", "name": "selector", "type": "string" },
+          {
+            "internalType": "address",
+            "name": "contractAddr",
+            "type": "address"
+          },
+          {
+            "components": [
+              { "internalType": "string", "name": "name", "type": "string" },
+              { "internalType": "string", "name": "value", "type": "string" }
+            ],
+            "internalType": "struct ShortcutsInterface.UserParams[]",
+            "name": "userParams",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "string",
+            "name": "shortCutsType",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct ShortcutsInterface.ShortCut",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
