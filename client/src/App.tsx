@@ -50,12 +50,14 @@ function App() {
           <LNB />
           <Home />
         </Layout> */}
-        <SignIn />
-        {/* <AddBuyShortCut/> */}
-        {/* <AddSendShortCut/> */}
-        {/* <AddAaveApyShortcut /> */}
-        {/* <AddTokenBalanceShortcut /> */}
-        {/* <LNB/> */}
+        <div style={{display: 'flex', marginTop: '50px'}}>
+          <LNB/>
+          {/* <AddBuyShortCut/> */}
+          {/* <SignIn /> */}
+          {/* <AddSendShortCut/> */}
+          {/* <AddAaveApyShortcut /> */}
+          <AddTokenBalanceShortcut />
+        </div>
       </Web3Provider>
     </>
   );

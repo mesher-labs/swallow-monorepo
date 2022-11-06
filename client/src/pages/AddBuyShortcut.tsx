@@ -59,7 +59,7 @@ export const AddBuyShortCut = () => {
     });
 
   return (
-    <>
+    <div style={{marginLeft: '50px', width: '100vw'}}>
       <S.Title>Add Buy ShortCuts</S.Title>
       <div style={{ display: "flex", marginTop: "67px", alignItems: "center" }}>
         <S.SubTitle>Buy</S.SubTitle>
@@ -85,6 +85,6 @@ export const AddBuyShortCut = () => {
         ></TokenDropDownInput>
       </div>
       <AddShortCutButton onClickHandler={() => console.log(shortCutData)}/>
-    </>
+    </div>
   );
 };

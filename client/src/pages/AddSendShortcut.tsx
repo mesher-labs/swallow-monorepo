@@ -57,7 +57,7 @@ export const AddSendShortCut = () => {
     });
 
   return (
-    <>
+    <div style={{marginLeft: '50px', width: '100vw'}}>
       <S.Title>Add Buy ShortCuts</S.Title>
       <div style={{ display: "flex", marginTop: "67px", alignItems: "center" }}>
         <S.SubTitle>Send</S.SubTitle>
@@ -84,6 +84,6 @@ export const AddSendShortCut = () => {
         ></TextInput>
       </div>
       <AddShortCutButton onClickHandler={() => console.log(shortCutData)} />
-    </>
+    </div>
   );
 };

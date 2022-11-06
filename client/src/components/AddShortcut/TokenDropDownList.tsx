@@ -8,6 +8,7 @@ const S = {
     border: 1px solid #5b5b5b;
     border-radius: 11px;
     overflow: scroll;
+    padding: 0;
   `,
   DropDownItem: styled.li`
     display: flex;

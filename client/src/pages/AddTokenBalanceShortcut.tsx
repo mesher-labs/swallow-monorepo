@@ -53,7 +53,7 @@ export const AddTokenBalanceShortcut = () => {
     setShortCutsState([...shortCutsState, { tokenSymbol: "" }]);
   };
   return (
-    <>
+    <div style={{marginLeft: '50px', width: '100vw'}}>
       <S.Title>Add Token Balance Shortcuts</S.Title>
       <S.Caption>
         *target Address: {nickName}({account})
@@ -126,6 +126,6 @@ export const AddTokenBalanceShortcut = () => {
         </div> */}
       </div>
       <AddShortCutButton onClickHandler={() => console.log("asdf")} />
-    </>
+    </div>
   );
 };

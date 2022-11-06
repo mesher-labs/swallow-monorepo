@@ -45,7 +45,7 @@ export const AddAaveApyShortcut = () => {
     setShortCutsState([...shortCutsState, { tokenSymbol: "" }]);
   };
   return (
-    <>
+    <div style={{marginLeft: '50px', width: '100vw'}}>
       <S.Title>Add Aave Current APY Shortcuts</S.Title>
       <S.Caption>*supply, borrow</S.Caption>
 
@@ -116,6 +116,6 @@ export const AddAaveApyShortcut = () => {
         </div> */}
       </div>
       <AddShortCutButton onClickHandler={() => console.log("asdf")} />
-    </>
+    </div>
   );
 };

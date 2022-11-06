@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { EventFragment } from "ethers/lib/utils";
 
 const iface =  new ethers.utils.Interface([
-  "function requestGTToMBXLSwap(uint amountIn, uint amountOutMin, address[] calldata path, address to) external"
+  "function approve(address spender, uint amount) external returns(bool)"
 ]);
 
 
