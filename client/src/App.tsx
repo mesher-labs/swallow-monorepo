@@ -27,7 +27,7 @@ export const Web3Provider = ({ children }: any) => {
     if (!window.ethereum) return alert("please install metamask first");
     window.ethereum.enable().then(() => {
       setWeb3(new Web3(window.ethereum));
-    })
+    });
   }, window.ethereum);
 
   const value = {
@@ -56,12 +56,11 @@ function App() {
         </Layout>
         {/* <SignIn /> */}
         <div style={{ display: "flex", marginTop: "50px" }}>
-          
           {/* <LNB /> */}
           {/* <AddBuyShortCut />  */}
           {/* <AddSendShortCut /> */}
-         
-          {/* <AddAaveApyShortcut /> */}
+
+          {/*<AddAaveApyShortcut />*/}
           {/* <AddTokenBalanceShortcut /> */}
         </div>
       </Web3Provider>
