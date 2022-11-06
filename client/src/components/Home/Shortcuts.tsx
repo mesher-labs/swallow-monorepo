@@ -5,6 +5,7 @@ import { CONTRACTS } from "../../common/constants/contracts";
 import localStorageService from "../../common/services/local-storage.service";
 import { TokenService } from "../../common/services/tokens.service";
 import txBuilderService from "../../common/services/tx-builder.service";
+import { useGetAaveCurrentAPY } from "../../hooks/react-query/query/useGetAaveCurrentAPY";
 import {
   ShortcutRes,
   UserParams,
@@ -16,7 +17,14 @@ interface ShortcutProps {
   myShortcut: ShortcutRes;
 }
 export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
-  // TODO : call to myShortcut endpoint for AaveCurrentAPY from TheGraph
+  const { userParams } = myShortcut;
+  const tokenAddresses = userParams.map((param) => param.value);
+  const { data: allAaveMarketDatas, isLoading } =
+    useGetAaveCurrentAPY(tokenAddresses);
+
+  if (isLoading || !allAaveMarketDatas) return <></>;
+  console.log("give me money", allAaveMarketDatas);
+
   return (
     <RectangleContainer backgroundColor="#B682F7">
       <div>
@@ -66,17 +74,17 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
   const onClickHanlder = async () => {
     console.log("object");
 
-    const allowanceTx = await txBuilderService.buildTx(web3, 'ALLOWANCE', {
-      token: parsedParams['sellToken'],
+    const allowanceTx = await txBuilderService.buildTx(web3, "ALLOWANCE", {
+      token: parsedParams["sellToken"],
       owner: account,
-      spender: CONTRACTS.ZERO_X_PROXY_CONTRACT
-    })
+      spender: CONTRACTS.ZERO_X_PROXY_CONTRACT,
+    });
 
     const allowance = await web3.eth.call(allowanceTx);
 
     const sellAmount = ethers.utils
-    .parseUnits(parsedParams["sellAmount"], 18)
-    .toString();
+      .parseUnits(parsedParams["sellAmount"], 18)
+      .toString();
 
     // if(allowance )
 
