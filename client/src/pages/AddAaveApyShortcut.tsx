@@ -9,6 +9,7 @@ import { COLORS } from "../common/constants/colors";
 import { TokenDropDownInput } from "../components/AddShortcut/TokenDropDownInput";
 import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
 import { ShortcutRes } from "../common/types/short-cuts.types";
+import { TokenService } from "../common/services/tokens.service";
 
 const S = {
   Title: styled.h1`
@@ -60,7 +61,14 @@ export const AddAaveApyShortcut = () => {
   };
 
   const addShortCutButtonHandler = () => {
-    localStorageService.add("myShortCut", shortCutsState);
+    const userParams = shortCutsState.map((state: ShortCutState) => {
+      const address = TokenService.findAddressBySymbol(state.tokenSymbol);
+      return {
+        name: state.tokenSymbol,
+        value: address,
+      };
+    });
+    localStorageService.add("myShortCut", userParams);
   };
 
   return (
