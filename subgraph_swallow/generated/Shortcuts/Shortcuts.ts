@@ -10,16 +10,44 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
-export class Shortcuts__getAllShortCutsResultValue0Struct extends ethereum.Tuple {
-  get name(): string {
-    return this[0].toString();
+export class AddShortcut extends ethereum.Event {
+  get params(): AddShortcut__Params {
+    return new AddShortcut__Params(this);
+  }
+}
+
+export class AddShortcut__Params {
+  _event: AddShortcut;
+
+  constructor(event: AddShortcut) {
+    this._event = event;
   }
 
-  get endpoint(): string {
+  get index(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get newShortcut(): AddShortcutNewShortcutStruct {
+    return changetype<AddShortcutNewShortcutStruct>(
+      this._event.parameters[1].value.toTuple()
+    );
+  }
+
+  get blockNum(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class AddShortcutNewShortcutStruct extends ethereum.Tuple {
+  get index(): BigInt {
+    return this[0].toBigInt();
+  }
+
+  get shortcutType(): string {
     return this[1].toString();
   }
 
-  get selector(): string {
+  get endpoint(): string {
     return this[2].toString();
   }
 
@@ -27,20 +55,16 @@ export class Shortcuts__getAllShortCutsResultValue0Struct extends ethereum.Tuple
     return this[3].toAddress();
   }
 
-  get userParams(): Array<
-    Shortcuts__getAllShortCutsResultValue0UserParamsStruct
-  > {
-    return this[4].toTupleArray<
-      Shortcuts__getAllShortCutsResultValue0UserParamsStruct
-    >();
+  get userParams(): Array<AddShortcutNewShortcutUserParamsStruct> {
+    return this[4].toTupleArray<AddShortcutNewShortcutUserParamsStruct>();
   }
 
-  get shortCutsType(): string {
-    return this[5].toString();
+  get isReady(): boolean {
+    return this[5].toBoolean();
   }
 }
 
-export class Shortcuts__getAllShortCutsResultValue0UserParamsStruct extends ethereum.Tuple {
+export class AddShortcutNewShortcutUserParamsStruct extends ethereum.Tuple {
   get name(): string {
     return this[0].toString();
   }
@@ -50,16 +74,48 @@ export class Shortcuts__getAllShortCutsResultValue0UserParamsStruct extends ethe
   }
 }
 
-export class Shortcuts__getShortCutByIndexResultValue0Struct extends ethereum.Tuple {
+export class SetIsReady extends ethereum.Event {
+  get params(): SetIsReady__Params {
+    return new SetIsReady__Params(this);
+  }
+}
+
+export class SetIsReady__Params {
+  _event: SetIsReady;
+
+  constructor(event: SetIsReady) {
+    this._event = event;
+  }
+
+  get index(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get newIsReady(): boolean {
+    return this._event.parameters[1].value.toBoolean();
+  }
+}
+
+export class Shortcuts__addShortcutInputUserParamsStruct extends ethereum.Tuple {
   get name(): string {
     return this[0].toString();
   }
 
-  get endpoint(): string {
+  get value(): string {
+    return this[1].toString();
+  }
+}
+
+export class Shortcuts__getAllShortcutsResultValue0Struct extends ethereum.Tuple {
+  get index(): BigInt {
+    return this[0].toBigInt();
+  }
+
+  get shortcutType(): string {
     return this[1].toString();
   }
 
-  get selector(): string {
+  get endpoint(): string {
     return this[2].toString();
   }
 
@@ -68,19 +124,59 @@ export class Shortcuts__getShortCutByIndexResultValue0Struct extends ethereum.Tu
   }
 
   get userParams(): Array<
-    Shortcuts__getShortCutByIndexResultValue0UserParamsStruct
+    Shortcuts__getAllShortcutsResultValue0UserParamsStruct
   > {
     return this[4].toTupleArray<
-      Shortcuts__getShortCutByIndexResultValue0UserParamsStruct
+      Shortcuts__getAllShortcutsResultValue0UserParamsStruct
     >();
   }
 
-  get shortCutsType(): string {
-    return this[5].toString();
+  get isReady(): boolean {
+    return this[5].toBoolean();
   }
 }
 
-export class Shortcuts__getShortCutByIndexResultValue0UserParamsStruct extends ethereum.Tuple {
+export class Shortcuts__getAllShortcutsResultValue0UserParamsStruct extends ethereum.Tuple {
+  get name(): string {
+    return this[0].toString();
+  }
+
+  get value(): string {
+    return this[1].toString();
+  }
+}
+
+export class Shortcuts__getShortcutByIndexResultValue0Struct extends ethereum.Tuple {
+  get index(): BigInt {
+    return this[0].toBigInt();
+  }
+
+  get shortcutType(): string {
+    return this[1].toString();
+  }
+
+  get endpoint(): string {
+    return this[2].toString();
+  }
+
+  get contractAddr(): Address {
+    return this[3].toAddress();
+  }
+
+  get userParams(): Array<
+    Shortcuts__getShortcutByIndexResultValue0UserParamsStruct
+  > {
+    return this[4].toTupleArray<
+      Shortcuts__getShortcutByIndexResultValue0UserParamsStruct
+    >();
+  }
+
+  get isReady(): boolean {
+    return this[5].toBoolean();
+  }
+}
+
+export class Shortcuts__getShortcutByIndexResultValue0UserParamsStruct extends ethereum.Tuple {
   get name(): string {
     return this[0].toString();
   }
@@ -93,6 +189,53 @@ export class Shortcuts__getShortCutByIndexResultValue0UserParamsStruct extends e
 export class Shortcuts extends ethereum.SmartContract {
   static bind(address: Address): Shortcuts {
     return new Shortcuts("Shortcuts", address);
+  }
+
+  addShortcut(
+    shortcutType: string,
+    endpoint: string,
+    contractAddr: Address,
+    userParams: Array<Shortcuts__addShortcutInputUserParamsStruct>,
+    isReady: boolean
+  ): BigInt {
+    let result = super.call(
+      "addShortcut",
+      "addShortcut(string,string,address,(string,string)[],bool):(uint256)",
+      [
+        ethereum.Value.fromString(shortcutType),
+        ethereum.Value.fromString(endpoint),
+        ethereum.Value.fromAddress(contractAddr),
+        ethereum.Value.fromTupleArray(userParams),
+        ethereum.Value.fromBoolean(isReady)
+      ]
+    );
+
+    return result[0].toBigInt();
+  }
+
+  try_addShortcut(
+    shortcutType: string,
+    endpoint: string,
+    contractAddr: Address,
+    userParams: Array<Shortcuts__addShortcutInputUserParamsStruct>,
+    isReady: boolean
+  ): ethereum.CallResult<BigInt> {
+    let result = super.tryCall(
+      "addShortcut",
+      "addShortcut(string,string,address,(string,string)[],bool):(uint256)",
+      [
+        ethereum.Value.fromString(shortcutType),
+        ethereum.Value.fromString(endpoint),
+        ethereum.Value.fromAddress(contractAddr),
+        ethereum.Value.fromTupleArray(userParams),
+        ethereum.Value.fromBoolean(isReady)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   admin(): Address {
@@ -110,24 +253,24 @@ export class Shortcuts extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
-  getAllShortCuts(): Array<Shortcuts__getAllShortCutsResultValue0Struct> {
+  getAllShortcuts(): Array<Shortcuts__getAllShortcutsResultValue0Struct> {
     let result = super.call(
-      "getAllShortCuts",
-      "getAllShortCuts():((string,string,string,address,(string,string)[],string)[])",
+      "getAllShortcuts",
+      "getAllShortcuts():((uint256,string,string,address,(string,string)[],bool)[])",
       []
     );
 
     return result[0].toTupleArray<
-      Shortcuts__getAllShortCutsResultValue0Struct
+      Shortcuts__getAllShortcutsResultValue0Struct
     >();
   }
 
-  try_getAllShortCuts(): ethereum.CallResult<
-    Array<Shortcuts__getAllShortCutsResultValue0Struct>
+  try_getAllShortcuts(): ethereum.CallResult<
+    Array<Shortcuts__getAllShortcutsResultValue0Struct>
   > {
     let result = super.tryCall(
-      "getAllShortCuts",
-      "getAllShortCuts():((string,string,string,address,(string,string)[],string)[])",
+      "getAllShortcuts",
+      "getAllShortcuts():((uint256,string,string,address,(string,string)[],bool)[])",
       []
     );
     if (result.reverted) {
@@ -135,30 +278,30 @@ export class Shortcuts extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      value[0].toTupleArray<Shortcuts__getAllShortCutsResultValue0Struct>()
+      value[0].toTupleArray<Shortcuts__getAllShortcutsResultValue0Struct>()
     );
   }
 
-  getShortCutByIndex(
+  getShortcutByIndex(
     index: BigInt
-  ): Shortcuts__getShortCutByIndexResultValue0Struct {
+  ): Shortcuts__getShortcutByIndexResultValue0Struct {
     let result = super.call(
-      "getShortCutByIndex",
-      "getShortCutByIndex(uint256):((string,string,string,address,(string,string)[],string))",
+      "getShortcutByIndex",
+      "getShortcutByIndex(uint256):((uint256,string,string,address,(string,string)[],bool))",
       [ethereum.Value.fromUnsignedBigInt(index)]
     );
 
-    return changetype<Shortcuts__getShortCutByIndexResultValue0Struct>(
+    return changetype<Shortcuts__getShortcutByIndexResultValue0Struct>(
       result[0].toTuple()
     );
   }
 
-  try_getShortCutByIndex(
+  try_getShortcutByIndex(
     index: BigInt
-  ): ethereum.CallResult<Shortcuts__getShortCutByIndexResultValue0Struct> {
+  ): ethereum.CallResult<Shortcuts__getShortcutByIndexResultValue0Struct> {
     let result = super.tryCall(
-      "getShortCutByIndex",
-      "getShortCutByIndex(uint256):((string,string,string,address,(string,string)[],string))",
+      "getShortcutByIndex",
+      "getShortcutByIndex(uint256):((uint256,string,string,address,(string,string)[],bool))",
       [ethereum.Value.fromUnsignedBigInt(index)]
     );
     if (result.reverted) {
@@ -166,7 +309,7 @@ export class Shortcuts extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      changetype<Shortcuts__getShortCutByIndexResultValue0Struct>(
+      changetype<Shortcuts__getShortcutByIndexResultValue0Struct>(
         value[0].toTuple()
       )
     );
@@ -199,70 +342,98 @@ export class ConstructorCall__Outputs {
   }
 }
 
-export class AddShortCutCall extends ethereum.Call {
-  get inputs(): AddShortCutCall__Inputs {
-    return new AddShortCutCall__Inputs(this);
+export class AddShortcutCall extends ethereum.Call {
+  get inputs(): AddShortcutCall__Inputs {
+    return new AddShortcutCall__Inputs(this);
   }
 
-  get outputs(): AddShortCutCall__Outputs {
-    return new AddShortCutCall__Outputs(this);
+  get outputs(): AddShortcutCall__Outputs {
+    return new AddShortcutCall__Outputs(this);
   }
 }
 
-export class AddShortCutCall__Inputs {
-  _call: AddShortCutCall;
+export class AddShortcutCall__Inputs {
+  _call: AddShortcutCall;
 
-  constructor(call: AddShortCutCall) {
+  constructor(call: AddShortcutCall) {
     this._call = call;
   }
 
-  get dto(): AddShortCutCallDtoStruct {
-    return changetype<AddShortCutCallDtoStruct>(
-      this._call.inputValues[0].value.toTuple()
-    );
-  }
-}
-
-export class AddShortCutCall__Outputs {
-  _call: AddShortCutCall;
-
-  constructor(call: AddShortCutCall) {
-    this._call = call;
-  }
-}
-
-export class AddShortCutCallDtoStruct extends ethereum.Tuple {
-  get name(): string {
-    return this[0].toString();
+  get shortcutType(): string {
+    return this._call.inputValues[0].value.toString();
   }
 
   get endpoint(): string {
-    return this[1].toString();
-  }
-
-  get selector(): string {
-    return this[2].toString();
+    return this._call.inputValues[1].value.toString();
   }
 
   get contractAddr(): Address {
-    return this[3].toAddress();
+    return this._call.inputValues[2].value.toAddress();
   }
 
-  get userParams(): Array<AddShortCutCallDtoUserParamsStruct> {
-    return this[4].toTupleArray<AddShortCutCallDtoUserParamsStruct>();
+  get userParams(): Array<AddShortcutCallUserParamsStruct> {
+    return this._call.inputValues[3].value.toTupleArray<
+      AddShortcutCallUserParamsStruct
+    >();
   }
 
-  get shortCutsType(): string {
-    return this[5].toString();
+  get isReady(): boolean {
+    return this._call.inputValues[4].value.toBoolean();
   }
 }
 
-export class AddShortCutCallDtoUserParamsStruct extends ethereum.Tuple {
+export class AddShortcutCall__Outputs {
+  _call: AddShortcutCall;
+
+  constructor(call: AddShortcutCall) {
+    this._call = call;
+  }
+
+  get value0(): BigInt {
+    return this._call.outputValues[0].value.toBigInt();
+  }
+}
+
+export class AddShortcutCallUserParamsStruct extends ethereum.Tuple {
   get name(): string {
     return this[0].toString();
   }
 
   get value(): string {
     return this[1].toString();
+  }
+}
+
+export class SetIsReadyCall extends ethereum.Call {
+  get inputs(): SetIsReadyCall__Inputs {
+    return new SetIsReadyCall__Inputs(this);
+  }
+
+  get outputs(): SetIsReadyCall__Outputs {
+    return new SetIsReadyCall__Outputs(this);
+  }
+}
+
+export class SetIsReadyCall__Inputs {
+  _call: SetIsReadyCall;
+
+  constructor(call: SetIsReadyCall) {
+    this._call = call;
+  }
+
+  get index(): BigInt {
+    return this._call.inputValues[0].value.toBigInt();
+  }
+
+  get newIsReady(): boolean {
+    return this._call.inputValues[1].value.toBoolean();
+  }
+}
+
+export class SetIsReadyCall__Outputs {
+  _call: SetIsReadyCall;
+
+  constructor(call: SetIsReadyCall) {
+    this._call = call;
   }
 }

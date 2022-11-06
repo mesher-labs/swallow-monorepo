@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class ShortCut extends Entity {
+export class Shortcut extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -19,18 +19,18 @@ export class ShortCut extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save ShortCut entity without an ID");
+    assert(id != null, "Cannot save Shortcut entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type ShortCut must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Shortcut must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("ShortCut", id.toString(), this);
+      store.set("Shortcut", id.toString(), this);
     }
   }
 
-  static load(id: string): ShortCut | null {
-    return changetype<ShortCut | null>(store.get("ShortCut", id));
+  static load(id: string): Shortcut | null {
+    return changetype<Shortcut | null>(store.get("Shortcut", id));
   }
 
   get id(): string {
@@ -42,13 +42,22 @@ export class ShortCut extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get name(): string {
-    let value = this.get("name");
+  get index(): BigInt {
+    let value = this.get("index");
+    return value!.toBigInt();
+  }
+
+  set index(value: BigInt) {
+    this.set("index", Value.fromBigInt(value));
+  }
+
+  get shortcutType(): string {
+    let value = this.get("shortcutType");
     return value!.toString();
   }
 
-  set name(value: string) {
-    this.set("name", Value.fromString(value));
+  set shortcutType(value: string) {
+    this.set("shortcutType", Value.fromString(value));
   }
 
   get endpoint(): string {
@@ -58,15 +67,6 @@ export class ShortCut extends Entity {
 
   set endpoint(value: string) {
     this.set("endpoint", Value.fromString(value));
-  }
-
-  get selector(): string {
-    let value = this.get("selector");
-    return value!.toString();
-  }
-
-  set selector(value: string) {
-    this.set("selector", Value.fromString(value));
   }
 
   get contractAddr(): Bytes {
@@ -87,13 +87,13 @@ export class ShortCut extends Entity {
     this.set("userParams", Value.fromStringArray(value));
   }
 
-  get shortCutsType(): string {
-    let value = this.get("shortCutsType");
-    return value!.toString();
+  get isReady(): boolean {
+    let value = this.get("isReady");
+    return value!.toBoolean();
   }
 
-  set shortCutsType(value: string) {
-    this.set("shortCutsType", Value.fromString(value));
+  set isReady(value: boolean) {
+    this.set("isReady", Value.fromBoolean(value));
   }
 }
 

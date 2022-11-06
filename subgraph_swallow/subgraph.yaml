@@ -6,21 +6,23 @@ dataSources:
     name: Shortcuts
     network: mumbai
     source:
-      address: "0x34D1dAE9B929F5f90DE6AeF1D34fD959431701c1"
+      address: "0xE13b85B5a1cE1Ff084019520783f98254aefDc55"
       abi: Shortcuts
-      startBlock: 28999591
+      startBlock: 29005358
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
-        - ShortCut
+        - Shortcut
         - UserParam
       abis:
         - name: Shortcuts
           file: ./abis/Shortcuts.json
-      callHandlers:
-        - function: addShortCut((string,string,string,address,(string,string)[],string))
-          handler: handleAddShortCut
+      eventHandlers:
+        - event: AddShortcut(indexed uint256,(uint256,string,string,address,(string,string)[],bool),uint256)
+          handler: handleAddShortcut
+        - event: SetIsReady(indexed uint256,bool)
+          handler: handleSetIsReady
 
-      file: ./src/shortcuts.ts
+      file: ./src/mapping.ts
