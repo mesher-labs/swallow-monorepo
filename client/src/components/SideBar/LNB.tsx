@@ -33,10 +33,17 @@ const commonStyle = {
 
 type SideBarType = "HOME" | "BROWSE";
 export const LNB = () => {
-  const { setServiceState } = useWeb3();
+  const { serviceState, setServiceState } = useWeb3();
   const onClickLNB = (sideBarType: SideBarType) => {
-    if (sideBarType === "HOME") setServiceState("home");
-    if (sideBarType === "BROWSE") setServiceState("browse");
+    if (sideBarType === "HOME") setServiceState("HOME");
+    if (sideBarType === "BROWSE") setServiceState("BROWSE");
+  };
+
+  const getOpacity = (sideBarType: SideBarType) => {
+    if (sideBarType === serviceState) {
+      return 1;
+    }
+    return 0.4;
   };
   return (
     <>
@@ -44,14 +51,22 @@ export const LNB = () => {
         <div onClick={() => onClickLNB("HOME")}>
           <Icon
             path={mdiHome}
-            style={{ ...commonStyle, color: COLORS.white }}
+            style={{
+              ...commonStyle,
+              color: COLORS.white,
+              opacity: getOpacity("HOME"),
+            }}
           ></Icon>
         </div>
         <S.Line />
         <div onClick={() => onClickLNB("BROWSE")}>
           <Icon
             path={mdiEarthPlus}
-            style={{ ...commonStyle, color: COLORS.blueGray }}
+            style={{
+              ...commonStyle,
+              color: COLORS.blueGray,
+              opacity: getOpacity("BROWSE"),
+            }}
           ></Icon>
         </div>
       </S.LNB>

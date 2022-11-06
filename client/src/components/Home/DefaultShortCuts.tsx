@@ -77,6 +77,7 @@ interface ContainerProps {
 }
 
 const SquareContainer = styled.div<ContainerProps>`
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -122,6 +123,7 @@ const SquareContainer = styled.div<ContainerProps>`
 interface RectangleContainerProps extends ContainerProps {}
 
 const RectangleContainer = styled.div<RectangleContainerProps>`
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   flex-direction: column;

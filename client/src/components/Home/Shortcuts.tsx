@@ -6,7 +6,7 @@ import localStorageService from "../../common/services/local-storage.service";
 import { TokenService } from "../../common/services/tokens.service";
 import txBuilderService from "../../common/services/tx-builder.service";
 import { useGetAaveCurrentAPY } from "../../hooks/react-query/query/useGetAaveCurrentAPY";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   ShortcutRes,
   UserParams,
@@ -75,16 +75,16 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
   const onClickHanlder = async () => {
     console.log("object");
 
-    if(parsedParams['sellToken'] !== 'MATIC') {
+    if (parsedParams["sellToken"] !== "MATIC") {
       const allowanceTx = await txBuilderService.buildTx(web3, "ALLOWANCE", {
         token: parsedParams["sellToken"],
         owner: account,
         spender: CONTRACTS.ZERO_X_PROXY_CONTRACT,
       });
-  
+
       const allowance = await web3.eth.call(allowanceTx);
       console.log(allowance);
-  
+
       if (+allowance < 0) {
         const approveTx = await txBuilderService.buildTx(web3, "APPROVE", {
           token: parsedParams["sellToken"],
@@ -163,9 +163,11 @@ export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
 };
 
 export const TokenBalanceShortcut = ({ myShortcut }: ShortcutProps) => {
-  const [balanceInfo, setBalanceInfo] = useState<{symbol: string, balance: string}[]>([]);
-  const {web3} = useWeb3();
-  const account = localStorageService.get('account');
+  const [balanceInfo, setBalanceInfo] = useState<
+    { symbol: string; balance: string }[]
+  >([]);
+  const { web3 } = useWeb3();
+  const account = localStorageService.get("account");
 
   // useEffect(() => {
   //   const promiseList = myShortcut.userParams.map(param => getBalance(param.value))
@@ -181,10 +183,10 @@ export const TokenBalanceShortcut = ({ myShortcut }: ShortcutProps) => {
   //   else {
   //     const tx = await txBuilderService.buildTx(web3, 'BALANCE_OF', {
   //       token:  tokenSymbol,
-  //       account, 
+  //       account,
   //     })
   //     return web3.eth.call(tx);
-  //   } 
+  //   }
   // }
 
   return (
@@ -273,6 +275,7 @@ interface ContainerProps {
 }
 
 const SquareContainer = styled.div<ContainerProps>`
+  cursor: pointer;
   margin: 10px;
   text-align: left;
   padding: 26px;
@@ -303,6 +306,8 @@ const SquareContainer = styled.div<ContainerProps>`
 interface RectangleContainerProps extends ContainerProps {}
 
 const RectangleContainer = styled.div<RectangleContainerProps>`
+  cursor: pointer;
+
   margin: 10px;
   display: flex;
   flex-direction: column;
