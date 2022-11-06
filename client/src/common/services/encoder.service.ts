@@ -15,6 +15,7 @@ class EncoderService {
           sellAmount: paramsDto.sellAmount,
           takerAddress: paramsDto.takerAddress,
         };
+        return zeroXApiService.getSwapQuote(params);
       }
     }
   }
