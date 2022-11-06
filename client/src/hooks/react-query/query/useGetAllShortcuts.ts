@@ -1,21 +1,11 @@
 import { useQuery, useQueryClient } from "react-query";
-import { ShortcutTypes } from "../../../common/types/short-cuts.types";
-
-interface UserParams {
-  name: string;
-  value: string;
-}
-
-interface ShortcutRes {
-  isReady: boolean;
-  endpoint: string;
-  contractAddr: string;
-  userParams: UserParams[];
-  shortcutType: ShortcutTypes;
-}
+import {
+  ShortcutTypes,
+  ShortcutRes,
+} from "../../../common/types/short-cuts.types";
 
 // TODO : the graph로 교체
-const getAllShortcuts = async (): Promise<ShortcutRes[]> => {
+const getAllShortcuts = (): ShortcutRes[] => {
   return [
     {
       isReady: false,
@@ -66,5 +56,5 @@ const getAllShortcuts = async (): Promise<ShortcutRes[]> => {
 
 export const useGetAllShortcuts = () => {
   const queryClient = useQueryClient();
-  return useQuery(["allShortcuts"], () => getAllShortcuts);
+  return useQuery(["allShortcuts"], () => getAllShortcuts());
 };
