@@ -59,7 +59,7 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
     <SquareContainer backgroundColor="#6FEB8E">
       <h1>Buy</h1>
       <h2>
-        {parsedParams.sellTokenAmount} {parsedParams.sellToken} <br /> with{" "}
+        {parsedParams.sellAmount} {parsedParams.sellToken} <br /> with{" "}
         {parsedParams.buyToken}
       </h2>
     </SquareContainer>

@@ -4,6 +4,7 @@ import { COLORS } from "../common/constants/colors";
 import React from "react";
 import localStorageService from "../common/services/local-storage.service";
 import { ethers } from "ethers";
+import Web3 from 'web3'
 const S = {
   Title: styled.h1`
     font-weight: 700;
@@ -64,12 +65,11 @@ export const SignIn = () => {
   const onSignIn = async () => {
     if (!nickName.length) return alert("please enter your nickname");
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
+    const web3 = new Web3(window.ethereum);
+    const accounts = await web3.eth.requestAccounts()
 
     localStorageService.set('nickName', nickName);
-    localStorageService.set('account', await signer.getAddress());
+    localStorageService.set('account', accounts[0]);
   };
   return (
     <>
