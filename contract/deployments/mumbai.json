@@ -3,7 +3,7 @@
   "chainId": "80001",
   "contracts": {
     "Shortcuts": {
-      "address": "0x30e12a2f8C933ba13482BaB0B795524c48E3Aef8",
+      "address": "0x0CF6D3D3FEC650Cf8dABC925f8307ACC997a425C",
       "abi": [
         {
           "inputs": [],
@@ -40,23 +40,6 @@
                   "internalType": "address",
                   "name": "contractAddr",
                   "type": "address"
-                },
-                {
-                  "components": [
-                    {
-                      "internalType": "string",
-                      "name": "name",
-                      "type": "string"
-                    },
-                    {
-                      "internalType": "string",
-                      "name": "value",
-                      "type": "string"
-                    }
-                  ],
-                  "internalType": "struct ShortcutsInterface.UserParams[]",
-                  "name": "userParams",
-                  "type": "tuple[]"
                 },
                 {
                   "internalType": "bool",
@@ -116,23 +99,6 @@
               "type": "address"
             },
             {
-              "components": [
-                {
-                  "internalType": "string",
-                  "name": "name",
-                  "type": "string"
-                },
-                {
-                  "internalType": "string",
-                  "name": "value",
-                  "type": "string"
-                }
-              ],
-              "internalType": "struct ShortcutsInterface.UserParams[]",
-              "name": "userParams",
-              "type": "tuple[]"
-            },
-            {
               "internalType": "bool",
               "name": "isReady",
               "type": "bool"
@@ -189,23 +155,6 @@
                   "type": "address"
                 },
                 {
-                  "components": [
-                    {
-                      "internalType": "string",
-                      "name": "name",
-                      "type": "string"
-                    },
-                    {
-                      "internalType": "string",
-                      "name": "value",
-                      "type": "string"
-                    }
-                  ],
-                  "internalType": "struct ShortcutsInterface.UserParams[]",
-                  "name": "userParams",
-                  "type": "tuple[]"
-                },
-                {
                   "internalType": "bool",
                   "name": "isReady",
                   "type": "bool"
@@ -250,23 +199,6 @@
                   "internalType": "address",
                   "name": "contractAddr",
                   "type": "address"
-                },
-                {
-                  "components": [
-                    {
-                      "internalType": "string",
-                      "name": "name",
-                      "type": "string"
-                    },
-                    {
-                      "internalType": "string",
-                      "name": "value",
-                      "type": "string"
-                    }
-                  ],
-                  "internalType": "struct ShortcutsInterface.UserParams[]",
-                  "name": "userParams",
-                  "type": "tuple[]"
                 },
                 {
                   "internalType": "bool",

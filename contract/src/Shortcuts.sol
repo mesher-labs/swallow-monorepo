@@ -36,21 +36,18 @@ contract Shortcuts is ShortcutsInterface {
         string memory shortcutType,
         string memory endpoint,
         address contractAddr,
-        UserParams[] memory userParams,
         bool isReady
     ) external onlyAdmin returns (uint256) {
         uint256 newIndex = _index + 1;
-        Shortcut storage newShortcut = _shortcuts[newIndex];
+        Shortcut memory newShortcut = Shortcut({
+            index: newIndex,
+            shortcutType: shortcutType,
+            endpoint: endpoint,
+            contractAddr: contractAddr,
+            isReady: isReady
+        });
+        _shortcuts[newIndex] = newShortcut;
 
-        newShortcut.shortcutType = shortcutType;
-        newShortcut.endpoint = endpoint;
-        newShortcut.contractAddr = contractAddr;
-        newShortcut.isReady = isReady;
-
-        uint256 len = userParams.length;
-        for (uint256 i = 0; i < len; i += 1) {
-            newShortcut.userParams.push(userParams[i]);
-        }
         _index = newIndex;
 
         emit AddShortcut(newIndex, newShortcut, block.number);

@@ -1,18 +1,12 @@
 pragma solidity 0.8.11;
 
 interface ShortcutsInterface {
-    struct UserParams {
-        string name;
-        string value;
-    }
-
-    /// @dev selector and contractAddr is only for ShortCutType.Transaction
+    /// @dev contractAddr is optional
     struct Shortcut {
         uint256 index;
         string shortcutType;
         string endpoint;
         address contractAddr;
-        UserParams[] userParams;
         bool isReady;
     }
 
@@ -27,7 +21,6 @@ interface ShortcutsInterface {
         string memory shortcutType,
         string memory endpoint,
         address contractAddr,
-        UserParams[] memory userParams,
         bool isReady
     ) external returns (uint256);
 
