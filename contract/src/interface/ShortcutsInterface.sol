@@ -7,18 +7,28 @@ interface ShortcutsInterface {
     }
 
     /// @dev selector and contractAddr is only for ShortCutType.Transaction
-    struct ShortCut {
-        string name;
+    struct Shortcut {
+        uint256 index;
+        string shortcutType;
         string endpoint;
-        string selector;
         address contractAddr;
         UserParams[] userParams;
-        string shortCutsType;
+        bool isReady;
     }
 
-    function getAllShortCuts() external view returns (ShortCut[] memory);
+    event AddShortcut(uint256 indexed index, Shortcut newShortcut, uint256 blockNum);
 
-    function getShortCutByIndex(uint256 index) external view returns (ShortCut memory);
+    function getAllShortcuts() external view returns (Shortcut[] memory);
 
-    function addShortCut(ShortCut memory dto) external;
+    function getShortcutByIndex(uint256 index) external view returns (Shortcut memory);
+
+    function addShortcut(
+        string memory shortcutType,
+        string memory endpoint,
+        address contractAddr,
+        UserParams[] memory userParams,
+        bool isReady
+    ) external returns (uint256);
+
+    function setIsReady(uint256 index, bool newIsReady) external;
 }
