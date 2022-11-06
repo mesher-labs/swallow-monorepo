@@ -66,10 +66,6 @@ export const useGetAllShortcuts = () => {
           id
           index
           shortcutType
-          userParams {
-            name
-            value
-          }
           endpoint
           isReady
         }
