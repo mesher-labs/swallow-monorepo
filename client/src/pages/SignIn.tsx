@@ -74,7 +74,7 @@ export const SignIn = () => {
     localStorageService.set("nickName", nickName);
     localStorageService.set("account", accounts[0]);
 
-    setServiceState("home");
+    setServiceState("HOME");
   };
   return (
     <>

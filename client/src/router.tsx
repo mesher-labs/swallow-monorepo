@@ -22,7 +22,7 @@ export const Router = () => {
   switch (serviceState) {
     case "unSigned":
       return <SignIn />;
-    case "home":
+    case "HOME":
       return (
         <>
           <Header />
@@ -32,7 +32,7 @@ export const Router = () => {
           </Layout>
         </>
       );
-    case "browse":
+    case "BROWSE":
       return (
         <>
           <Header />
