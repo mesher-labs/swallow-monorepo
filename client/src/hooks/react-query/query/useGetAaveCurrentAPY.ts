@@ -8,37 +8,36 @@ const graphQLClient = new GraphQLClient(API_URL, {
   headers: {
     "Content-Type": "application/json",
   },
+  cache: "no-cache",
 });
 
-export const useGetAaveCurrentAPY = (tokenAddresses: string[]) => {
-  return useQuery(["aaveCurrentAPY"], async () => {
-    let len = tokenAddresses.length;
-    let markets = [];
-    try {
-      for (let i = 0; i < len; i += 1) {
-        console.log(tokenAddresses[i].toLowerCase());
-        const { market } = await graphQLClient.request(gql`
-      query {
-        market (id: ${tokenAddresses[i].toLowerCase()}) {
-          id
-          name
-          inputToken {
+export const useGetAaveCurrentAPY = () => {
+  console.log(graphQLClient);
+  return useQuery(
+    ["aaveCurrentAPY"],
+    async () => {
+      const { markets } = await graphQLClient.request(gql`
+        query {
+          markets(first: 20) {
             id
-            symbol 
-            decimals
-          }
-          rates {
-            rate
-            side
-            type
+            name
+            inputToken {
+              id
+              symbol
+              decimals
+            }
+            rates {
+              rate
+              side
+              type
+            }
           }
         }
-      }
       `);
-        markets.push(market);
-      }
-    } catch (e) {
-      console.log("aaveCurrentAPY graphql err", e);
-    }
-  });
+      return markets;
+    },
+    {
+      cacheTime: 0,
+    },
+  );
 };

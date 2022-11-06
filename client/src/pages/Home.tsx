@@ -7,14 +7,11 @@ import {
   ShortcutTypes,
   ShortcutRes,
 } from "../common/types/short-cuts.types";
-import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
 
 export const Home = () => {
-  const { data: allShortcuts, isLoading } = useGetAllShortcuts();
 
   return (
     <>
-      {!isLoading && (
         <Container>
           <Row>
             <HomePresenter shortcutType={Shortcuts.SEND} />
@@ -26,7 +23,8 @@ export const Home = () => {
             <HomePresenter shortcutType={Shortcuts.TOKEN_BALANCE} />
           </Row>
         </Container>
-      )}
+      {/* {!isLoading && (
+      )} */}
     </>
   );
 };

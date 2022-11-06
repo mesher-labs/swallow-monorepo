@@ -7,7 +7,7 @@ import {
   DefaultAaveCurrentAPYShortcut,
   DefaultMultiSendShortcut,
   DefaultTokenBalanceShortcut,
-} from "./DefaultShortcuts";
+} from "./DefaultShortCuts";
 import {
   AaveCurrentAPYShortcut,
   BuyShortcut,

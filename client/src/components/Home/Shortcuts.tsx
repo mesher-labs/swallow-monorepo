@@ -6,7 +6,7 @@ import localStorageService from "../../common/services/local-storage.service";
 import { TokenService } from "../../common/services/tokens.service";
 import txBuilderService from "../../common/services/tx-builder.service";
 import { useGetAaveCurrentAPY } from "../../hooks/react-query/query/useGetAaveCurrentAPY";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   ShortcutRes,
   UserParams,
@@ -19,9 +19,28 @@ interface ShortcutProps {
 }
 export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
   const { userParams } = myShortcut;
-  const tokenAddresses = userParams.map((param) => TokenService.findAddressBySymbol(param.value, 'mainnet') || '');
-  const { data: allAaveMarketDatas, isLoading } =
-    useGetAaveCurrentAPY(tokenAddresses);
+  const { data: allAaveMarketDatas, isLoading } = useGetAaveCurrentAPY();
+  const apyInfoList = userParams.map((param) => {
+    const symbol = param.value;
+
+    const data = allAaveMarketDatas
+      .find(
+        (marketData: any) =>
+          marketData.id ===
+          TokenService.findAddressBySymbol(param.value, "mainnet"),
+      )
+      .rates.filter((rate: any) => rate.type === "VARIABLE");
+
+    const supplyAPY = data.find((rate: any) => rate.side === "LENDER").rate;
+
+    const borrowAPY = data.find((rate: any) => rate.side === "BORROWER").rate;
+
+    return {
+      symbol,
+      supplyAPY: Number(supplyAPY).toFixed(3),
+      borrowAPY: Number(borrowAPY).toFixed(3),
+    };
+  });
 
   if (isLoading || !allAaveMarketDatas) return <></>;
   console.log("give me money", allAaveMarketDatas);
@@ -33,17 +52,17 @@ export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
         <p>*supply, borrow</p>
       </div>
       <APYContainer>
-        <Row>
-          <APYTokenWrapper>
-            <h3>DAI</h3>
-            <p>1.30%, 2.55%</p>
-          </APYTokenWrapper>
-          <APYTokenWrapper>
-            <h3>USDT</h3>
-            <p>1.30%, 2.55%</p>
-          </APYTokenWrapper>
-        </Row>
-        <Row>
+        {apyInfoList.map((info) => (
+          <Row>
+            <APYTokenWrapper>
+              <h3>{info.symbol}</h3>
+              <p>
+                {info.supplyAPY}%, {info.borrowAPY}%
+              </p>
+            </APYTokenWrapper>
+          </Row>
+        ))}
+        {/* <Row>
           <APYTokenWrapper>
             <h3>USDC</h3>
             <p>1.30%, 2.55%</p>
@@ -52,7 +71,7 @@ export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
             <h3>CRV</h3>
             <p>1.30%, 2.55%</p>
           </APYTokenWrapper>
-        </Row>
+        </Row> */}
       </APYContainer>
     </RectangleContainer>
   );
@@ -75,16 +94,16 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
   const onClickHanlder = async () => {
     console.log("object");
 
-    if(parsedParams['sellToken'] !== 'MATIC') {
+    if (parsedParams["sellToken"] !== "MATIC") {
       const allowanceTx = await txBuilderService.buildTx(web3, "ALLOWANCE", {
         token: parsedParams["sellToken"],
         owner: account,
         spender: CONTRACTS.ZERO_X_PROXY_CONTRACT,
       });
-  
+
       const allowance = await web3.eth.call(allowanceTx);
       console.log(allowance);
-  
+
       if (+allowance < 0) {
         const approveTx = await txBuilderService.buildTx(web3, "APPROVE", {
           token: parsedParams["sellToken"],
@@ -163,9 +182,11 @@ export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
 };
 
 export const TokenBalanceShortcut = ({ myShortcut }: ShortcutProps) => {
-  const [balanceInfo, setBalanceInfo] = useState<{symbol: string, balance: string}[]>([]);
-  const {web3} = useWeb3();
-  const account = localStorageService.get('account');
+  const [balanceInfo, setBalanceInfo] = useState<
+    { symbol: string; balance: string }[]
+  >([]);
+  const { web3 } = useWeb3();
+  const account = localStorageService.get("account");
 
   // useEffect(() => {
   //   const promiseList = myShortcut.userParams.map(param => getBalance(param.value))
@@ -181,10 +202,10 @@ export const TokenBalanceShortcut = ({ myShortcut }: ShortcutProps) => {
   //   else {
   //     const tx = await txBuilderService.buildTx(web3, 'BALANCE_OF', {
   //       token:  tokenSymbol,
-  //       account, 
+  //       account,
   //     })
   //     return web3.eth.call(tx);
-  //   } 
+  //   }
   // }
 
   return (

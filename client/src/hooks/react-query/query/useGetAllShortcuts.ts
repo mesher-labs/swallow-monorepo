@@ -11,6 +11,7 @@ const graphQLClient = new GraphQLClient(API_URL, {
   headers: {
     //Authorization: `Bearer ${process.env.API_KEY}`
   },
+  cache: 'no-cache'
 });
 
 export const useGetAllShortcuts = () => {
@@ -29,5 +30,7 @@ export const useGetAllShortcuts = () => {
     `);
     console.log("gogogogogogogog", shortcuts);
     return shortcuts;
+  }, {
+    cacheTime: 0
   });
 };
