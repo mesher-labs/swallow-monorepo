@@ -26,6 +26,8 @@
     "deploy:hardhat": "cd ./contract && yarn deploy:hardhat"
   },
   "dependencies": {
-    "ethers": "5.6.4"
+    "ethers": "5.6.4",
+    "graphql": "^16.6.0",
+    "urql": "^3.0.3"
   }
 }
