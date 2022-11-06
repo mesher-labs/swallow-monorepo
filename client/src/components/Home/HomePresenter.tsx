@@ -19,17 +19,16 @@ import {
   DefaultAaveCurrentAPYShortcut,
   DefaultMultiSendShortcut,
   DefaultTokenBalanceShortcut,
-} from "./DefaultShortCuts";
+} from "./DefaultShortcuts";
 import { isUndefined, isNull } from "lodash-es";
 
 export interface HomePresenterProps {
   shortcutType: ShortcutTypes;
-  shortcutData: ShortcutRes;
 }
 
 const getMyShortcuts = (
   shortcutType: ShortcutTypes,
-  myShortcut: ShortcutRes
+  myShortcut: ShortcutRes,
 ) => {
   if (shortcutType === Shortcuts.SEND) {
     return <SendShortcut myShortcut={myShortcut} />;
@@ -56,10 +55,7 @@ const getDefaultShortcuts: Record<ShortcutTypes, JSX.Element> = {
   TOKEN_BALANCE: <DefaultTokenBalanceShortcut />,
 };
 
-export const HomePresenter = ({
-  shortcutType,
-  shortcutData,
-}: HomePresenterProps) => {
+export const HomePresenter = ({ shortcutType }: HomePresenterProps) => {
   const myShortcutString = LocalStorageService.get("myShortcut");
   // Case 1: 한번도 숏컷을 등록한적 없는놈
   if (
@@ -70,12 +66,16 @@ export const HomePresenter = ({
     return <>{getDefaultShortcuts[shortcutType]}</>;
 
   // Case 2: 등록은 했는데 이 숏컷이 아닌놈
-  const myShortcut = JSON.parse(myShortcutString);
-  const isMyShortcut = myShortcut.some(
-    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType
+  const myShortcutArr = JSON.parse(myShortcutString);
+  const isMyShortcut = myShortcutArr.some(
+    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType,
   );
-  if (isMyShortcut) {
+  if (!isMyShortcut) {
     return <>{getDefaultShortcuts[shortcutType]}</>;
   }
-  return <>{getMyShortcuts(shortcutType, myShortcut)}</>;
+  const targetShortcut = myShortcutArr.find(
+    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType,
+  );
+  if (isUndefined(targetShortcut)) throw new Error("Shortcut type err");
+  return <>{getMyShortcuts(shortcutType, targetShortcut)}</>;
 };

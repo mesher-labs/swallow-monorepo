@@ -43,6 +43,7 @@ export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
 };
 
 export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
+  console.log("hellooo", myShortcut);
   const { userParams } = myShortcut;
   const parsedParams: Record<BuyShortcutParamsType, string> = {
     sellToken: "",
