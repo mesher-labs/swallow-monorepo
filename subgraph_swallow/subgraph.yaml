@@ -6,9 +6,9 @@ dataSources:
     name: Shortcuts
     network: mumbai
     source:
-      address: "0xE13b85B5a1cE1Ff084019520783f98254aefDc55"
+      address: "0x4b56262A5FCFEbD1a217F6066891a551e85832ec"
       abi: Shortcuts
-      startBlock: 29005358
+      startBlock: 29005620
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
