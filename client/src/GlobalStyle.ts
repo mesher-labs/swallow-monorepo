@@ -6,6 +6,26 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     color: white;
     font-family: system-ui;
+    #someselector {
+      all: initial;
+    }
+
+    input, button {
+      border: none;
+    }
+
+    textarea:focus, input:focus{
+      outline: none;
+    }
+
+    #someselector * {
+      all: unset
+    }
+
+    *:focus {
+      outline: none;
+    }
+
 
     h1 { 
       margin: 0;

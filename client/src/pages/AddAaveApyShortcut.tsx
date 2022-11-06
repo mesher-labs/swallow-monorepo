@@ -14,7 +14,7 @@ import { TokenService } from "../common/services/tokens.service";
 const S = {
   Title: styled.h1`
     color: ${COLORS.white};
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     margin-right: 60px;
   `,
@@ -26,7 +26,7 @@ const S = {
   `,
   SubTitle: styled.h1`
     color: ${COLORS.white};
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     margin-right: 60px;
     width: 75px;

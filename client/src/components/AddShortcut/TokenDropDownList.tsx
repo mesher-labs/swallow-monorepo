@@ -14,7 +14,7 @@ const S = {
     display: flex;
     justify-content:center;
     align-items: center;
-    height: 36px;
+    height: 24px;
     border-bottom: 1px solid #5b5b5b;
     cursor: pointer;
     font-weight: 400;

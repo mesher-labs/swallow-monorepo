@@ -16,13 +16,13 @@ import { ShortcutRes } from "../common/types/short-cuts.types";
 const S = {
   Title: styled.h1`
     color: ${COLORS.white};
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     margin-right: 60px;
   `,
   SubTitle: styled.h1`
     color: ${COLORS.white};
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     margin-right: 60px;
     width: 75px;
@@ -92,7 +92,7 @@ export const AddSendShortCut = () => {
   };
 
   return (
-    <div style={{ marginLeft: "50px", width: "100vw" }}>
+    <div style={{ marginTop: "50px", marginLeft: "50px", width: "100vw" }}>
       <S.Title>Add Send ShortCuts</S.Title>
       <div style={{ display: "flex", marginTop: "67px", alignItems: "center" }}>
         <S.SubTitle>Send</S.SubTitle>
@@ -115,13 +115,13 @@ export const AddSendShortCut = () => {
           placeHodler="address"
           amount={shortCutData.toAddress}
           onChangeHanlder={onChangeToAddress}
-          width="1000px"
+          width="800px"
         ></TextInput>
       </div>
       <div style={{ display: "flex", marginTop: "30px", alignItems: "center" }}>
-        <S.SubTitle style={{ width: "150px" }}>nickname</S.SubTitle>
+        <S.SubTitle>nickname</S.SubTitle>
         <TextInput
-          placeHodler="nickname"
+          placeHodler="refer your address"
           amount={shortCutData.toNickName}
           onChangeHanlder={onChangeToNickName}
           width="500px"

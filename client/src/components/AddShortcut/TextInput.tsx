@@ -2,17 +2,21 @@ import styled from "styled-components";
 import { COLORS } from "../../common/constants/colors";
 
 const S = {
-  Form: styled.div<{width? : string}>`
-    width: ${props => props.width || '166px'};
+  Form: styled.div<{ width?: string }>`
+    width: ${(props) => props.width || "166px"};
   `,
   FormInput: styled.input`
-    color: ${COLORS.brownGray};
-    font-size: 36px;
+    color: white;
+    font-size: 24px;
     font-weight: 400;
-    text-align: center;
+    text-align: left;
     background: transparent;
     border: none;
     width: 100%;
+    padding-left: 10px;
+    input::placeholder {
+      font-size: 18px;
+    }
   `,
   BottomLine: styled.div`
     background: #d9d9d9;
@@ -27,10 +31,15 @@ interface Props {
   placeHodler: string;
   amount: string;
   onChangeHanlder: (e: React.FormEvent<HTMLInputElement>) => void;
-  width? : string;
+  width?: string;
 }
 
-export const TextInput = ({ placeHodler, amount, onChangeHanlder, width }: Props) => {
+export const TextInput = ({
+  placeHodler,
+  amount,
+  onChangeHanlder,
+  width,
+}: Props) => {
   return (
     <S.Form width={width}>
       <S.FormInput

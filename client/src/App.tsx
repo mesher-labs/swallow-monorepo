@@ -8,8 +8,8 @@ import { Router } from "./router";
 
 type ServiceState =
   | "unSigned"
-  | "home"
-  | "browse"
+  | "HOME"
+  | "BROWSE"
   | "AddBuyShortcut"
   | "AddSendShortcut"
   | "AddAaveShortcut"
@@ -23,13 +23,13 @@ const Web3Context = createContext<{
 }>({
   web3: new Web3(),
   setWeb3: () => {},
-  serviceState: "home",
+  serviceState: "HOME",
   setServiceState: () => {},
 }); // 기본 값
 
 export const Web3Provider = ({ children }: any) => {
   const [web3, setWeb3] = useState<Web3>(new Web3());
-  const [serviceState, setServiceState] = useState<ServiceState>("home");
+  const [serviceState, setServiceState] = useState<ServiceState>("HOME");
 
   useEffect(() => {
     if (!window.ethereum) return alert("please install metamask first");

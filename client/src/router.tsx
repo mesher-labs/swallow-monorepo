@@ -22,7 +22,7 @@ export const Router = () => {
   switch (serviceState) {
     case "unSigned":
       return <SignIn />;
-    case "home":
+    case "HOME":
       return (
         <>
           <Header />
@@ -32,13 +32,13 @@ export const Router = () => {
           </Layout>
         </>
       );
-    case "browse":
+    case "BROWSE":
       return (
         <>
           <Header />
           <Layout>
             <LNB />
-            <Browse />;
+            <Browse />
           </Layout>
         </>
       );
@@ -46,36 +46,41 @@ export const Router = () => {
       return (
         <>
           <Header />
-          <div style={{ display: "flex", marginTop: "50px" }}>
+          <Layout>
+            <LNB />
             <AddSendShortCut />
-          </div>
+          </Layout>
+          <div style={{ display: "flex", marginTop: "50px" }}></div>
         </>
       );
     case "AddBuyShortcut":
       return (
         <>
           <Header />
-          <div style={{ display: "flex", marginTop: "50px" }}>
+          <Layout>
+            <LNB />
             <AddBuyShortCut />
-          </div>
+          </Layout>
         </>
       );
     case "AddAaveShortcut":
       return (
         <>
           <Header />
-          <div style={{ display: "flex", marginTop: "50px" }}>
+          <Layout>
+            <LNB />
             <AddAaveApyShortcut />
-          </div>
+          </Layout>
         </>
       );
     case "AddTokenBalanceShortcut":
       return (
         <>
           <Header />
-          <div style={{ display: "flex", marginTop: "50px" }}>
+          <Layout>
+            <LNB />
             <AddTokenBalanceShortcut />
-          </div>
+          </Layout>
         </>
       );
     default:
