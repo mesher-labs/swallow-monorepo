@@ -1,7 +1,7 @@
 node_modules
 build
 contract/.openzeppelin/unknown-31337.json
-contract/env
+
 .DS_Store
 contract/deployments/**/solcInputs
 contract/typechain
