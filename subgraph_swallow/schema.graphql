@@ -1,5 +1,16 @@
-type ExampleEntity @entity {
+type ShortCut @entity {
   id: ID!
-  block: Bytes!
-  count: BigInt!
+  name: String!
+  endpoint: String!
+  selector: String!
+  contractAddr: Bytes!
+  userParams: [UserParam!]! @derivedFrom(field: "shortcut")
+  shortCutsType: String!
+}
+
+type UserParam @entity {
+  id: ID!
+  name: String!
+  value: String!
+  shortcut: ShortCut!
 }

@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.4
 schema:
   file: ./schema.graphql
 dataSources:
@@ -8,15 +8,19 @@ dataSources:
     source:
       address: "0x34D1dAE9B929F5f90DE6AeF1D34fD959431701c1"
       abi: Shortcuts
+      startBlock: 28999591
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-
+        - ShortCut
+        - UserParam
       abis:
         - name: Shortcuts
           file: ./abis/Shortcuts.json
-      eventHandlers:
+      callHandlers:
+        - function: addShortCut((string,string,string,address,(string,string)[],string))
+          handler: handleAddShortCut
 
       file: ./src/shortcuts.ts
