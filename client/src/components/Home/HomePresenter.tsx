@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ShortcutUtils from "../../utils/shortcuts";
+import LocalStorageService from "../../common/services/local-storage.service";
 
 import {
   AaveCurrentAPYShortcut,
@@ -9,26 +9,43 @@ import {
   TokenBalanceShortcut,
 } from "../../components/Home/Shortcuts";
 import {
+  ShortcutTypes,
+  ShortcutRes,
+  Shortcuts,
+} from "../../common/types/short-cuts.types";
+import {
   DefaultSendShortcut,
   DefaultBuyShortcut,
   DefaultAaveCurrentAPYShortcut,
   DefaultMultiSendShortcut,
   DefaultTokenBalanceShortcut,
-} from "./DefaultShortCuts";
-import { ShortcutTypes } from "../../common/types/short-cuts.types";
-
-
+} from "./DefaultShortcuts";
+import { isUndefined, isNull } from "lodash-es";
 
 export interface HomePresenterProps {
   shortcutType: ShortcutTypes;
+  shortcutData: ShortcutRes;
 }
 
-const getMyShortcuts: Record<ShortcutTypes, JSX.Element> = {
-  SEND: <SendShortcut />,
-  BUY: <BuyShortcut />,
-  AAVE_CURRENT_APY: <AaveCurrentAPYShortcut />,
-  MULTI_SEND: <MultiSendShortcut />,
-  TOKEN_BALANCE: <TokenBalanceShortcut />,
+const getMyShortcuts = (
+  shortcutType: ShortcutTypes,
+  myShortcut: ShortcutRes,
+) => {
+  if (shortcutType === Shortcuts.SEND) {
+    return <SendShortcut myShortcut={myShortcut} />;
+  }
+  if (shortcutType === Shortcuts.BUY) {
+    return <BuyShortcut myShortcut={myShortcut} />;
+  }
+  if (shortcutType === Shortcuts.AAVE_CURRENT_APY) {
+    return <AaveCurrentAPYShortcut myShortcut={myShortcut} />;
+  }
+  if (shortcutType === Shortcuts.MULTI_SEND) {
+    return <MultiSendShortcut myShortcut={myShortcut} />;
+  }
+  if (shortcutType === Shortcuts.TOKEN_BALANCE) {
+    return <TokenBalanceShortcut myShortcut={myShortcut} />;
+  }
 };
 
 const getDefaultShortcuts: Record<ShortcutTypes, JSX.Element> = {
@@ -39,39 +56,26 @@ const getDefaultShortcuts: Record<ShortcutTypes, JSX.Element> = {
   TOKEN_BALANCE: <DefaultTokenBalanceShortcut />,
 };
 
-const getShortcutsTitle: Record<ShortcutTypes, string> = {
-  SEND: "SEND",
-  BUY: "BUY",
-  AAVE_CURRENT_APY: "AAVE_CURRENT_APY2",
-  MULTI_SEND: "MULTI_SEND",
-  TOKEN_BALANCE: "TOKEN_BALANCE",
-};
+export const HomePresenter = ({
+  shortcutType,
+  shortcutData,
+}: HomePresenterProps) => {
+  const myShortcutString = LocalStorageService.get("myShortcut");
+  // Case 1: 한번도 숏컷을 등록한적 없는놈
+  if (
+    isNull(myShortcutString) ||
+    isUndefined(myShortcutString) ||
+    myShortcutString.length === 0
+  )
+    return <>{getDefaultShortcuts[shortcutType]}</>;
 
-const getShortcutsSubTitle: Record<ShortcutTypes, JSX.Element> = {
-  // TODO : token symbol 등 동적으로 변하는 데이터 객체 타입 정해지면 수정하기
-  SEND: (
-    <>
-      100 MATIC <br /> to @juwon
-    </>
-  ),
-  BUY: (
-    <>
-      100 MATIC <br /> with USDC
-    </>
-  ),
-  AAVE_CURRENT_APY: <>Aave Current APY</>,
-  MULTI_SEND: (
-    <>
-      Send 100 USDC <br /> to every <br /> @mesherDev
-    </>
-  ),
-  TOKEN_BALANCE: <>Token Balance @juwon</>,
-};
-
-export const HomePresenter = ({ shortcutType }: HomePresenterProps) => {
-  const myShortCuts = ShortcutUtils.myShortCuts();
-
-  // TODO:  DefaultShortcuts 와 toggle
-  // return <>{getMyShortcuts[shortcutType]}</>;
-  return <>{getDefaultShortcuts[shortcutType]}</>;
+  // Case 2: 등록은 했는데 이 숏컷이 아닌놈
+  const myShortcut = JSON.parse(myShortcutString);
+  const isMyShortcut = myShortcut.some(
+    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType,
+  );
+  if (isMyShortcut) {
+    return <>{getDefaultShortcuts[shortcutType]}</>;
+  }
+  return <>{getMyShortcuts(shortcutType, myShortcut)}</>;
 };

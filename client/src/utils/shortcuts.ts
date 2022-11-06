@@ -14,7 +14,9 @@ export interface Shortcut {
 
 class ShortCutUtils {
   public static myShortCuts(): Shortcut[] {
-    const rawMyShortCuts = window.localStorage.getItem(localStorageKeys.MY_SHORT_CUTS);
+    const rawMyShortCuts = window.localStorage.getItem(
+      localStorageKeys.MY_SHORT_CUTS,
+    );
 
     if (isNull(rawMyShortCuts)) {
       return [];
@@ -28,7 +30,9 @@ class ShortCutUtils {
   }
 
   public static isExistShortcutType(shortcutType: ShortcutTypes): boolean {
-    const rawMyShortCuts = window.localStorage.getItem(localStorageKeys.MY_SHORT_CUTS);
+    const rawMyShortCuts = window.localStorage.getItem(
+      localStorageKeys.MY_SHORT_CUTS,
+    );
     return false;
   }
 

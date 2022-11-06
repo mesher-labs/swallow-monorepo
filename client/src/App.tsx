@@ -46,7 +46,7 @@ function App() {
       <GlobalStyle />
       <Web3Provider>
         <Header />
-        {/* <Layout>
+        <Layout>
           <LNB />
           <Home />
         </Layout> */}

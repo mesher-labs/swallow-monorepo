@@ -1,6 +1,15 @@
 import styled from "styled-components";
+import {
+  ShortcutRes,
+  UserParams,
+  BuyShortcutParamsType,
+} from "../../common/types/short-cuts.types";
 
-export const AaveCurrentAPYShortcut = () => {
+interface ShortcutProps {
+  myShortcut: ShortcutRes;
+}
+export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
+  // TODO : call to myShortcut endpoint for AaveCurrentAPY from TheGraph
   return (
     <RectangleContainer backgroundColor="#B682F7">
       <div>
@@ -33,18 +42,31 @@ export const AaveCurrentAPYShortcut = () => {
   );
 };
 
-export const BuyShortcut = () => {
+export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
+  const { userParams } = myShortcut;
+  const parsedParams: Record<BuyShortcutParamsType, string> = {
+    sellToken: "",
+    buyToken: "",
+    sellAmount: "",
+    buyAmount: "",
+    slippagePercentage: "",
+  };
+  userParams.forEach((param: UserParams) => {
+    parsedParams[param.name] = param.value;
+  });
+
   return (
     <SquareContainer backgroundColor="#6FEB8E">
       <h1>Buy</h1>
       <h2>
-        100 MATIC <br /> with USDC
+        {parsedParams.sellAmount} {parsedParams.sellToken} <br /> with{" "}
+        {parsedParams.buyToken}
       </h2>
     </SquareContainer>
   );
 };
 
-export const MultiSendShortcut = () => {
+export const MultiSendShortcut = ({ myShortcut }: ShortcutProps) => {
   return (
     <RectangleContainer backgroundColor="#ED797C">
       <RectangleLeftAlignBox>
@@ -58,7 +80,7 @@ export const MultiSendShortcut = () => {
   );
 };
 
-export const SendShortcut = () => {
+export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
   return (
     <SquareContainer backgroundColor="#F5BF45">
       <h1>Send</h1>
@@ -69,7 +91,7 @@ export const SendShortcut = () => {
   );
 };
 
-export const TokenBalanceShortcut = () => {
+export const TokenBalanceShortcut = ({ myShortcut }: ShortcutProps) => {
   return (
     <RectangleContainer backgroundColor="#58B9EF">
       <h1>Token Balance @juwon</h1>
