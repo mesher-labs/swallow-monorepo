@@ -10,6 +10,7 @@ import { TokenDropDownInput } from "../components/AddShortcut/TokenDropDownInput
 import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
 import { ShortcutRes } from "../common/types/short-cuts.types";
 import { TokenService } from "../common/services/tokens.service";
+import { useWeb3 } from '../App';
 
 const S = {
   Title: styled.h1`
@@ -45,6 +46,8 @@ export const AddAaveApyShortcut = () => {
       tokenSymbol: "",
     },
   ]);
+
+  const {setServiceState} = useWeb3();
 
   const { data: allShortcuts, isLoading } = useGetAllShortcuts();
 
@@ -144,7 +147,10 @@ export const AddAaveApyShortcut = () => {
           />
         </div> */}
       </div>
-      <AddShortCutButton onClickHandler={() => addShortCutButtonHandler()} />
+      <AddShortCutButton onClickHandler={() => {
+        addShortCutButtonHandler();
+        setServiceState('HOME');
+        }} />
     </div>
   );
 };

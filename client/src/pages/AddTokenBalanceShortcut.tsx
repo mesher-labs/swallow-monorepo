@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Icon from "@mdi/react";
 import localStorageService from "../common/services/local-storage.service";
 import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
+import { useWeb3 } from '../App';
 
 const S = {
   Title: styled.h1`
@@ -44,6 +45,7 @@ export const AddTokenBalanceShortcut = () => {
   ]);
   const [nickName, setNickName] = useState<string>("");
   const [account, setAccount] = useState<string>("");
+  const {setServiceState} = useWeb3();
 
   useEffect(() => {
     setNickName(localStorageService.get("nickName") || "");
@@ -70,6 +72,7 @@ export const AddTokenBalanceShortcut = () => {
       value: state.tokenSymbol,
     }));
     localStorageService.add("myShortCut", shortCut);
+    setServiceState('HOME');
   };
 
   return (

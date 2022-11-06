@@ -11,6 +11,7 @@ import { useState } from "react";
 import { AddShortCutButton } from "../components/AddShortcut/Button";
 import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
 import { ShortcutRes } from "../common/types/short-cuts.types";
+import { useWeb3 } from '../App';
 
 const S = {
   Title: styled.h1`
@@ -41,6 +42,7 @@ export const AddBuyShortCut = () => {
     amount: "",
   });
   const { data: allShortcuts, isLoading } = useGetAllShortcuts();
+  const {setServiceState} = useWeb3(); 
 
   if (isLoading || !allShortcuts) return <></>;
 
@@ -79,6 +81,7 @@ export const AddBuyShortCut = () => {
       { name: "buyAmount", value: shortCutData.amount },
     ];
     localStorageService.add("myShortCut", addBuyShortCut);
+    setServiceState('HOME');
   };
 
   return (
