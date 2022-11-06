@@ -4,10 +4,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ everGreenGH/Swallow",
-    "create-local": "graph create --node http://localhost:8020/ everGreenGH/Swallow",
-    "remove-local": "graph remove --node http://localhost:8020/ everGreenGH/Swallow",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 everGreenGH/Swallow",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ evergreengh/swallow",
+    "create-local": "graph create --node http://localhost:8020/ evergreengh/swallow",
+    "remove-local": "graph remove --node http://localhost:8020/ evergreengh/swallow",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001/evergreengh/swallow",
     "test": "graph test"
   },
   "dependencies": {

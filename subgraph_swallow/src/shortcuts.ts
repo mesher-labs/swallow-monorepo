@@ -5,15 +5,15 @@ export function handleAddShortCut(call: AddShortCutCall): void {
   const shortCutId = call.transaction.hash.toHex();
   const shortCut = new ShortCut(shortCutId);
 
-  call.inputs.dto.userParams.forEach(({ name, value }, index) => {
-    const paramId = shortCutId + "-" + index;
+  for (let i = 0; i < call.inputs.dto.userParams.length; i++) {
+    const paramId = shortCutId.concat("-").concat(i.toString());
     const userParam = new UserParam(paramId);
-    userParam.name = name;
-    userParam.value = value;
+    userParam.name = call.inputs.dto.userParams[i].name;
+    userParam.value = call.inputs.dto.userParams[i].value;
     userParam.shortcut = shortCutId;
 
     userParam.save();
-  });
+  }
 
   shortCut.name = call.inputs.dto.name;
   shortCut.endpoint = call.inputs.dto.endpoint;
