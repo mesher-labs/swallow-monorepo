@@ -19,7 +19,7 @@ import {
   DefaultAaveCurrentAPYShortcut,
   DefaultMultiSendShortcut,
   DefaultTokenBalanceShortcut,
-} from "./DefaultShortcuts";
+} from "./DefaultShortCuts";
 import { isUndefined, isNull } from "lodash-es";
 
 export interface HomePresenterProps {
@@ -29,7 +29,7 @@ export interface HomePresenterProps {
 
 const getMyShortcuts = (
   shortcutType: ShortcutTypes,
-  myShortcut: ShortcutRes,
+  myShortcut: ShortcutRes
 ) => {
   if (shortcutType === Shortcuts.SEND) {
     return <SendShortcut myShortcut={myShortcut} />;
@@ -72,7 +72,7 @@ export const HomePresenter = ({
   // Case 2: 등록은 했는데 이 숏컷이 아닌놈
   const myShortcut = JSON.parse(myShortcutString);
   const isMyShortcut = myShortcut.some(
-    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType,
+    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType
   );
   if (isMyShortcut) {
     return <>{getDefaultShortcuts[shortcutType]}</>;

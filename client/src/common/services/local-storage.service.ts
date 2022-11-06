@@ -26,6 +26,19 @@ class LocalStorageService {
         return this.getMyShortcut();
     }
   }
+  add(key: "myShortCut", value: Record<string, any>) {
+    switch (key) {
+      case "myShortCut":
+        return this.addMyShortCut(value);
+    }
+  }
+  private addMyShortCut(value: Record<string, any>) {
+    const prev = this.getMyShortcut() || "[]";
+    console.log(JSON.parse(prev));
+    const added = [...JSON.parse(prev), value];
+    console.log(added);
+    return this.setMyShortcut(JSON.stringify(added));
+  }
   private setNickName(nickName: string) {
     return localStorage.setItem(NICKNAME_KEY, nickName);
   }
