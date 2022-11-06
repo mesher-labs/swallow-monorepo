@@ -38,7 +38,7 @@ export const Router = () => {
           <Header />
           <Layout>
             <LNB />
-            <Browse />;
+            <Browse />
           </Layout>
         </>
       );

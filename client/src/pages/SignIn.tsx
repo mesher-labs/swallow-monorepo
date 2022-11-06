@@ -14,6 +14,7 @@ const S = {
     color: ${COLORS.white};
     width: fit-content;
     margin: 0 auto;
+    margin-top: 60px;
   `,
   SubTitle: styled.h2`
     font-weight: 400;
