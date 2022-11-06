@@ -14,7 +14,7 @@ import {
   DefaultAaveCurrentAPYShortcut,
   DefaultMultiSendShortcut,
   DefaultTokenBalanceShortcut,
-} from "./DefaultShortCuts";
+} from "./DefaultShortcuts";
 
 export type ShortcutTypes =
   | "SEND"
