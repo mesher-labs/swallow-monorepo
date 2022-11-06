@@ -1,4 +1,9 @@
+import { ethers } from "ethers";
 import styled from "styled-components";
+import { useWeb3 } from "../../App";
+import localStorageService from "../../common/services/local-storage.service";
+import { TokenService } from "../../common/services/tokens.service";
+import txBuilderService from "../../common/services/tx-builder.service";
 import {
   ShortcutRes,
   UserParams,
@@ -45,20 +50,35 @@ export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
 
 export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
   const { userParams } = myShortcut;
+  const { web3 } = useWeb3();
+  const account = localStorageService.get("account");
   const parsedParams: Record<BuyShortcutParamsType, string> = {
     sellToken: "",
     buyToken: "",
     sellAmount: "",
-    buyAmount: "",
-    slippagePercentage: "",
   };
   userParams.forEach((param: UserParams) => {
     const name = param.name as BuyShortcutParamsType;
     parsedParams[name] = param.value;
   });
 
+  const onClickHanlder = async () => {
+    console.log("object");
+    const swapTx = await txBuilderService.buildTx(web3, "BUY", {
+      sellToken: TokenService.findAddressBySymbol(parsedParams["sellToken"]),
+      buyToken: TokenService.findAddressBySymbol(parsedParams["buyToken"]),
+      sellAmount: ethers.utils
+        .parseUnits(parsedParams["sellAmount"], 18)
+        .toString(),
+      takerAddress: account,
+    });
+    await web3.eth.sendTransaction(swapTx);
+    console.log("swapTx", swapTx);
+    console.log("after approve");
+  };
+
   return (
-    <SquareContainer backgroundColor="#6FEB8E">
+    <SquareContainer onClick={onClickHanlder} backgroundColor="#6FEB8E">
       <h1>Buy</h1>
       <h2>
         {parsedParams.sellAmount} {parsedParams.sellToken} <br /> with{" "}
@@ -84,6 +104,7 @@ export const MultiSendShortcut = ({ myShortcut }: ShortcutProps) => {
 
 export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
   const { userParams } = myShortcut;
+  const { web3 } = useWeb3();
   const parsedParams: Record<SendShortCutParamsType, string> = {
     recipientAddress: "",
     recipientNickName: "",
@@ -94,8 +115,12 @@ export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
     const name = param.name as SendShortCutParamsType;
     parsedParams[name] = param.value;
   });
+  const onClickHandler = async () => {
+    const tx = await txBuilderService.buildTx(web3, "SEND", parsedParams);
+    await web3.eth.sendTransaction(tx);
+  };
   return (
-    <SquareContainer backgroundColor="#F5BF45">
+    <SquareContainer onClick={onClickHandler} backgroundColor="#F5BF45">
       <h1>Send</h1>
       <h2>
         {parsedParams.amount} {parsedParams.token} <br /> to @

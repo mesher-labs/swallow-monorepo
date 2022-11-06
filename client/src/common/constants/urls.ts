@@ -1,3 +1,3 @@
 export const URLS = {
-  'ZERO_X' : 'https://api.0x.org'
+  'ZERO_X' : 'https://mumbai.api.0x.org'
 }

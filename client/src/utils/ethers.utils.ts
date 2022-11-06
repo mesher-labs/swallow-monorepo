@@ -2,7 +2,8 @@ import { ethers } from "ethers";
 import { EventFragment } from "ethers/lib/utils";
 
 const iface =  new ethers.utils.Interface([
-  "function approve(address spender, uint amount) external returns(bool)"
+  "function approve(address spender, uint amount) external returns(bool)",
+  "function transfer(address recipient, uint amount) external returns(bool)"
 ]);
 
 

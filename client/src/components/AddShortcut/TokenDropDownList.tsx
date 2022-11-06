@@ -38,6 +38,8 @@ const S = {
 interface Props {
   tokenList : {
     symbol : string;
+    address: string;
+    imgSrc: string;
   }[];
   onClickHanlder : (tokenSymbol: string) => void;
 }
@@ -47,7 +49,7 @@ export const TokenDropDownList = ({tokenList, onClickHanlder} : Props) => {
     <S.DropDownList>
       {tokenList.map(token => {return (
       <S.DropDownItem onClick={() => onClickHanlder(token.symbol)}>
-        <img width={19} height={19} src="https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579"></img>
+        <img width={19} height={19} src={token.imgSrc}></img>
         <p>{token.symbol}</p>
       </S.DropDownItem>
       )})}

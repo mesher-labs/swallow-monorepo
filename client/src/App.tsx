@@ -25,7 +25,9 @@ export const Web3Provider = ({ children }: any) => {
   const [web3, setWeb3] = useState<Web3>(new Web3());
   useEffect(() => {
     if (!window.ethereum) return alert("please install metamask first");
-    setWeb3(new Web3(window.ethereum));
+    window.ethereum.enable().then(() => {
+      setWeb3(new Web3(window.ethereum));
+    })
   }, window.ethereum);
 
   const value = {
@@ -48,17 +50,17 @@ function App() {
         <Header />
         {/*
          */}
-        <Layout>
+        {/* <Layout>
           <LNB />
           <Home />
-        </Layout>
+        </Layout> */}
         <div style={{ display: "flex", marginTop: "50px" }}>
-          {/* 
-          <LNB />
-          <SignIn />
+          
+          {/* <LNB /> */}
+          {/* <SignIn /> */}
           <AddBuyShortCut /> 
-          <AddSendShortCut />
-          */}
+          {/* <AddSendShortCut /> */}
+         
           {/* <AddAaveApyShortcut /> */}
           {/* <AddTokenBalanceShortcut /> */}
         </div>
