@@ -8,7 +8,13 @@ import {
   SendShortcut,
   TokenBalanceShortcut,
 } from "../../components/Home/Shortcuts";
-import { DefaultShortcuts } from "../../components/Home/DefaultShortcuts";
+import {
+  DefaultSendShortcut,
+  DefaultBuyShortcut,
+  DefaultAaveCurrentAPYShortcut,
+  DefaultMultiSendShortcut,
+  DefaultTokenBalanceShortcut,
+} from "../../components/Home/DefaultShortcuts";
 
 export type ShortcutTypes =
   | "SEND"
@@ -35,6 +41,14 @@ const getMyShortcuts: Record<ShortcutTypes, JSX.Element> = {
   AAVE_CURRENT_APY: <AaveCurrentAPYShortcut />,
   MULTI_SEND: <MultiSendShortcut />,
   TOKEN_BALANCE: <TokenBalanceShortcut />,
+};
+
+const getDefaultShortcuts: Record<ShortcutTypes, JSX.Element> = {
+  SEND: <DefaultSendShortcut />,
+  BUY: <DefaultBuyShortcut />,
+  AAVE_CURRENT_APY: <DefaultAaveCurrentAPYShortcut />,
+  MULTI_SEND: <DefaultMultiSendShortcut />,
+  TOKEN_BALANCE: <DefaultTokenBalanceShortcut />,
 };
 
 const getShortcutsTitle: Record<ShortcutTypes, string> = {
@@ -69,5 +83,7 @@ const getShortcutsSubTitle: Record<ShortcutTypes, JSX.Element> = {
 export const HomePresenter = ({ shortcutType }: HomePresenterProps) => {
   const myShortCuts = ShortcutUtils.myShortCuts();
 
-  return <>{getMyShortcuts[shortcutType]}</>;
+  // TODO:  DefaultShortcuts 와 toggle
+  // return <>{getMyShortcuts[shortcutType]}</>;
+  return <>{getDefaultShortcuts[shortcutType]}</>;
 };
