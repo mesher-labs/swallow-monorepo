@@ -4,9 +4,9 @@ import { URLS } from "../constants/urls";
 import qs from 'qs'
 
 export interface SwapQuoteParams {
-  sellToken: string;
   buyToken: string,
-  sellAmount: string,
+  sellToken: string;
+  buyAmount: string,
   takerAddress: string,
 }
 

@@ -50,15 +50,15 @@ function App() {
         <Header />
         {/*
          */}
-        {/* <Layout>
+        <Layout>
           <LNB />
           <Home />
-        </Layout> */}
+        </Layout>
+        {/* <SignIn /> */}
         <div style={{ display: "flex", marginTop: "50px" }}>
           
           {/* <LNB /> */}
-          {/* <SignIn /> */}
-          <AddBuyShortCut /> 
+          {/* <AddBuyShortCut />  */}
           {/* <AddSendShortCut /> */}
          
           {/* <AddAaveApyShortcut /> */}

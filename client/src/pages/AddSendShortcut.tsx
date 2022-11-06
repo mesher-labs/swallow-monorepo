@@ -46,7 +46,7 @@ export const AddSendShortCut = () => {
   if (isLoading || !allShortcuts) return <></>;
 
   const addSendShortCut = allShortcuts.find(
-    (shortCut) => shortCut.shortcutType === "SEND"
+    (shortCut: any) => shortCut.shortcutType === "SEND"
   );
 
   if (!addSendShortCut) return <></>;

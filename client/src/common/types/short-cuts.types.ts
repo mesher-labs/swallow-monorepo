@@ -17,7 +17,7 @@ export const Shortcuts = {
 export type BuyShortcutParamsType =
   | "sellToken"
   | "buyToken"
-  | "sellAmount"
+  | "buyAmount"
 
 export type SendShortCutParamsType = 'recipientNickName' | 'amount' | 'token' | 'recipientAddress'
 

@@ -56,7 +56,7 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
   const parsedParams: Record<BuyShortcutParamsType, string> = {
     sellToken: "",
     buyToken: "",
-    sellAmount: "",
+    buyAmount: "",
   };
   userParams.forEach((param: UserParams) => {
     const name = param.name as BuyShortcutParamsType;
@@ -66,24 +66,31 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
   const onClickHanlder = async () => {
     console.log("object");
 
-    const allowanceTx = await txBuilderService.buildTx(web3, 'ALLOWANCE', {
-      token: parsedParams['sellToken'],
-      owner: account,
-      spender: CONTRACTS.ZERO_X_PROXY_CONTRACT
-    })
-
-    const allowance = await web3.eth.call(allowanceTx);
-
-    const sellAmount = ethers.utils
-    .parseUnits(parsedParams["sellAmount"], 18)
-    .toString();
-
-    // if(allowance )
+    if(parsedParams['sellToken'] !== 'MATIC') {
+      const allowanceTx = await txBuilderService.buildTx(web3, "ALLOWANCE", {
+        token: parsedParams["sellToken"],
+        owner: account,
+        spender: CONTRACTS.ZERO_X_PROXY_CONTRACT,
+      });
+  
+      const allowance = await web3.eth.call(allowanceTx);
+      console.log(allowance);
+  
+      if (+allowance < 0) {
+        const approveTx = await txBuilderService.buildTx(web3, "APPROVE", {
+          token: parsedParams["sellToken"],
+          spender: CONTRACTS.ZERO_X_PROXY_CONTRACT,
+        });
+        await web3.eth.sendTransaction(approveTx);
+      }
+    }
 
     const swapTx = await txBuilderService.buildTx(web3, "BUY", {
       sellToken: TokenService.findAddressBySymbol(parsedParams["sellToken"]),
       buyToken: TokenService.findAddressBySymbol(parsedParams["buyToken"]),
-      sellAmount,
+      buyAmount: ethers.utils
+        .parseUnits(parsedParams["buyAmount"], 18)
+        .toString(),
       takerAddress: account,
     });
 
@@ -97,8 +104,8 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
     <SquareContainer onClick={onClickHanlder} backgroundColor="#6FEB8E">
       <h1>Buy</h1>
       <h2>
-        {parsedParams.sellAmount} {parsedParams.sellToken} <br /> with{" "}
-        {parsedParams.buyToken}
+        {parsedParams.buyAmount} {parsedParams.buyToken} <br /> with{" "}
+        {parsedParams.sellToken}
       </h2>
     </SquareContainer>
   );
@@ -132,8 +139,12 @@ export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
     parsedParams[name] = param.value;
   });
   const onClickHandler = async () => {
-    const tx = await txBuilderService.buildTx(web3, "SEND", parsedParams);
-    await web3.eth.sendTransaction(tx);
+    if(parsedParams['token'] === 'MATIC') {
+      // await web3.eth.s
+    } else {
+      const tx = await txBuilderService.buildTx(web3, "SEND", parsedParams);
+      await web3.eth.sendTransaction(tx);
+    }
   };
   return (
     <SquareContainer onClick={onClickHandler} backgroundColor="#F5BF45">

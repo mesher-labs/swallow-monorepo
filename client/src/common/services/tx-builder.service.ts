@@ -25,7 +25,7 @@ class TxBuilderService {
         const params: SwapQuoteParams = {
           sellToken: paramsDto.sellToken,
           buyToken: paramsDto.buyToken,
-          sellAmount: paramsDto.sellAmount,
+          buyAmount: paramsDto.buyAmount,
           takerAddress: paramsDto.takerAddress,
         };
         return await (
@@ -36,7 +36,7 @@ class TxBuilderService {
         const data = EthersUtil.encodeFunctionData("approve", this.toParams(type, paramsDto));
         return {
           data,
-          to: paramsDto.contractAddress,
+          to: TokenService.findAddressBySymbol(paramsDto.token),
           from,
         };
       }

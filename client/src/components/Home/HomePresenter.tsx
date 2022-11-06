@@ -28,7 +28,7 @@ export interface HomePresenterProps {
 
 const getMyShortcuts = (
   shortcutType: ShortcutTypes,
-  myShortcut: ShortcutRes,
+  myShortcut: ShortcutRes
 ) => {
   if (shortcutType === Shortcuts.SEND) {
     return <SendShortcut myShortcut={myShortcut} />;
@@ -68,14 +68,18 @@ export const HomePresenter = ({ shortcutType }: HomePresenterProps) => {
   // Case 2: 등록은 했는데 이 숏컷이 아닌놈
   const myShortcutArr = JSON.parse(myShortcutString);
   const isMyShortcut = myShortcutArr.some(
-    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType,
+    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType
   );
   if (!isMyShortcut) {
     return <>{getDefaultShortcuts[shortcutType]}</>;
   }
   const targetShortcut = myShortcutArr.find(
-    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType,
+    (shortcut: ShortcutRes) => shortcut.shortcutType === shortcutType
   );
   if (isUndefined(targetShortcut)) throw new Error("Shortcut type err");
-  return <>{getMyShortcuts(shortcutType, targetShortcut)}</>;
+  return (
+    <div style={{ cursor: "pointer" }}>
+      {getMyShortcuts(shortcutType, targetShortcut)}
+    </div>
+  );
 };
