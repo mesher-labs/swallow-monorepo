@@ -58,6 +58,7 @@ contract Shortcuts is ShortcutsInterface {
     }
 
     function setIsReady(uint256 index, bool newIsReady) external onlyAdmin {
+        emit SetIsReady(index, newIsReady);
         _shortcuts[index].isReady = newIsReady;
     }
 }

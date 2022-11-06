@@ -74,6 +74,25 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "newIsReady",
+        "type": "bool"
+      }
+    ],
+    "name": "SetIsReady",
+    "type": "event"
+  },
+  {
     "inputs": [
       {
         "internalType": "string",

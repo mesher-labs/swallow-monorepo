@@ -17,6 +17,7 @@ interface ShortcutsInterface {
     }
 
     event AddShortcut(uint256 indexed index, Shortcut newShortcut, uint256 blockNum);
+    event SetIsReady(uint256 indexed index, bool newIsReady);
 
     function getAllShortcuts() external view returns (Shortcut[] memory);
 

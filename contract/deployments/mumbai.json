@@ -3,7 +3,7 @@
   "chainId": "80001",
   "contracts": {
     "Shortcuts": {
-      "address": "0xE13b85B5a1cE1Ff084019520783f98254aefDc55",
+      "address": "0x4b56262A5FCFEbD1a217F6066891a551e85832ec",
       "abi": [
         {
           "inputs": [],
@@ -77,6 +77,25 @@
             }
           ],
           "name": "AddShortcut",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "newIsReady",
+              "type": "bool"
+            }
+          ],
+          "name": "SetIsReady",
           "type": "event"
         },
         {
