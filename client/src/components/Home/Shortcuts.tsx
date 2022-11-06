@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import styled from "styled-components";
 import { useWeb3 } from "../../App";
+import { CONTRACTS } from "../../common/constants/contracts";
 import localStorageService from "../../common/services/local-storage.service";
 import { TokenService } from "../../common/services/tokens.service";
 import txBuilderService from "../../common/services/tx-builder.service";
@@ -64,15 +65,30 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
 
   const onClickHanlder = async () => {
     console.log("object");
+
+    const allowanceTx = await txBuilderService.buildTx(web3, 'ALLOWANCE', {
+      token: parsedParams['sellToken'],
+      owner: account,
+      spender: CONTRACTS.ZERO_X_PROXY_CONTRACT
+    })
+
+    const allowance = await web3.eth.call(allowanceTx);
+
+    const sellAmount = ethers.utils
+    .parseUnits(parsedParams["sellAmount"], 18)
+    .toString();
+
+    // if(allowance )
+
     const swapTx = await txBuilderService.buildTx(web3, "BUY", {
       sellToken: TokenService.findAddressBySymbol(parsedParams["sellToken"]),
       buyToken: TokenService.findAddressBySymbol(parsedParams["buyToken"]),
-      sellAmount: ethers.utils
-        .parseUnits(parsedParams["sellAmount"], 18)
-        .toString(),
+      sellAmount,
       takerAddress: account,
     });
+
     await web3.eth.sendTransaction(swapTx);
+
     console.log("swapTx", swapTx);
     console.log("after approve");
   };
