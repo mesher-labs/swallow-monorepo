@@ -5,6 +5,7 @@ import React from "react";
 import localStorageService from "../common/services/local-storage.service";
 import { ethers } from "ethers";
 import Web3 from 'web3'
+import { useWeb3 } from "../App";
 const S = {
   Title: styled.h1`
     font-weight: 700;
@@ -59,6 +60,7 @@ const S = {
 };
 export const SignIn = () => {
   const [nickName, setNickName] = useState<string>("");
+  const {setServiceState} = useWeb3();
   const onChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setNickName(e.currentTarget.value);
   };
@@ -70,6 +72,8 @@ export const SignIn = () => {
 
     localStorageService.set('nickName', nickName);
     localStorageService.set('account', accounts[0]);
+
+    setServiceState('home');
   };
   return (
     <>

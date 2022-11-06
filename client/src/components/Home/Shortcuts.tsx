@@ -6,6 +6,7 @@ import localStorageService from "../../common/services/local-storage.service";
 import { TokenService } from "../../common/services/tokens.service";
 import txBuilderService from "../../common/services/tx-builder.service";
 import { useGetAaveCurrentAPY } from "../../hooks/react-query/query/useGetAaveCurrentAPY";
+import { useEffect, useState } from 'react';
 import {
   ShortcutRes,
   UserParams,
@@ -147,12 +148,8 @@ export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
     parsedParams[name] = param.value;
   });
   const onClickHandler = async () => {
-    if(parsedParams['token'] === 'MATIC') {
-      // await web3.eth.s
-    } else {
-      const tx = await txBuilderService.buildTx(web3, "SEND", parsedParams);
-      await web3.eth.sendTransaction(tx);
-    }
+    const tx = await txBuilderService.buildTx(web3, "SEND", parsedParams);
+    await web3.eth.sendTransaction(tx);
   };
   return (
     <SquareContainer onClick={onClickHandler} backgroundColor="#F5BF45">
@@ -166,11 +163,51 @@ export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
 };
 
 export const TokenBalanceShortcut = ({ myShortcut }: ShortcutProps) => {
+  const [balanceInfo, setBalanceInfo] = useState<{symbol: string, balance: string}[]>([]);
+  const {web3} = useWeb3();
+  const account = localStorageService.get('account');
+
+  // useEffect(() => {
+  //   const promiseList = myShortcut.userParams.map(param => getBalance(param.value))
+  //   Promise.all(promiseList).then(res => setBalanceInfo([...balanceInfo, ...res.map((balance, index) => ({symbol: myShortcut.userParams[index].value, balance })) ]))
+  // }, [])
+
+  // console.log(balanceInfo);
+
+  // if(!account) return <></>;
+
+  // const getBalance = async (tokenSymbol: string) => {
+  //   if(tokenSymbol === 'MATIC') return web3.eth.getBalance(account);
+  //   else {
+  //     const tx = await txBuilderService.buildTx(web3, 'BALANCE_OF', {
+  //       token:  tokenSymbol,
+  //       account, 
+  //     })
+  //     return web3.eth.call(tx);
+  //   } 
+  // }
+
   return (
     <RectangleContainer backgroundColor="#58B9EF">
       <h1>Token Balance @juwon</h1>
       <TokenBalanceContainer>
         <Row>
+          {/* {balanceInfo.map(info => (
+            <TokenBalanceItemWrapper>
+              <img />
+              <Row>
+                <TokenInfoColumn isFlexEnd={true}>
+                  <p>10,588,050,080.45</p>
+                  <p>$10,688,050,080.45</p>
+                </TokenInfoColumn>
+                <TokenInfoColumn isFlexEnd={false}>
+                  <h3>DAI</h3>
+                  <h3>USD</h3>
+                </TokenInfoColumn>
+              </Row>
+            </TokenBalanceItemWrapper>
+            ))
+          } */}
           <TokenBalanceItemWrapper>
             <img />
             <Row>
