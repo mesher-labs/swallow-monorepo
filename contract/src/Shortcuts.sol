@@ -23,7 +23,7 @@ contract Shortcuts is ShortcutsInterface {
         Shortcut[] memory allShortcuts = new Shortcut[](len);
 
         for (uint256 i = 1; i <= len; i += 1) {
-            allShortcuts[i] = _shortcuts[i];
+            allShortcuts[i - 1] = _shortcuts[i];
         }
         return allShortcuts;
     }
