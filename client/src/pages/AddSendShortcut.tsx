@@ -1,14 +1,17 @@
 import Icon from "@mdi/react";
-import { mdiArrowLeft } from "@mdi/js";
-import { COLORS } from "../common/constants/colors";
 import styled from "styled-components";
+import localStorageService from "../common/services/local-storage.service";
+
+import { mdiArrowLeft } from "@mdi/js";
+import { useState } from "react";
+
+import { COLORS } from "../common/constants/colors";
 import { TextInput } from "../components/AddShortcut/TextInput";
 import { TokenDropDownList } from "../components/AddShortcut/TokenDropDownList";
 import { TokenDropDownInput } from "../components/AddShortcut/TokenDropDownInput";
-import { useState } from "react";
 import { AddShortCutButton } from "../components/AddShortcut/Button";
 import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
-import localStorageService from "../common/services/local-storage.service";
+import { ShortcutRes } from "../common/types/short-cuts.types";
 
 const S = {
   Title: styled.h1`
@@ -46,7 +49,7 @@ export const AddSendShortCut = () => {
   if (isLoading || !allShortcuts) return <></>;
 
   const addSendShortCut = allShortcuts.find(
-    (shortCut: any) => shortCut.shortcutType === "SEND"
+    (shortCut: ShortcutRes) => shortCut.shortcutType === "SEND",
   );
 
   if (!addSendShortCut) return <></>;
@@ -74,9 +77,9 @@ export const AddSendShortCut = () => {
   const onChangeToNickName = (e: React.FormEvent<HTMLInputElement>) => {
     setShortCutData({
       ...shortCutData,
-      toNickName: e.currentTarget.value
-    })
-  }
+      toNickName: e.currentTarget.value,
+    });
+  };
 
   const onClickButton = () => {
     addSendShortCut.userParams = [
@@ -116,7 +119,7 @@ export const AddSendShortCut = () => {
         ></TextInput>
       </div>
       <div style={{ display: "flex", marginTop: "30px", alignItems: "center" }}>
-        <S.SubTitle style={{width: '150px'}}>nickname</S.SubTitle>
+        <S.SubTitle style={{ width: "150px" }}>nickname</S.SubTitle>
         <TextInput
           placeHodler="nickname"
           amount={shortCutData.toNickName}

@@ -19,9 +19,17 @@ export type BuyShortcutParamsType =
   | "buyToken"
   | "buyAmount"
 
-export type SendShortCutParamsType = 'recipientNickName' | 'amount' | 'token' | 'recipientAddress'
+export type SendShortCutParamsType =
+  | "recipientNickName"
+  | "amount"
+  | "token"
+  | "recipientAddress";
 
-export type ShortCutParamsType = BuyShortcutParamsType | SendShortCutParamsType;
+export type AaveCurrentAPYParamsType = string;
+export type ShortCutParamsType =
+  | BuyShortcutParamsType
+  | SendShortCutParamsType
+  | AaveCurrentAPYParamsType;
 
 export interface UserParams {
   // TODO : ParamsType 를 추가해야함

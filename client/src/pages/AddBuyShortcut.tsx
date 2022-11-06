@@ -1,14 +1,16 @@
 import Icon from "@mdi/react";
+import styled from "styled-components";
+import localStorageService from "../common/services/local-storage.service";
+
 import { mdiArrowLeft } from "@mdi/js";
 import { COLORS } from "../common/constants/colors";
-import styled from "styled-components";
 import { TextInput } from "../components/AddShortcut/TextInput";
 import { TokenDropDownList } from "../components/AddShortcut/TokenDropDownList";
 import { TokenDropDownInput } from "../components/AddShortcut/TokenDropDownInput";
 import { useState } from "react";
 import { AddShortCutButton } from "../components/AddShortcut/Button";
 import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
-import localStorageService from "../common/services/local-storage.service";
+import { ShortcutRes } from "../common/types/short-cuts.types";
 
 const S = {
   Title: styled.h1`
@@ -43,7 +45,7 @@ export const AddBuyShortCut = () => {
   if (isLoading || !allShortcuts) return <></>;
 
   const addBuyShortCut = allShortcuts.find(
-    (shortCut: any) => shortCut.shortcutType === "BUY"
+    (shortCut: ShortcutRes) => shortCut.shortcutType === "BUY",
   );
 
   if (!addBuyShortCut) return <></>;

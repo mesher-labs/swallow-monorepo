@@ -1,10 +1,14 @@
-import { AddShortCutButton } from "../components/AddShortcut/Button";
 import styled from "styled-components";
-import { COLORS } from "../common/constants/colors";
-import { TokenDropDownInput } from "../components/AddShortcut/TokenDropDownInput";
+import Icon from "@mdi/react";
+import localStorageService from "../common/services/local-storage.service";
+
 import { mdiPlus } from "@mdi/js";
 import { useState } from "react";
-import Icon from "@mdi/react";
+import { AddShortCutButton } from "../components/AddShortcut/Button";
+import { COLORS } from "../common/constants/colors";
+import { TokenDropDownInput } from "../components/AddShortcut/TokenDropDownInput";
+import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
+import { ShortcutRes } from "../common/types/short-cuts.types";
 
 const S = {
   Title: styled.h1`
@@ -41,11 +45,26 @@ export const AddAaveApyShortcut = () => {
     },
   ]);
 
+  const { data: allShortcuts, isLoading } = useGetAllShortcuts();
+
+  if (isLoading || !allShortcuts) return <></>;
+
+  const addAaveApyShortcut = allShortcuts.find(
+    (shortCut: ShortcutRes) => shortCut.shortcutType === "AAVE_CURRENT_APY",
+  );
+
+  if (!addAaveApyShortcut) return <></>;
+
   const onClickIcon = () => {
     setShortCutsState([...shortCutsState, { tokenSymbol: "" }]);
   };
+
+  const addShortCutButtonHandler = () => {
+    localStorageService.add("myShortCut", shortCutsState);
+  };
+
   return (
-    <div style={{marginLeft: '50px', width: '100vw'}}>
+    <div style={{ marginLeft: "50px", width: "100vw" }}>
       <S.Title>Add Aave Current APY Shortcuts</S.Title>
       <S.Caption>*supply, borrow</S.Caption>
 
@@ -115,7 +134,7 @@ export const AddAaveApyShortcut = () => {
           />
         </div> */}
       </div>
-      <AddShortCutButton onClickHandler={() => console.log("asdf")} />
+      <AddShortCutButton onClickHandler={() => addShortCutButtonHandler()} />
     </div>
   );
 };
