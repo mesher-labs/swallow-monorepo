@@ -22,11 +22,6 @@ const getAllShortcuts = (): ShortcutRes[] => {
         { name: "sellToken", value: "test" },
         { name: "buyToken", value: "test" },
         { name: "sellAmount", value: "test" },
-        { name: "buyAmount", value: "test" },
-        {
-          name: "slippagePercentage",
-          value: "test",
-        },
       ],
       shortcutType: "BUY",
     },
