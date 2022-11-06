@@ -19,7 +19,7 @@ interface ShortcutProps {
 }
 export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
   const { userParams } = myShortcut;
-  const tokenAddresses = userParams.map((param) => param.value);
+  const tokenAddresses = userParams.map((param) => TokenService.findAddressBySymbol(param.value, 'mainnet') || '');
   const { data: allAaveMarketDatas, isLoading } =
     useGetAaveCurrentAPY(tokenAddresses);
 

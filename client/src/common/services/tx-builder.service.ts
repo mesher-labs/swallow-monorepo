@@ -60,7 +60,7 @@ class TxBuilderService {
         const data = EthersUtil.encodeFunctionData("balanceOf", this.toParams(type, paramsDto));
         return {
           data,
-          to: TokenService.findAddressBySymbol(paramsDto.token),
+          to: TokenService.findAddressBySymbol(paramsDto.token, "mainnet"),
         };
       }
       default:

@@ -63,10 +63,10 @@ export const AddAaveApyShortcut = () => {
   const addShortCutButtonHandler = () => {
     addAaveApyShortcut.userParams = shortCutsState.map(
       (state: ShortCutState) => {
-        const address = TokenService.findAddressBySymbol(state.tokenSymbol);
+        // const address = TokenService.findAddressBySymbol(state.tokenSymbol);
         return {
-          name: state.tokenSymbol,
-          value: address,
+          name: 'tokenSymbol',
+          value: state.tokenSymbol,
         };
       },
     );

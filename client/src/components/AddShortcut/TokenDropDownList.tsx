@@ -38,7 +38,10 @@ const S = {
 interface Props {
   tokenList : {
     symbol : string;
-    address: string;
+    address: {
+      mainnet: string;
+      mumbai: string;
+    }
     imgSrc: string;
   }[];
   onClickHanlder : (tokenSymbol: string) => void;

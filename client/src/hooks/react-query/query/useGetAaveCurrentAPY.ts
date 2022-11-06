@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "react-query";
 import { GraphQLClient, gql } from "graphql-request";
 
-const API_URL = `https://api.thegraph.com/subgraphs/name/messari/aave-v2-polygon`;
+const API_URL = `https://api.thegraph.com/subgraphs/name/messari/aave-v2-polygon-extended`;
 
 const graphQLClient = new GraphQLClient(API_URL, {
   method: "POST",
