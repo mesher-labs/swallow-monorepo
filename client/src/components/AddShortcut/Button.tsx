@@ -1,28 +1,24 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 const S = {
-  Button : styled.button`
-    background: #8660F0;
+  Button: styled.button`
+    background: #8660f0;
     border-radius: 38.5px;
-    width: 563px;
-    height: 77px;
-    color: #FFFFFF;
+    width: 463px;
+    height: 70px;
+    color: #ffffff;
     font-weight: 700;
-    font-size: 36px;
+    font-size: 24px;
     display: block;
     margin: 0 auto;
     margin-top: 112px;
     cursor: pointer;
-  `
-}
+  `,
+};
 
 interface Props {
-  onClickHandler : () => void;
+  onClickHandler: () => void;
 }
 
-export const AddShortCutButton = ({onClickHandler} : Props) => {
-  return (
-    <S.Button onClick={onClickHandler}>
-      Add ShortCuts
-    </S.Button>
-  )
-}
+export const AddShortCutButton = ({ onClickHandler }: Props) => {
+  return <S.Button onClick={onClickHandler}>Add ShortCuts</S.Button>;
+};

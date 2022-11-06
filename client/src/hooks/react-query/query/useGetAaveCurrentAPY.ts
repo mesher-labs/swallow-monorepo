@@ -12,13 +12,12 @@ const graphQLClient = new GraphQLClient(API_URL, {
 });
 
 export const useGetAaveCurrentAPY = () => {
-  console.log(graphQLClient);
   return useQuery(
     ["aaveCurrentAPY"],
     async () => {
       const { markets } = await graphQLClient.request(gql`
         query {
-          markets(first: 20) {
+          markets(first: 200) {
             id
             name
             inputToken {
@@ -34,6 +33,7 @@ export const useGetAaveCurrentAPY = () => {
           }
         }
       `);
+      console.log(markets);
       return markets;
     },
     {

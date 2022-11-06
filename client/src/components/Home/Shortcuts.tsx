@@ -20,6 +20,7 @@ interface ShortcutProps {
 export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
   const { userParams } = myShortcut;
   const { data: allAaveMarketDatas, isLoading } = useGetAaveCurrentAPY();
+  if (isLoading) return <></>;
   const apyInfoList = userParams.map((param) => {
     const symbol = param.value;
 
@@ -55,7 +56,10 @@ export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
         {apyInfoList.map((info) => (
           <Row>
             <APYTokenWrapper>
-              <h3>{info.symbol}</h3>
+              <APYInside>
+                <img src={`/images/${info.symbol}.png`} />
+                <h3>{info.symbol}</h3>
+              </APYInside>
               <p>
                 {info.supplyAPY}%, {info.borrowAPY}%
               </p>
@@ -172,11 +176,14 @@ export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
   };
   return (
     <SquareContainer onClick={onClickHandler} backgroundColor="#F5BF45">
-      <h1>Send</h1>
-      <h2>
-        {parsedParams.amount} {parsedParams.token} <br /> to @
-        {parsedParams.recipientNickName}
-      </h2>
+      <div>
+        <h1>Send</h1>
+        <h2>
+          {parsedParams.amount} {parsedParams.token} <br /> to @
+          {parsedParams.recipientNickName}
+        </h2>
+      </div>
+      <img src={`/images/${parsedParams.token}.png`} />
     </SquareContainer>
   );
 };
@@ -302,6 +309,12 @@ const SquareContainer = styled.div<ContainerProps>`
   width: 252px;
   height: 252px;
   border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  img {
+    align-self: flex-end;
+  }
   h1 {
     font-style: normal;
     font-weight: 700;
@@ -366,6 +379,11 @@ const APYContainer = styled.div`
   align-items: space-between;
   width: 100%;
 `;
+const APYInside = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const APYTokenWrapper = styled.div`
   margin-top: 10px;
   width: 50%;
@@ -377,6 +395,11 @@ const APYTokenWrapper = styled.div`
   }
   p {
     width: 70%;
+  }
+  img {
+    width: 18px;
+    margin-right: 5px;
+    height: 18px;
   }
 `;
 
