@@ -19,9 +19,9 @@ export type BuyShortcutParamsType =
   | "buyToken"
   | "sellAmount"
   | "buyAmount"
-  | "slippagePercentage"
+  | "slippagePercentage";
 
-export type SendShortCutParamsType = 'recipient' | 'amount' | 'token';
+export type SendShortCutParamsType = "recipient" | "amount" | "token";
 
 export type ShortCutParamsType = BuyShortcutParamsType | SendShortCutParamsType;
 
