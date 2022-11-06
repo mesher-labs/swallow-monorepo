@@ -1,6 +1,8 @@
 import { LeftHeader } from "./LeftHeader";
 import { RightHeader } from "./RightHeader";
 import styled from "styled-components";
+import { useWeb3 } from "../../App";
+import { useEffect } from "react";
 
 const S = {
   Header: styled.div`

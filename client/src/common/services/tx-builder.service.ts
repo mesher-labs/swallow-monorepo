@@ -1,13 +1,21 @@
 import EthersUtil from "../../utils/ethers.utils";
 import { ShortcutTypes } from "../types/short-cuts.types";
 import zeroXApiService, { SwapQuoteParams } from "./zeroX.api.service";
+import Web3 from 'web3';
 
-class EncoderService {
+class TxBuilderService {
   constructor() {}
-  async encode(type: ShortcutTypes, paramsDto: any) {
+  async encode(web3: Web3, type: ShortcutTypes, paramsDto: any) {
     switch (type) {
-      case "SEND":
-        return EthersUtil.encodeFunctionData("transfer", this.toParams(type, paramsDto));
+      case "SEND": {
+        const gasPrice = +(await web3.eth.getGasPrice()) * 1.2;
+        const data = EthersUtil.encodeFunctionData("transfer", this.toParams(type, paramsDto));
+        return {
+          gasPrice,
+          data,
+          to: paramsDto.contractAddress,
+        }
+      }
       case "BUY": {
         const params: SwapQuoteParams = {
           sellToken: paramsDto.sellToken,
@@ -29,4 +37,4 @@ class EncoderService {
   }
 }
 
-export default new EncoderService();
+export default new TxBuilderService();

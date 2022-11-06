@@ -1,5 +1,5 @@
 import { isNull } from "lodash-es";
-import { ShortcutTypes } from "../components/Home/HomePresenter";
+import { ShortcutTypes } from "../common/types/short-cuts.types";
 
 export type localStorageKeyType = "MY_SHORT_CUTS" | "MY_TAG";
 
@@ -20,7 +20,7 @@ class ShortCutUtils {
       return [];
     }
 
-    if(!rawMyShortCuts) return [];
+    if (!rawMyShortCuts) return [];
 
     const myShortCuts = JSON.parse(rawMyShortCuts);
 
