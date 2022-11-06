@@ -52,7 +52,8 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
     slippagePercentage: "",
   };
   userParams.forEach((param: UserParams) => {
-    parsedParams[param.name] = param.value;
+    const name = param.name as BuyShortcutParamsType;
+    parsedParams[name] = param.value;
   });
 
   return (

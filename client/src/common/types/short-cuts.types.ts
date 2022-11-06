@@ -19,11 +19,15 @@ export type BuyShortcutParamsType =
   | "buyToken"
   | "sellAmount"
   | "buyAmount"
-  | "slippagePercentage";
+  | "slippagePercentage"
+
+export type SendShortCutParamsType = 'recipient' | 'amount' | 'token';
+
+export type ShortCutParamsType = BuyShortcutParamsType | SendShortCutParamsType;
 
 export interface UserParams {
   // TODO : ParamsType 를 추가해야함
-  name: BuyShortcutParamsType;
+  name: ShortCutParamsType;
   value: string;
 }
 

@@ -7,6 +7,8 @@ import { TokenDropDownList } from "../components/AddShortcut/TokenDropDownList";
 import { TokenDropDownInput } from "../components/AddShortcut/TokenDropDownInput";
 import { useState } from "react";
 import { AddShortCutButton } from "../components/AddShortcut/Button";
+import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
+import localStorageService from "../common/services/local-storage.service";
 
 const S = {
   Title: styled.h1`
@@ -36,6 +38,15 @@ export const AddSendShortCut = () => {
     amount: "",
     toAddress: "",
   });
+
+  const { data: allShortcuts, isLoading } = useGetAllShortcuts();
+
+  if(isLoading || !allShortcuts) return <></>;
+
+  const addSendShortCut = allShortcuts.find(shortCut => shortCut.shortcutType === 'SEND');
+
+  if(!addSendShortCut) return <></>;
+
   const onChangeToken = (tokenSymbol: string) => {
     setShortCutData({
       ...shortCutData,
@@ -56,9 +67,18 @@ export const AddSendShortCut = () => {
       amount: e.currentTarget.value,
     });
 
+  const onClickButton = () => {
+    addSendShortCut.userParams = [
+      {name: 'recipient', value: shortCutData.toAddress},
+      {name : 'amount', value: shortCutData.amount},
+      {name : 'token', value: shortCutData.token}
+    ]
+    localStorageService.add('myShortCut', addSendShortCut);
+  };
+
   return (
-    <div style={{marginLeft: '50px', width: '100vw'}}>
-      <S.Title>Add Buy ShortCuts</S.Title>
+    <div style={{ marginLeft: "50px", width: "100vw" }}>
+      <S.Title>Add Send ShortCuts</S.Title>
       <div style={{ display: "flex", marginTop: "67px", alignItems: "center" }}>
         <S.SubTitle>Send</S.SubTitle>
         <TokenDropDownInput
@@ -83,7 +103,7 @@ export const AddSendShortCut = () => {
           width="1000px"
         ></TextInput>
       </div>
-      <AddShortCutButton onClickHandler={() => console.log(shortCutData)} />
+      <AddShortCutButton onClickHandler={onClickButton} />
     </div>
   );
 };

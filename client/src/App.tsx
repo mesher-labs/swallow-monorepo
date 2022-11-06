@@ -52,9 +52,9 @@ function App() {
         </Layout> */}
         <div style={{ display: "flex", marginTop: "50px" }}>
           <LNB />
-          <AddBuyShortCut />
+          {/* <AddBuyShortCut /> */}
           {/* <SignIn /> */}
-          {/* <AddSendShortCut/> */}
+          <AddSendShortCut/>
           {/* <AddAaveApyShortcut /> */}
           {/* <AddTokenBalanceShortcut /> */}
         </div>
