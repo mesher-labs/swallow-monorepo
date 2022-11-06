@@ -5,6 +5,7 @@ export const useSwapQuote = () => {
   const queryClient = useQueryClient();
   return useQuery({
     queryKey: ["swapQuote"],
-    queryFn: () => zeroXApiService.getSwapQuote(),
+    // queryFn: () => zeroXApiService.getSwapQuote(),
+    queryFn: () => {},
   });
 };

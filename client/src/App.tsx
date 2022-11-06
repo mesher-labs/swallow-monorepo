@@ -4,6 +4,9 @@ import { GlobalStyle } from './GlobalStyle'
 import { Header } from './components/Header';
 import { SignIn } from './pages/SignIn';
 import { LNB } from './components/SideBar/LNB';
+import { AddBuyShortCut } from './pages/AddBuyShortcut';
+import { AddSendShortCut } from './pages/AddSendShortcut';
+import { AddAaveApyShortcut } from './pages/AddAaveApyShortcut';
 
 
 function App() {
@@ -12,7 +15,10 @@ function App() {
       <GlobalStyle />
       {/* <Header /> */}
       {/* <SignIn /> */}
-      <LNB/>
+      {/* <AddBuyShortCut/> */}
+      {/* <AddSendShortCut/> */}
+      <AddAaveApyShortcut/>
+      {/* <LNB/> */}
     </>
   );
 }

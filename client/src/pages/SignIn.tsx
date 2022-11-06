@@ -68,8 +68,8 @@ export const SignIn = () => {
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
 
-    localStorageService.set("swallow-nickName", nickName);
-    localStorageService.set("swallow-address", await signer.getAddress());
+    localStorageService.set('nickName', nickName);
+    localStorageService.set('account', await signer.getAddress());
   };
   return (
     <>
