@@ -1,7 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-#yarn contract:build
-#yarn contract:test
-# yarn client:test
-# yarn client:build

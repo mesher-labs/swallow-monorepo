@@ -1,0 +1,238 @@
+{
+  "name": "mumbai",
+  "chainId": "80001",
+  "contracts": {
+    "Shortcuts": {
+      "address": "0x0CF6D3D3FEC650Cf8dABC925f8307ACC997a425C",
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "shortcutType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "endpoint",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "contractAddr",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isReady",
+                  "type": "bool"
+                }
+              ],
+              "indexed": false,
+              "internalType": "struct ShortcutsInterface.Shortcut",
+              "name": "newShortcut",
+              "type": "tuple"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "blockNum",
+              "type": "uint256"
+            }
+          ],
+          "name": "AddShortcut",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "newIsReady",
+              "type": "bool"
+            }
+          ],
+          "name": "SetIsReady",
+          "type": "event"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "shortcutType",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "endpoint",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "contractAddr",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "isReady",
+              "type": "bool"
+            }
+          ],
+          "name": "addShortcut",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "admin",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "getAllShortcuts",
+          "outputs": [
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "shortcutType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "endpoint",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "contractAddr",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isReady",
+                  "type": "bool"
+                }
+              ],
+              "internalType": "struct ShortcutsInterface.Shortcut[]",
+              "name": "",
+              "type": "tuple[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            }
+          ],
+          "name": "getShortcutByIndex",
+          "outputs": [
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "shortcutType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "endpoint",
+                  "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "contractAddr",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isReady",
+                  "type": "bool"
+                }
+              ],
+              "internalType": "struct ShortcutsInterface.Shortcut",
+              "name": "",
+              "type": "tuple"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "newIsReady",
+              "type": "bool"
+            }
+          ],
+          "name": "setIsReady",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ]
+    }
+  }
+}

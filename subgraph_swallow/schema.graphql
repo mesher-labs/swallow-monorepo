@@ -1,0 +1,8 @@
+type Shortcut @entity {
+  id: ID!
+  index: BigInt!
+  shortcutType: String!
+  endpoint: String!
+  contractAddr: Bytes!
+  isReady: Boolean!
+}

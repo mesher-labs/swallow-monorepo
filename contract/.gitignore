@@ -2,7 +2,8 @@ node_modules
 coverage
 coverage.json
 
-env
+env/*
+!env/.example.env
 
 .openzeppelin/unknown-31337.json
 .openzeppelin/unknown-1337.json
