@@ -8,6 +8,7 @@ import { AddBuyShortCut } from "./pages/AddBuyShortcut";
 import { AddSendShortCut } from "./pages/AddSendShortcut";
 import { AddAaveApyShortcut } from "./pages/AddAaveApyShortcut";
 import { Home } from "./pages/Home";
+import { Browse } from "./pages/Browse";
 import styled from "styled-components";
 import { AddTokenBalanceShortcut } from "./pages/AddTokenBalanceShortcut";
 import { useEffect, useState } from "react";
