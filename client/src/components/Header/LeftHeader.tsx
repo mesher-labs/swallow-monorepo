@@ -5,12 +5,12 @@ const S = {
   Title: styled.h1`
     color: ${COLORS.white};
     font-weight: 700;
-    font-size: 36px;
+    font-size: 24px;
   `,
   SubTitle: styled.h2`
     color: ${COLORS.gray};
     font-weight: 500;
-    font-size: 36px;
+    font-size: 24px;
   `,
 };
 

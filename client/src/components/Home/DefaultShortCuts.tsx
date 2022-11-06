@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useWeb3 } from "../../App";
 
 const AddShortcutSvg = () => {
   return (
@@ -19,8 +20,12 @@ const AddShortcutSvg = () => {
 };
 
 export const DefaultSendShortcut = () => {
+  const { setServiceState } = useWeb3();
   return (
-    <SquareContainer color="#F5BF45">
+    <SquareContainer
+      onClick={() => setServiceState("AddSendShortcut")}
+      color="#F5BF45"
+    >
       <h1>
         Add <br /> Send Shortcut
       </h1>
@@ -29,8 +34,12 @@ export const DefaultSendShortcut = () => {
   );
 };
 export const DefaultBuyShortcut = () => {
+  const { setServiceState } = useWeb3();
   return (
-    <SquareContainer color="#6FEB8E">
+    <SquareContainer
+      onClick={() => setServiceState("AddBuyShortcut")}
+      color="#6FEB8E"
+    >
       <h1>
         Add
         <br /> Buy Shortcut
@@ -40,6 +49,7 @@ export const DefaultBuyShortcut = () => {
   );
 };
 export const DefaultMultiSendShortcut = () => {
+  const { setServiceState } = useWeb3();
   return (
     <RectangleContainer color="#ED797C">
       <h1>
@@ -50,8 +60,12 @@ export const DefaultMultiSendShortcut = () => {
   );
 };
 export const DefaultTokenBalanceShortcut = () => {
+  const { setServiceState } = useWeb3();
   return (
-    <RectangleContainer color="#58B9EF">
+    <RectangleContainer
+      onClick={() => setServiceState("AddTokenBalanceShortcut")}
+      color="#58B9EF"
+    >
       <h1>
         Add <br /> Token Balance <br />
         Shortcut
@@ -61,8 +75,12 @@ export const DefaultTokenBalanceShortcut = () => {
   );
 };
 export const DefaultAaveCurrentAPYShortcut = () => {
+  const { setServiceState } = useWeb3();
   return (
-    <RectangleContainer color="#B682F7">
+    <RectangleContainer
+      onClick={() => setServiceState("AddAaveShortcut")}
+      color="#B682F7"
+    >
       <h1>
         Add <br />
         Aave Current APY Shortcut

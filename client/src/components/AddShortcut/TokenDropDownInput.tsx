@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { COLORS } from "../../common/constants/colors";
 import { TokenDropDownList } from "./TokenDropDownList";
 import { useState } from "react";
-import { ShortCutData } from "../../pages/AddBuyShortcut";
 import { TOKENS } from "../../common/constants/tokens";
 
 const S = {
@@ -13,13 +12,16 @@ const S = {
     position: relative;
   `,
   FormInput: styled.div`
-    color: ${COLORS.brownGray};
-    font-size: 36px;
+    color: white;
+    font-size: 24px;
     font-weight: 400;
     background: transparent;
     border: none;
     width: 100%;
     padding-left: 10px;
+    input::placeholder {
+      font-size: 18px;
+    }
   `,
   BottomLine: styled.div`
     background: #d9d9d9;
@@ -30,14 +32,17 @@ const S = {
   `,
 };
 
-
 interface Props {
   placeholder: string;
   tokenSymbol: string;
   onClickSymbol: (tokenSymbol: string) => void;
 }
 
-export const TokenDropDownInput = ({ placeholder, tokenSymbol, onClickSymbol }: Props) => {
+export const TokenDropDownInput = ({
+  placeholder,
+  tokenSymbol,
+  onClickSymbol,
+}: Props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const rotate = isClicked ? 0 : 180;
   const onClickIcon = () => setIsClicked(!isClicked);
@@ -45,7 +50,7 @@ export const TokenDropDownInput = ({ placeholder, tokenSymbol, onClickSymbol }: 
   const onClickHanlder = (tokenSymbol: string) => {
     setIsClicked(!isClicked);
     onClickSymbol(tokenSymbol);
-  }
+  };
 
   return (
     <S.Form>

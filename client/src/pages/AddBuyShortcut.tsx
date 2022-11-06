@@ -15,13 +15,13 @@ import { ShortcutRes } from "../common/types/short-cuts.types";
 const S = {
   Title: styled.h1`
     color: ${COLORS.white};
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     margin-right: 60px;
   `,
   SubTitle: styled.h1`
     color: ${COLORS.white};
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     margin-right: 60px;
     width: 75px;

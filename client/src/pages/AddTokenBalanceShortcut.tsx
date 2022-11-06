@@ -11,7 +11,7 @@ import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcut
 const S = {
   Title: styled.h1`
     color: ${COLORS.white};
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     margin-right: 60px;
   `,
@@ -23,7 +23,7 @@ const S = {
   `,
   SubTitle: styled.h1`
     color: ${COLORS.white};
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 700;
     margin-right: 60px;
     width: 75px;
@@ -55,7 +55,7 @@ export const AddTokenBalanceShortcut = () => {
   if (isLoading || !allShortcuts) return <></>;
 
   const shortCut = allShortcuts.find(
-    (shortCut: any) => shortCut.shortcutType === "TOKEN_BALANCE"
+    (shortCut: any) => shortCut.shortcutType === "TOKEN_BALANCE",
   );
 
   if (!shortCut) return <></>;
@@ -65,9 +65,12 @@ export const AddTokenBalanceShortcut = () => {
   };
 
   const onClickButton = () => {
-    shortCut.userParams = shortCutsState.map(state => ({ name : 'tokenSymbol', value : state.tokenSymbol}));
-    localStorageService.add('myShortCut', shortCut);
-  }
+    shortCut.userParams = shortCutsState.map((state) => ({
+      name: "tokenSymbol",
+      value: state.tokenSymbol,
+    }));
+    localStorageService.add("myShortCut", shortCut);
+  };
 
   return (
     <div style={{ marginLeft: "50px", width: "100vw" }}>
