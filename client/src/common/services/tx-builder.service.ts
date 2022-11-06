@@ -4,20 +4,20 @@ import zeroXApiService, { SwapQuoteParams } from "./zeroX.api.service";
 import Web3 from "web3";
 import localStorageService from "./local-storage.service";
 import { ethers } from "ethers";
+import { TokenService } from "./tokens.service";
 
-type TransactionTypes = ShortcutTypes | "APPROVE";
+type TransactionTypes = ShortcutTypes | "APPROVE" | "ALLOWANCE";
 
 class TxBuilderService {
   constructor() {}
   async buildTx(web3: Web3, type: TransactionTypes | TransactionTypes, paramsDto: any) {
-    const from = localStorageService.get('account') || '';
+    const from = localStorageService.get("account") || "";
     switch (type) {
       case "SEND": {
         const data = EthersUtil.encodeFunctionData("transfer", this.toParams(type, paramsDto));
         return {
           data,
-          // to: paramsDto.token,
-          to: "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
+          to: TokenService.findAddressBySymbol(paramsDto.token),
           from,
         };
       }
@@ -28,14 +28,24 @@ class TxBuilderService {
           sellAmount: paramsDto.sellAmount,
           takerAddress: paramsDto.takerAddress,
         };
-        return await (await zeroXApiService.getSwapQuote(params)).data;
+        return await (
+          await zeroXApiService.getSwapQuote(params)
+        ).data;
       }
       case "APPROVE": {
         const data = EthersUtil.encodeFunctionData("approve", this.toParams(type, paramsDto));
         return {
           data,
           to: paramsDto.contractAddress,
-          from
+          from,
+        };
+      }
+      case "ALLOWANCE": {
+        const data = EthersUtil.encodeFunctionData("allowance", this.toParams(type, paramsDto));
+        return {
+          data,
+          to: TokenService.findAddressBySymbol(paramsDto.token),
+          from,
         };
       }
       default:
@@ -45,10 +55,11 @@ class TxBuilderService {
   private toParams(type: TransactionTypes, paramsDto: any) {
     switch (type) {
       case "SEND":
-        // return [paramsDto.recipientAddress, paramsDto.amount];
-        return ["0xB2324554De0EA36fff2FF270b21eA1A503eCe751", ethers.utils.parseUnits('0.01', 18)];
+        return [paramsDto.recipientAddress, ethers.utils.parseUnits(paramsDto.amount, 18)];
       case "APPROVE":
-        return [paramsDto.spender, paramsDto.amount];
+        return [paramsDto.spender, ethers.constants.MaxUint256];
+      case "ALLOWANCE":
+        return [paramsDto.owner, paramsDto.spender];
       default:
         throw new Error("");
     }
