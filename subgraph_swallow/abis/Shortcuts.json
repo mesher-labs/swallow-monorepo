@@ -1,12 +1,35 @@
 [
-  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
   {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      },
+      {
         "components": [
-          { "internalType": "string", "name": "name", "type": "string" },
-          { "internalType": "string", "name": "endpoint", "type": "string" },
-          { "internalType": "string", "name": "selector", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "shortcutType",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "endpoint",
+            "type": "string"
+          },
           {
             "internalType": "address",
             "name": "contractAddr",
@@ -14,45 +37,146 @@
           },
           {
             "components": [
-              { "internalType": "string", "name": "name", "type": "string" },
-              { "internalType": "string", "name": "value", "type": "string" }
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "value",
+                "type": "string"
+              }
             ],
             "internalType": "struct ShortcutsInterface.UserParams[]",
             "name": "userParams",
             "type": "tuple[]"
           },
           {
+            "internalType": "bool",
+            "name": "isReady",
+            "type": "bool"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct ShortcutsInterface.Shortcut",
+        "name": "newShortcut",
+        "type": "tuple"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "blockNum",
+        "type": "uint256"
+      }
+    ],
+    "name": "AddShortcut",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "newIsReady",
+        "type": "bool"
+      }
+    ],
+    "name": "SetIsReady",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "shortcutType",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "endpoint",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "contractAddr",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
             "internalType": "string",
-            "name": "shortCutsType",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "value",
             "type": "string"
           }
         ],
-        "internalType": "struct ShortcutsInterface.ShortCut",
-        "name": "dto",
-        "type": "tuple"
+        "internalType": "struct ShortcutsInterface.UserParams[]",
+        "name": "userParams",
+        "type": "tuple[]"
+      },
+      {
+        "internalType": "bool",
+        "name": "isReady",
+        "type": "bool"
       }
     ],
-    "name": "addShortCut",
-    "outputs": [],
+    "name": "addShortcut",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "admin",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "getAllShortCuts",
+    "name": "getAllShortcuts",
     "outputs": [
       {
         "components": [
-          { "internalType": "string", "name": "name", "type": "string" },
-          { "internalType": "string", "name": "endpoint", "type": "string" },
-          { "internalType": "string", "name": "selector", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "shortcutType",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "endpoint",
+            "type": "string"
+          },
           {
             "internalType": "address",
             "name": "contractAddr",
@@ -60,20 +184,28 @@
           },
           {
             "components": [
-              { "internalType": "string", "name": "name", "type": "string" },
-              { "internalType": "string", "name": "value", "type": "string" }
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "value",
+                "type": "string"
+              }
             ],
             "internalType": "struct ShortcutsInterface.UserParams[]",
             "name": "userParams",
             "type": "tuple[]"
           },
           {
-            "internalType": "string",
-            "name": "shortCutsType",
-            "type": "string"
+            "internalType": "bool",
+            "name": "isReady",
+            "type": "bool"
           }
         ],
-        "internalType": "struct ShortcutsInterface.ShortCut[]",
+        "internalType": "struct ShortcutsInterface.Shortcut[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -83,15 +215,31 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "index", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      }
     ],
-    "name": "getShortCutByIndex",
+    "name": "getShortcutByIndex",
     "outputs": [
       {
         "components": [
-          { "internalType": "string", "name": "name", "type": "string" },
-          { "internalType": "string", "name": "endpoint", "type": "string" },
-          { "internalType": "string", "name": "selector", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "shortcutType",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "endpoint",
+            "type": "string"
+          },
           {
             "internalType": "address",
             "name": "contractAddr",
@@ -99,25 +247,51 @@
           },
           {
             "components": [
-              { "internalType": "string", "name": "name", "type": "string" },
-              { "internalType": "string", "name": "value", "type": "string" }
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "value",
+                "type": "string"
+              }
             ],
             "internalType": "struct ShortcutsInterface.UserParams[]",
             "name": "userParams",
             "type": "tuple[]"
           },
           {
-            "internalType": "string",
-            "name": "shortCutsType",
-            "type": "string"
+            "internalType": "bool",
+            "name": "isReady",
+            "type": "bool"
           }
         ],
-        "internalType": "struct ShortcutsInterface.ShortCut",
+        "internalType": "struct ShortcutsInterface.Shortcut",
         "name": "",
         "type": "tuple"
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "newIsReady",
+        "type": "bool"
+      }
+    ],
+    "name": "setIsReady",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

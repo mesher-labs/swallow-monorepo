@@ -6,16 +6,16 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
 
-  // deploy ShortCuts contract
-  const ShortCuts = await deploy("ShortCuts", {
+  // deploy Shortcuts contract
+  const Shortcuts = await deploy("Shortcuts", {
     from: deployer,
     args: [],
     log: true,
     autoMine: true,
   });
 
-  console.log("Deployed Contract: ShortCuts 🥰");
-  console.log("Contract Address: ", ShortCuts.address);
+  console.log("Deployed Contract: Shortcuts 🥰");
+  console.log("Contract Address: ", Shortcuts.address);
 };
 
 export default func;

@@ -2,8 +2,8 @@
   "name": "mumbai",
   "chainId": "80001",
   "contracts": {
-    "ShortCuts": {
-      "address": "0x34D1dAE9B929F5f90DE6AeF1D34fD959431701c1",
+    "Shortcuts": {
+      "address": "0x4b56262A5FCFEbD1a217F6066891a551e85832ec",
       "abi": [
         {
           "inputs": [],
@@ -11,22 +11,29 @@
           "type": "constructor"
         },
         {
+          "anonymous": false,
           "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            },
             {
               "components": [
                 {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
                   "internalType": "string",
-                  "name": "name",
+                  "name": "shortcutType",
                   "type": "string"
                 },
                 {
                   "internalType": "string",
                   "name": "endpoint",
-                  "type": "string"
-                },
-                {
-                  "internalType": "string",
-                  "name": "selector",
                   "type": "string"
                 },
                 {
@@ -52,18 +59,93 @@
                   "type": "tuple[]"
                 },
                 {
+                  "internalType": "bool",
+                  "name": "isReady",
+                  "type": "bool"
+                }
+              ],
+              "indexed": false,
+              "internalType": "struct ShortcutsInterface.Shortcut",
+              "name": "newShortcut",
+              "type": "tuple"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "blockNum",
+              "type": "uint256"
+            }
+          ],
+          "name": "AddShortcut",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "newIsReady",
+              "type": "bool"
+            }
+          ],
+          "name": "SetIsReady",
+          "type": "event"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "shortcutType",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "endpoint",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "contractAddr",
+              "type": "address"
+            },
+            {
+              "components": [
+                {
                   "internalType": "string",
-                  "name": "shortCutsType",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "value",
                   "type": "string"
                 }
               ],
-              "internalType": "struct ShortcutsInterface.ShortCut",
-              "name": "dto",
-              "type": "tuple"
+              "internalType": "struct ShortcutsInterface.UserParams[]",
+              "name": "userParams",
+              "type": "tuple[]"
+            },
+            {
+              "internalType": "bool",
+              "name": "isReady",
+              "type": "bool"
             }
           ],
-          "name": "addShortCut",
-          "outputs": [],
+          "name": "addShortcut",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
           "stateMutability": "nonpayable",
           "type": "function"
         },
@@ -82,23 +164,23 @@
         },
         {
           "inputs": [],
-          "name": "getAllShortCuts",
+          "name": "getAllShortcuts",
           "outputs": [
             {
               "components": [
                 {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
                   "internalType": "string",
-                  "name": "name",
+                  "name": "shortcutType",
                   "type": "string"
                 },
                 {
                   "internalType": "string",
                   "name": "endpoint",
-                  "type": "string"
-                },
-                {
-                  "internalType": "string",
-                  "name": "selector",
                   "type": "string"
                 },
                 {
@@ -124,12 +206,12 @@
                   "type": "tuple[]"
                 },
                 {
-                  "internalType": "string",
-                  "name": "shortCutsType",
-                  "type": "string"
+                  "internalType": "bool",
+                  "name": "isReady",
+                  "type": "bool"
                 }
               ],
-              "internalType": "struct ShortcutsInterface.ShortCut[]",
+              "internalType": "struct ShortcutsInterface.Shortcut[]",
               "name": "",
               "type": "tuple[]"
             }
@@ -145,23 +227,23 @@
               "type": "uint256"
             }
           ],
-          "name": "getShortCutByIndex",
+          "name": "getShortcutByIndex",
           "outputs": [
             {
               "components": [
                 {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
                   "internalType": "string",
-                  "name": "name",
+                  "name": "shortcutType",
                   "type": "string"
                 },
                 {
                   "internalType": "string",
                   "name": "endpoint",
-                  "type": "string"
-                },
-                {
-                  "internalType": "string",
-                  "name": "selector",
                   "type": "string"
                 },
                 {
@@ -187,17 +269,35 @@
                   "type": "tuple[]"
                 },
                 {
-                  "internalType": "string",
-                  "name": "shortCutsType",
-                  "type": "string"
+                  "internalType": "bool",
+                  "name": "isReady",
+                  "type": "bool"
                 }
               ],
-              "internalType": "struct ShortcutsInterface.ShortCut",
+              "internalType": "struct ShortcutsInterface.Shortcut",
               "name": "",
               "type": "tuple"
             }
           ],
           "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "index",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "newIsReady",
+              "type": "bool"
+            }
+          ],
+          "name": "setIsReady",
+          "outputs": [],
+          "stateMutability": "nonpayable",
           "type": "function"
         }
       ]
