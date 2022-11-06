@@ -3,7 +3,7 @@
   "chainId": "80001",
   "contracts": {
     "Shortcuts": {
-      "address": "0x4b56262A5FCFEbD1a217F6066891a551e85832ec",
+      "address": "0x30e12a2f8C933ba13482BaB0B795524c48E3Aef8",
       "abi": [
         {
           "inputs": [],
