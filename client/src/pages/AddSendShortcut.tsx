@@ -30,6 +30,7 @@ export interface ShortCutData {
   token: string;
   amount: string;
   toAddress: string;
+  toNickName: string;
 }
 
 export const AddSendShortCut = () => {
@@ -37,15 +38,18 @@ export const AddSendShortCut = () => {
     token: "",
     amount: "",
     toAddress: "",
+    toNickName: "",
   });
 
   const { data: allShortcuts, isLoading } = useGetAllShortcuts();
 
-  if(isLoading || !allShortcuts) return <></>;
+  if (isLoading || !allShortcuts) return <></>;
 
-  const addSendShortCut = allShortcuts.find(shortCut => shortCut.shortcutType === 'SEND');
+  const addSendShortCut = allShortcuts.find(
+    (shortCut) => shortCut.shortcutType === "SEND"
+  );
 
-  if(!addSendShortCut) return <></>;
+  if (!addSendShortCut) return <></>;
 
   const onChangeToken = (tokenSymbol: string) => {
     setShortCutData({
@@ -67,13 +71,21 @@ export const AddSendShortCut = () => {
       amount: e.currentTarget.value,
     });
 
+  const onChangeToNickName = (e: React.FormEvent<HTMLInputElement>) => {
+    setShortCutData({
+      ...shortCutData,
+      toNickName: e.currentTarget.value
+    })
+  }
+
   const onClickButton = () => {
     addSendShortCut.userParams = [
-      {name: 'recipient', value: shortCutData.toAddress},
-      {name : 'amount', value: shortCutData.amount},
-      {name : 'token', value: shortCutData.token}
-    ]
-    localStorageService.add('myShortCut', addSendShortCut);
+      { name: "recipientAddress", value: shortCutData.toAddress },
+      { name: "recipientNickName", value: shortCutData.toNickName },
+      { name: "amount", value: shortCutData.amount },
+      { name: "token", value: shortCutData.token },
+    ];
+    localStorageService.add("myShortCut", addSendShortCut);
   };
 
   return (
@@ -101,6 +113,15 @@ export const AddSendShortCut = () => {
           amount={shortCutData.toAddress}
           onChangeHanlder={onChangeToAddress}
           width="1000px"
+        ></TextInput>
+      </div>
+      <div style={{ display: "flex", marginTop: "30px", alignItems: "center" }}>
+        <S.SubTitle style={{width: '150px'}}>nickname</S.SubTitle>
+        <TextInput
+          placeHodler="nickname"
+          amount={shortCutData.toNickName}
+          onChangeHanlder={onChangeToNickName}
+          width="500px"
         ></TextInput>
       </div>
       <AddShortCutButton onClickHandler={onClickButton} />

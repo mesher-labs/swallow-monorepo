@@ -85,7 +85,8 @@ export const MultiSendShortcut = ({ myShortcut }: ShortcutProps) => {
 export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
   const { userParams } = myShortcut;
   const parsedParams: Record<SendShortCutParamsType, string> = {
-    recipient: "",
+    recipientAddress: "",
+    recipientNickName: "",
     amount: "",
     token: "",
   };
@@ -98,7 +99,7 @@ export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
       <h1>Send</h1>
       <h2>
         {parsedParams.amount} {parsedParams.token} <br /> to @
-        {parsedParams.recipient}
+        {parsedParams.recipientNickName}
       </h2>
     </SquareContainer>
   );

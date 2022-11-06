@@ -20,7 +20,7 @@ export const RightHeader = () => {
   return (
     <div>
       <S.SubTitle>{date.format(now, 'dddd, MMM DD')}</S.SubTitle>
-      <S.Title>{date.format(now, 'H:m')}</S.Title>
+      <S.Title>{date.format(now, 'H:mm')}</S.Title>
     </div>
   )
 }
