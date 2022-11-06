@@ -8,7 +8,6 @@ const S = {
     width: 88px;
     height: 519px;
     padding-top: 36px;
-    margin: 0 auto;
     background: rgba(47, 60, 97, 0.27);
     border-radius: 20px;
   `,
@@ -24,24 +23,24 @@ const S = {
 };
 
 const commonStyle = {
-  display: "block", 
+  display: "block",
   margin: "0 auto",
-  width:'30px',
-  height:'25.5px',
-  cursor: 'pointer'
-}
+  width: "30px",
+  height: "25.5px",
+  cursor: "pointer",
+};
 
 export const LNB = () => (
   <>
     <S.LNB>
       <Icon
         path={mdiHome}
-        style={{ ...commonStyle, color: COLORS.white}}
+        style={{ ...commonStyle, color: COLORS.white }}
       ></Icon>
       <S.Line />
       <Icon
         path={mdiEarthPlus}
-        style={{ ...commonStyle, color: COLORS.blueGray}}
+        style={{ ...commonStyle, color: COLORS.blueGray }}
       ></Icon>
     </S.LNB>
   </>
