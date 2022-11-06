@@ -1,8 +1,5 @@
-import {
-  HomePresenter,
-  Shortcuts,
-  ShortcutTypes,
-} from "../components/Home/HomePresenter";
+import { HomePresenter } from "../components/Home/HomePresenter";
+import { Shortcuts, ShortcutTypes } from "../common/types/short-cuts.types";
 import styled from "styled-components";
 
 export const Home = () => {

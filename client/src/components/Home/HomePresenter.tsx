@@ -8,16 +8,14 @@ import {
   SendShortcut,
   TokenBalanceShortcut,
 } from "../../components/Home/Shortcuts";
+import { ShortcutTypes } from "../../common/types/short-cuts.types";
 import {
   DefaultSendShortcut,
   DefaultBuyShortcut,
   DefaultAaveCurrentAPYShortcut,
   DefaultMultiSendShortcut,
   DefaultTokenBalanceShortcut,
-} from "./DefaultShortCuts";
-import { ShortcutTypes } from "../../common/types/short-cuts.types";
-
-
+} from "./DefaultShortcuts";
 
 export interface HomePresenterProps {
   shortcutType: ShortcutTypes;

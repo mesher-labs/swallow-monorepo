@@ -1,5 +1,5 @@
 import { isNull } from "lodash-es";
-import { ShortcutTypes } from "../components/Home/HomePresenter";
+import { ShortcutTypes } from "../common/types/short-cuts.types";
 
 export type localStorageKeyType = "MY_SHORT_CUTS" | "MY_TAG";
 
@@ -14,13 +14,15 @@ export interface Shortcut {
 
 class ShortCutUtils {
   public static myShortCuts(): Shortcut[] {
-    const rawMyShortCuts = window.localStorage.getItem(localStorageKeys.MY_SHORT_CUTS);
+    const rawMyShortCuts = window.localStorage.getItem(
+      localStorageKeys.MY_SHORT_CUTS,
+    );
 
     if (isNull(rawMyShortCuts)) {
       return [];
     }
 
-    if(!rawMyShortCuts) return [];
+    if (!rawMyShortCuts) return [];
 
     const myShortCuts = JSON.parse(rawMyShortCuts);
 
@@ -28,7 +30,9 @@ class ShortCutUtils {
   }
 
   public static isExistShortcutType(shortcutType: ShortcutTypes): boolean {
-    const rawMyShortCuts = window.localStorage.getItem(localStorageKeys.MY_SHORT_CUTS);
+    const rawMyShortCuts = window.localStorage.getItem(
+      localStorageKeys.MY_SHORT_CUTS,
+    );
     return false;
   }
 

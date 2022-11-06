@@ -1,20 +1,21 @@
 import { useQuery, useQueryClient } from "react-query";
+import { ShortcutTypes } from "../../../common/types/short-cuts.types";
 
 interface UserParams {
   name: string;
   value: string;
 }
 
-interface Shortcut {
+interface ShortcutRes {
   isReady: boolean;
   endpoint: string;
   contractAddr: string;
   userParams: UserParams[];
-  shortcutType: string;
+  shortcutType: ShortcutTypes;
 }
 
 // TODO : the graph로 교체
-const getAllShortcuts = (): Shortcut[] => {
+const getAllShortcuts = async (): Promise<ShortcutRes[]> => {
   return [
     {
       isReady: false,
@@ -40,52 +41,25 @@ const getAllShortcuts = (): Shortcut[] => {
       shortcutType: "BUY",
     },
     {
-      isReady: false,
+      isReady: true,
       endpoint: "https://mumbai.api.0x.org/swap/v1/quote",
       contractAddr: "0x0000000000000000000000000000000000000000",
-      userParams: [
-        { name: "sellToken", value: "test" },
-        { name: "buyToken", value: "test" },
-        { name: "sellAmount", value: "test" },
-        { name: "buyAmount", value: "test" },
-        {
-          name: "slippagePercentage",
-          value: "test",
-        },
-      ],
-      shortcutType: "swap",
+      userParams: [],
+      shortcutType: "AAVE_CURRENT_APY",
     },
     {
       isReady: false,
-      endpoint: "https://mumbai.api.0x.org/swap/v1/quote",
-      contractAddr: "0x0000000000000000000000000000000000000000",
-      userParams: [
-        { name: "sellToken", value: "test" },
-        { name: "buyToken", value: "test" },
-        { name: "sellAmount", value: "test" },
-        { name: "buyAmount", value: "test" },
-        {
-          name: "slippagePercentage",
-          value: "test",
-        },
-      ],
-      shortcutType: "swap",
+      endpoint: "",
+      contractAddr: "",
+      userParams: [],
+      shortcutType: "MULTI_SEND",
     },
     {
       isReady: false,
-      endpoint: "https://mumbai.api.0x.org/swap/v1/quote",
-      contractAddr: "0x0000000000000000000000000000000000000000",
-      userParams: [
-        { name: "sellToken", value: "test" },
-        { name: "buyToken", value: "test" },
-        { name: "sellAmount", value: "test" },
-        { name: "buyAmount", value: "test" },
-        {
-          name: "slippagePercentage",
-          value: "test",
-        },
-      ],
-      shortcutType: "swap",
+      endpoint: "",
+      contractAddr: "",
+      userParams: [],
+      shortcutType: "TOKEN_BALANCE",
     },
   ];
 };
