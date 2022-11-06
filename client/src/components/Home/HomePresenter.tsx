@@ -2,6 +2,13 @@ import styled from "styled-components";
 import LocalStorageService from "../../common/services/local-storage.service";
 
 import {
+  DefaultSendShortcut,
+  DefaultBuyShortcut,
+  DefaultAaveCurrentAPYShortcut,
+  DefaultMultiSendShortcut,
+  DefaultTokenBalanceShortcut,
+} from "./DefaultShortcuts";
+import {
   AaveCurrentAPYShortcut,
   BuyShortcut,
   MultiSendShortcut,
@@ -13,13 +20,6 @@ import {
   ShortcutRes,
   Shortcuts,
 } from "../../common/types/short-cuts.types";
-import {
-  DefaultSendShortcut,
-  DefaultBuyShortcut,
-  DefaultAaveCurrentAPYShortcut,
-  DefaultMultiSendShortcut,
-  DefaultTokenBalanceShortcut,
-} from "./DefaultShortCuts";
 import { isUndefined, isNull } from "lodash-es";
 
 export interface HomePresenterProps {
