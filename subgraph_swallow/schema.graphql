@@ -4,13 +4,5 @@ type Shortcut @entity {
   shortcutType: String!
   endpoint: String!
   contractAddr: Bytes!
-  userParams: [UserParam!]! @derivedFrom(field: "shortcut")
   isReady: Boolean!
-}
-
-type UserParam @entity {
-  id: ID!
-  name: String!
-  value: String!
-  shortcut: Shortcut!
 }

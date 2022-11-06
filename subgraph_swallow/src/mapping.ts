@@ -1,21 +1,11 @@
 import { AddShortcut, SetIsReady } from "../generated/Shortcuts/Shortcuts";
-import { Shortcut, UserParam } from "../generated/schema";
+import { Shortcut } from "../generated/schema";
 import { log } from "@graphprotocol/graph-ts";
 
 export function handleAddShortcut(event: AddShortcut): void {
   const blockNum = event.params.blockNum.toString();
   log.debug("AddShortcut EventHandler blockNum={}", [blockNum]);
   const shortcutId = event.params.index.toString();
-  const eventUserParams = event.params.newShortcut.userParams;
-
-  for (let i = 0; i < eventUserParams.length; i++) {
-    const paramId = shortcutId.concat("-").concat(i.toString());
-    let userParam = new UserParam(paramId);
-    userParam.name = eventUserParams[i].name;
-    userParam.value = eventUserParams[i].value;
-    userParam.shortcut = shortcutId;
-    userParam.save();
-  }
 
   let shortcut = new Shortcut(shortcutId);
   shortcut.index = event.params.index;

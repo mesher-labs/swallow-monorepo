@@ -55,22 +55,8 @@ export class AddShortcutNewShortcutStruct extends ethereum.Tuple {
     return this[3].toAddress();
   }
 
-  get userParams(): Array<AddShortcutNewShortcutUserParamsStruct> {
-    return this[4].toTupleArray<AddShortcutNewShortcutUserParamsStruct>();
-  }
-
   get isReady(): boolean {
-    return this[5].toBoolean();
-  }
-}
-
-export class AddShortcutNewShortcutUserParamsStruct extends ethereum.Tuple {
-  get name(): string {
-    return this[0].toString();
-  }
-
-  get value(): string {
-    return this[1].toString();
+    return this[4].toBoolean();
   }
 }
 
@@ -96,16 +82,6 @@ export class SetIsReady__Params {
   }
 }
 
-export class Shortcuts__addShortcutInputUserParamsStruct extends ethereum.Tuple {
-  get name(): string {
-    return this[0].toString();
-  }
-
-  get value(): string {
-    return this[1].toString();
-  }
-}
-
 export class Shortcuts__getAllShortcutsResultValue0Struct extends ethereum.Tuple {
   get index(): BigInt {
     return this[0].toBigInt();
@@ -123,26 +99,8 @@ export class Shortcuts__getAllShortcutsResultValue0Struct extends ethereum.Tuple
     return this[3].toAddress();
   }
 
-  get userParams(): Array<
-    Shortcuts__getAllShortcutsResultValue0UserParamsStruct
-  > {
-    return this[4].toTupleArray<
-      Shortcuts__getAllShortcutsResultValue0UserParamsStruct
-    >();
-  }
-
   get isReady(): boolean {
-    return this[5].toBoolean();
-  }
-}
-
-export class Shortcuts__getAllShortcutsResultValue0UserParamsStruct extends ethereum.Tuple {
-  get name(): string {
-    return this[0].toString();
-  }
-
-  get value(): string {
-    return this[1].toString();
+    return this[4].toBoolean();
   }
 }
 
@@ -163,26 +121,8 @@ export class Shortcuts__getShortcutByIndexResultValue0Struct extends ethereum.Tu
     return this[3].toAddress();
   }
 
-  get userParams(): Array<
-    Shortcuts__getShortcutByIndexResultValue0UserParamsStruct
-  > {
-    return this[4].toTupleArray<
-      Shortcuts__getShortcutByIndexResultValue0UserParamsStruct
-    >();
-  }
-
   get isReady(): boolean {
-    return this[5].toBoolean();
-  }
-}
-
-export class Shortcuts__getShortcutByIndexResultValue0UserParamsStruct extends ethereum.Tuple {
-  get name(): string {
-    return this[0].toString();
-  }
-
-  get value(): string {
-    return this[1].toString();
+    return this[4].toBoolean();
   }
 }
 
@@ -195,17 +135,15 @@ export class Shortcuts extends ethereum.SmartContract {
     shortcutType: string,
     endpoint: string,
     contractAddr: Address,
-    userParams: Array<Shortcuts__addShortcutInputUserParamsStruct>,
     isReady: boolean
   ): BigInt {
     let result = super.call(
       "addShortcut",
-      "addShortcut(string,string,address,(string,string)[],bool):(uint256)",
+      "addShortcut(string,string,address,bool):(uint256)",
       [
         ethereum.Value.fromString(shortcutType),
         ethereum.Value.fromString(endpoint),
         ethereum.Value.fromAddress(contractAddr),
-        ethereum.Value.fromTupleArray(userParams),
         ethereum.Value.fromBoolean(isReady)
       ]
     );
@@ -217,17 +155,15 @@ export class Shortcuts extends ethereum.SmartContract {
     shortcutType: string,
     endpoint: string,
     contractAddr: Address,
-    userParams: Array<Shortcuts__addShortcutInputUserParamsStruct>,
     isReady: boolean
   ): ethereum.CallResult<BigInt> {
     let result = super.tryCall(
       "addShortcut",
-      "addShortcut(string,string,address,(string,string)[],bool):(uint256)",
+      "addShortcut(string,string,address,bool):(uint256)",
       [
         ethereum.Value.fromString(shortcutType),
         ethereum.Value.fromString(endpoint),
         ethereum.Value.fromAddress(contractAddr),
-        ethereum.Value.fromTupleArray(userParams),
         ethereum.Value.fromBoolean(isReady)
       ]
     );
@@ -256,7 +192,7 @@ export class Shortcuts extends ethereum.SmartContract {
   getAllShortcuts(): Array<Shortcuts__getAllShortcutsResultValue0Struct> {
     let result = super.call(
       "getAllShortcuts",
-      "getAllShortcuts():((uint256,string,string,address,(string,string)[],bool)[])",
+      "getAllShortcuts():((uint256,string,string,address,bool)[])",
       []
     );
 
@@ -270,7 +206,7 @@ export class Shortcuts extends ethereum.SmartContract {
   > {
     let result = super.tryCall(
       "getAllShortcuts",
-      "getAllShortcuts():((uint256,string,string,address,(string,string)[],bool)[])",
+      "getAllShortcuts():((uint256,string,string,address,bool)[])",
       []
     );
     if (result.reverted) {
@@ -287,7 +223,7 @@ export class Shortcuts extends ethereum.SmartContract {
   ): Shortcuts__getShortcutByIndexResultValue0Struct {
     let result = super.call(
       "getShortcutByIndex",
-      "getShortcutByIndex(uint256):((uint256,string,string,address,(string,string)[],bool))",
+      "getShortcutByIndex(uint256):((uint256,string,string,address,bool))",
       [ethereum.Value.fromUnsignedBigInt(index)]
     );
 
@@ -301,7 +237,7 @@ export class Shortcuts extends ethereum.SmartContract {
   ): ethereum.CallResult<Shortcuts__getShortcutByIndexResultValue0Struct> {
     let result = super.tryCall(
       "getShortcutByIndex",
-      "getShortcutByIndex(uint256):((uint256,string,string,address,(string,string)[],bool))",
+      "getShortcutByIndex(uint256):((uint256,string,string,address,bool))",
       [ethereum.Value.fromUnsignedBigInt(index)]
     );
     if (result.reverted) {
@@ -371,14 +307,8 @@ export class AddShortcutCall__Inputs {
     return this._call.inputValues[2].value.toAddress();
   }
 
-  get userParams(): Array<AddShortcutCallUserParamsStruct> {
-    return this._call.inputValues[3].value.toTupleArray<
-      AddShortcutCallUserParamsStruct
-    >();
-  }
-
   get isReady(): boolean {
-    return this._call.inputValues[4].value.toBoolean();
+    return this._call.inputValues[3].value.toBoolean();
   }
 }
 
@@ -391,16 +321,6 @@ export class AddShortcutCall__Outputs {
 
   get value0(): BigInt {
     return this._call.outputValues[0].value.toBigInt();
-  }
-}
-
-export class AddShortcutCallUserParamsStruct extends ethereum.Tuple {
-  get name(): string {
-    return this[0].toString();
-  }
-
-  get value(): string {
-    return this[1].toString();
   }
 }
 
