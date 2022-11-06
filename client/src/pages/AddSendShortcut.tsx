@@ -12,6 +12,7 @@ import { TokenDropDownInput } from "../components/AddShortcut/TokenDropDownInput
 import { AddShortCutButton } from "../components/AddShortcut/Button";
 import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
 import { ShortcutRes } from "../common/types/short-cuts.types";
+import { useWeb3 } from '../App';
 
 const S = {
   Title: styled.h1`
@@ -43,6 +44,8 @@ export const AddSendShortCut = () => {
     toAddress: "",
     toNickName: "",
   });
+
+  const {setServiceState} = useWeb3();
 
   const { data: allShortcuts, isLoading } = useGetAllShortcuts();
 
@@ -89,6 +92,7 @@ export const AddSendShortCut = () => {
       { name: "token", value: shortCutData.token },
     ];
     localStorageService.add("myShortCut", addSendShortCut);
+    setServiceState('HOME');
   };
 
   return (

@@ -12,7 +12,6 @@ const graphQLClient = new GraphQLClient(API_URL, {
 });
 
 export const useGetAaveCurrentAPY = () => {
-  console.log(graphQLClient);
   return useQuery(
     ["aaveCurrentAPY"],
     async () => {

@@ -20,6 +20,9 @@ interface ShortcutProps {
 export const AaveCurrentAPYShortcut = ({ myShortcut }: ShortcutProps) => {
   const { userParams } = myShortcut;
   const { data: allAaveMarketDatas, isLoading } = useGetAaveCurrentAPY();
+
+  if(isLoading || !allAaveMarketDatas) return <></>
+
   const apyInfoList = userParams.map((param) => {
     const symbol = param.value;
 
