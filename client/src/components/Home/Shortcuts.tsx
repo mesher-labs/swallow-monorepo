@@ -127,18 +127,18 @@ export const BuyShortcut = ({ myShortcut }: ShortcutProps) => {
     });
 
     await web3.eth.sendTransaction(swapTx);
-
-    console.log("swapTx", swapTx);
-    console.log("after approve");
   };
 
   return (
     <SquareContainer onClick={onClickHanlder} backgroundColor="#6FEB8E">
-      <h1>Buy</h1>
-      <h2>
-        {parsedParams.buyAmount} {parsedParams.buyToken} <br /> with{" "}
-        {parsedParams.sellToken}
-      </h2>
+      <div>
+        <h1>Buy</h1>
+        <h2>
+          {parsedParams.buyAmount} {parsedParams.buyToken} <br /> with{" "}
+          {parsedParams.sellToken}
+        </h2>
+      </div>
+      <img src={`/images/${parsedParams.buyToken}.png`} />
     </SquareContainer>
   );
 };
@@ -314,6 +314,8 @@ const SquareContainer = styled.div<ContainerProps>`
   flex-direction: column;
   img {
     align-self: flex-end;
+    width: 45px;
+    height: 45px;
   }
   h1 {
     font-style: normal;
