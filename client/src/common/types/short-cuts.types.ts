@@ -14,7 +14,10 @@ export const Shortcuts = {
 } as const;
 
 // TODO : ParamsType 를 추가해야함
-export type BuyShortcutParamsType = "sellToken" | "buyToken" | "sellAmount";
+export type BuyShortcutParamsType =
+  | "sellToken"
+  | "buyToken"
+  | "buyAmount"
 
 export type SendShortCutParamsType =
   | "recipientNickName"
