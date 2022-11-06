@@ -46,15 +46,19 @@ function App() {
       <GlobalStyle />
       <Web3Provider>
         <Header />
-        {/* <Layout>
+        {/*
+         */}
+        <Layout>
           <LNB />
           <Home />
-        </Layout> */}
+        </Layout>
         <div style={{ display: "flex", marginTop: "50px" }}>
+          {/* 
           <LNB />
-          {/* <AddBuyShortCut /> */}
-          {/* <SignIn /> */}
-          <AddSendShortCut/>
+          <SignIn />
+          <AddBuyShortCut /> 
+          <AddSendShortCut />
+          */}
           {/* <AddAaveApyShortcut /> */}
           {/* <AddTokenBalanceShortcut /> */}
         </div>

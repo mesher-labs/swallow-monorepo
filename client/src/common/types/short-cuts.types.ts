@@ -19,7 +19,7 @@ export type BuyShortcutParamsType =
   | "buyToken"
   | "sellAmount"
   | "buyAmount"
-  | "slippagePercentage"
+  | "slippagePercentage";
 
 export type SendShortCutParamsType = 'recipientNickName' | 'amount' | 'token' | 'recipientAddress'
 

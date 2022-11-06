@@ -3,6 +3,7 @@ import {
   ShortcutRes,
   UserParams,
   BuyShortcutParamsType,
+  SendShortCutParamsType,
 } from "../../common/types/short-cuts.types";
 
 interface ShortcutProps {
@@ -82,11 +83,22 @@ export const MultiSendShortcut = ({ myShortcut }: ShortcutProps) => {
 };
 
 export const SendShortcut = ({ myShortcut }: ShortcutProps) => {
+  const { userParams } = myShortcut;
+  const parsedParams: Record<SendShortCutParamsType, string> = {
+    recipient: "",
+    amount: "",
+    token: "",
+  };
+  userParams.forEach((param: UserParams) => {
+    const name = param.name as SendShortCutParamsType;
+    parsedParams[name] = param.value;
+  });
   return (
     <SquareContainer backgroundColor="#F5BF45">
       <h1>Send</h1>
       <h2>
-        100 MATIC <br /> to @juwon
+        {parsedParams.amount} {parsedParams.token} <br /> to @
+        {parsedParams.recipient}
       </h2>
     </SquareContainer>
   );
