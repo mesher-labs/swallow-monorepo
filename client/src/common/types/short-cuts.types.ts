@@ -21,7 +21,7 @@ export type BuyShortcutParamsType =
   | "buyAmount"
   | "slippagePercentage"
 
-export type SendShortCutParamsType = 'recipient' | 'amount' | 'token';
+export type SendShortCutParamsType = 'recipientNickName' | 'amount' | 'token' | 'recipientAddress'
 
 export type ShortCutParamsType = BuyShortcutParamsType | SendShortCutParamsType;
 
