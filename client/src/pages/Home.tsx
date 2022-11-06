@@ -3,15 +3,29 @@ import {
   Shortcuts,
   ShortcutTypes,
 } from "../components/Home/HomePresenter";
+import styled from "styled-components";
 
 export const Home = () => {
   return (
-    <>
-      <HomePresenter shortcutType={Shortcuts.SEND} />
-      <HomePresenter shortcutType={Shortcuts.BUY} />
-      <HomePresenter shortcutType={Shortcuts.AAVE_CURRENT_APY} />
-      <HomePresenter shortcutType={Shortcuts.MULTI_SEND} />
-      <HomePresenter shortcutType={Shortcuts.TOKEN_BALANCE} />
-    </>
+    <Container>
+      <Row>
+        <HomePresenter shortcutType={Shortcuts.SEND} />
+        <HomePresenter shortcutType={Shortcuts.BUY} />
+        <HomePresenter shortcutType={Shortcuts.AAVE_CURRENT_APY} />
+      </Row>
+      <Row>
+        <HomePresenter shortcutType={Shortcuts.MULTI_SEND} />
+        <HomePresenter shortcutType={Shortcuts.TOKEN_BALANCE} />
+      </Row>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: block;
+`;
+
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+`;

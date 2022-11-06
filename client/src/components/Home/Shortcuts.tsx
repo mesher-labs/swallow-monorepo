@@ -3,8 +3,10 @@ import styled from "styled-components";
 export const AaveCurrentAPYShortcut = () => {
   return (
     <RectangleContainer backgroundColor="#B682F7">
-      <h1>Aave Current APY</h1>
-      <p>*supply, borrow</p>
+      <div>
+        <h1>Aave Current APY</h1>
+        <p>*supply, borrow</p>
+      </div>
       <APYContainer>
         <Row>
           <APYTokenWrapper>
@@ -43,7 +45,17 @@ export const BuyShortcut = () => {
 };
 
 export const MultiSendShortcut = () => {
-  return <RectangleContainer backgroundColor="#ED797C"></RectangleContainer>;
+  return (
+    <RectangleContainer backgroundColor="#ED797C">
+      <RectangleLeftAlignBox>
+        <h1>Send</h1>
+        <h2>
+          100 USDC <br /> to every <br /> @mesherDev
+        </h2>
+      </RectangleLeftAlignBox>
+      <img />
+    </RectangleContainer>
+  );
 };
 
 export const SendShortcut = () => {
@@ -58,7 +70,69 @@ export const SendShortcut = () => {
 };
 
 export const TokenBalanceShortcut = () => {
-  return <RectangleContainer backgroundColor="#58B9EF"></RectangleContainer>;
+  return (
+    <RectangleContainer backgroundColor="#58B9EF">
+      <h1>Token Balance @juwon</h1>
+      <TokenBalanceContainer>
+        <Row>
+          <TokenBalanceItemWrapper>
+            <img />
+            <Row>
+              <TokenInfoColumn isFlexEnd={true}>
+                <p>10,588,050,080.45</p>
+                <p>$10,688,050,080.45</p>
+              </TokenInfoColumn>
+              <TokenInfoColumn isFlexEnd={false}>
+                <h3>DAI</h3>
+                <h3>USD</h3>
+              </TokenInfoColumn>
+            </Row>
+          </TokenBalanceItemWrapper>
+          <TokenBalanceItemWrapper>
+            <img />
+            <Row>
+              <TokenInfoColumn isFlexEnd={true}>
+                <p>10,588,050,080.45</p>
+                <p>$10,688,050,080.45</p>
+              </TokenInfoColumn>
+              <TokenInfoColumn isFlexEnd={false}>
+                <h3>DAI</h3>
+                <h3>USD</h3>
+              </TokenInfoColumn>
+            </Row>
+          </TokenBalanceItemWrapper>
+        </Row>
+        <Row>
+          <TokenBalanceItemWrapper>
+            <img />
+            <Row>
+              <TokenInfoColumn isFlexEnd={true}>
+                <p>10,588,050,080.45</p>
+                <p>$10,688,050,080.45</p>
+              </TokenInfoColumn>
+              <TokenInfoColumn isFlexEnd={false}>
+                <h3>DAI</h3>
+                <h3>USD</h3>
+              </TokenInfoColumn>
+            </Row>
+          </TokenBalanceItemWrapper>
+          <TokenBalanceItemWrapper>
+            <img />
+            <Row>
+              <TokenInfoColumn isFlexEnd={true}>
+                <p>10,588,050,080.45</p>
+                <p>$10,688,050,080.45</p>
+              </TokenInfoColumn>
+              <TokenInfoColumn isFlexEnd={false}>
+                <h3>DAI</h3>
+                <h3>USD</h3>
+              </TokenInfoColumn>
+            </Row>
+          </TokenBalanceItemWrapper>
+        </Row>
+      </TokenBalanceContainer>
+    </RectangleContainer>
+  );
 };
 
 interface ContainerProps {
@@ -66,6 +140,7 @@ interface ContainerProps {
 }
 
 const SquareContainer = styled.div<ContainerProps>`
+  margin: 10px;
   text-align: left;
   padding: 26px;
   background: ${({ backgroundColor }) => backgroundColor};
@@ -95,6 +170,10 @@ const SquareContainer = styled.div<ContainerProps>`
 interface RectangleContainerProps extends ContainerProps {}
 
 const RectangleContainer = styled.div<RectangleContainerProps>`
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   text-align: left;
   padding: 26px;
   background: ${({ backgroundColor }) => backgroundColor};
@@ -123,6 +202,7 @@ const RectangleContainer = styled.div<RectangleContainerProps>`
 `;
 
 const APYContainer = styled.div`
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -130,8 +210,11 @@ const APYContainer = styled.div`
   width: 100%;
 `;
 const APYTokenWrapper = styled.div`
+  margin-top: 10px;
   width: 50%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   h1 {
     width: 30%;
   }
@@ -144,4 +227,53 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const RectangleLeftAlignBox = styled.div`
+  text-align: left;
+`;
+
+const TokenBalanceContainer = styled.div`
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+  width: 100%;
+`;
+
+const TokenBalanceItemWrapper = styled.div`
+  width: 45%;
+  height: 72px;
+  padding: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.37);
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+`;
+
+const TokenInfoColumn = styled.div<{ isFlexEnd: boolean }>`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: ${({ isFlexEnd }) => (isFlexEnd ? "flex-end" : "flex-start")};
+  font-size: 14px;
+  text-align: right;
+  p {
+    text-align: right;
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+  h3 {
+    font-size: 14px;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
 `;
