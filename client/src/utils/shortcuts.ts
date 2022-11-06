@@ -20,6 +20,8 @@ class ShortCutUtils {
       return [];
     }
 
+    if(!rawMyShortCuts) return [];
+
     const myShortCuts = JSON.parse(rawMyShortCuts);
 
     return myShortCuts;

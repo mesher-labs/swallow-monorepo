@@ -8,20 +8,23 @@ import { AddBuyShortCut } from "./pages/AddBuyShortcut";
 import { AddSendShortCut } from "./pages/AddSendShortcut";
 import { AddAaveApyShortcut } from "./pages/AddAaveApyShortcut";
 import { Home } from "./pages/Home";
+import styled from "styled-components";
+import { AddTokenBalanceShortcut } from "./pages/AddTokenBalanceShortcut";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <Header />
-      <Layout>
+      {/* <Layout>
         <LNB />
         <Home />
-      </Layout>
+      </Layout> */}
       {/* <SignIn /> */}
       {/* <AddBuyShortCut/> */}
       {/* <AddSendShortCut/> */}
-      {/* <AddAaveApyShortcut/> */}
+      {/* <AddAaveApyShortcut /> */}
+      <AddTokenBalanceShortcut />
       {/* <LNB/> */}
     </>
   );

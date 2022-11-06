@@ -39,31 +39,67 @@ export const AddAaveApyShortcut = () => {
     {
       tokenSymbol: "",
     },
-    {
-      tokenSymbol: "",
-    },
   ]);
+
+  const onClickIcon = () => {
+    setShortCutsState([...shortCutsState, { tokenSymbol: "" }]);
+  };
   return (
     <>
       <S.Title>Add Aave Current APY Shortcuts</S.Title>
       <S.Caption>*supply, borrow</S.Caption>
 
-      <div style={{ display: "flex", width: "900px", marginTop: "30px" }}>
-        {shortCutsState.slice(0, 3).map((state, index) => (
-          <div style={{ marginLeft: "10px", display: "flex" }}>
-            <TokenDropDownInput
-              placeholder={placeholder}
-              tokenSymbol={state.tokenSymbol}
-              onClickSymbol={() => console.log("asdf")}
-            />
-            {index === shortCutsState.length -1 && <Icon
-              path={mdiPlus}
-              color="white"
-              size={2}
-              style={{ marginLeft: "10px", cursor: "pointer" }}
-            ></Icon>}
-          </div>
-        ))}
+      <div style={{ width: "1200px", marginTop: "30px" }}>
+        <div style={{ display: "flex" }}>
+          {shortCutsState.slice(0, 3).map((state, index) => (
+            <div style={{ marginLeft: "10px", display: "flex" }}>
+              <TokenDropDownInput
+                placeholder={placeholder}
+                tokenSymbol={state.tokenSymbol}
+                onClickSymbol={(tokenSymbol: string) => {
+                  const temp = [...shortCutsState];
+                  temp[index].tokenSymbol = tokenSymbol;
+                  setShortCutsState(temp);
+                }}
+              />
+              {index === shortCutsState.length - 1 && (
+                <div onClick={onClickIcon}>
+                  <Icon
+                    path={mdiPlus}
+                    color="white"
+                    size={2}
+                    style={{ marginLeft: "10px", cursor: "pointer" }}
+                  ></Icon>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div style={{ display: "flex" }}>
+          {shortCutsState.slice(3, 6).map((state, index) => (
+            <div style={{ marginLeft: "10px", display: "flex" }}>
+              <TokenDropDownInput
+                placeholder={placeholder}
+                tokenSymbol={state.tokenSymbol}
+                onClickSymbol={(tokenSymbol: string) => {
+                  const temp = [...shortCutsState];
+                  temp[index + 3].tokenSymbol = tokenSymbol;
+                  setShortCutsState(temp);
+                }}
+              />
+              {index + 3 === shortCutsState.length - 1 && index !== 2 && (
+                <div onClick={onClickIcon}>
+                  <Icon
+                    path={mdiPlus}
+                    color="white"
+                    size={2}
+                    style={{ marginLeft: "10px", cursor: "pointer" }}
+                  ></Icon>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
         {/* <div style={{ marginLeft: "10px" }}>
           <TokenDropDownInput
             placeholder={placeholder}
