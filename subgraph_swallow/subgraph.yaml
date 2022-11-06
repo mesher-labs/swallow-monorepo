@@ -1,0 +1,27 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Shortcuts
+    network: mumbai
+    source:
+      address: "0x0CF6D3D3FEC650Cf8dABC925f8307ACC997a425C"
+      abi: Shortcuts
+      startBlock: 29008317
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Shortcut
+      abis:
+        - name: Shortcuts
+          file: ./abis/Shortcuts.json
+      eventHandlers:
+        - event: AddShortcut(indexed uint256,(uint256,string,string,address,bool),uint256)
+          handler: handleAddShortcut
+        - event: SetIsReady(indexed uint256,bool)
+          handler: handleSetIsReady
+
+      file: ./src/mapping.ts

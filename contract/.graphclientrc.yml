@@ -1,0 +1,8 @@
+sources:
+  - name: aave-v2-polygon
+    handler:
+      graphql:
+        endpoint: https://api.thegraph.com/subgraphs/name/dmelotik/aave-v2-polygon
+
+documents:
+  - ./scripts/query/aaveQuery.graphql
