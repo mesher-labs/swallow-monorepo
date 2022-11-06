@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
   ${reset}
   * {
     box-sizing: border-box;
+    color: white;
   }
   html {
     background: black;

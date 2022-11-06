@@ -1,26 +1,17 @@
-import { DefaultShortcuts } from "../components/Home/DefaultShortCuts";
-
-import { isUndefined } from "lodash-es";
-
-type localStorageKeyType = "MY_SHORT_CUTS" | "MY_TAG";
-
-enum localStorageKeys {
-  MY_TAG = "MY_TAG",
-  MY_SHORT_CUTS = "MY_SHORT_CUTS",
-}
-
-const getMyShortcuts = () => {
-  /*
-  const rawMyShortCuts: ShortCuts = window.localStorage.getItem(
-    localStorageKeys.MY_SHORT_CUTS
-  );
-  if (isUndefined(myShortCuts)) {
-    return [];
-  }
-  return myShortCuts;
-   */
-};
+import {
+  HomePresenter,
+  Shortcuts,
+  ShortcutTypes,
+} from "../components/Home/HomePresenter";
 
 export const Home = () => {
-  return <h1>react fucking great</h1>;
+  return (
+    <>
+      <HomePresenter shortcutType={Shortcuts.SEND} />
+      <HomePresenter shortcutType={Shortcuts.BUY} />
+      <HomePresenter shortcutType={Shortcuts.AAVE_CURRENT_APY} />
+      <HomePresenter shortcutType={Shortcuts.MULTI_SEND} />
+      <HomePresenter shortcutType={Shortcuts.TOKEN_BALANCE} />
+    </>
+  );
 };
