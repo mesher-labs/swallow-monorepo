@@ -4,8 +4,9 @@ import { COLORS } from "../common/constants/colors";
 import React from "react";
 import localStorageService from "../common/services/local-storage.service";
 import { ethers } from "ethers";
-import Web3 from 'web3'
+import Web3 from "web3";
 import { useWeb3 } from "../App";
+
 const S = {
   Title: styled.h1`
     font-weight: 700;
@@ -60,7 +61,7 @@ const S = {
 };
 export const SignIn = () => {
   const [nickName, setNickName] = useState<string>("");
-  const {setServiceState} = useWeb3();
+  const { setServiceState } = useWeb3();
   const onChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setNickName(e.currentTarget.value);
   };
@@ -68,12 +69,12 @@ export const SignIn = () => {
     if (!nickName.length) return alert("please enter your nickname");
 
     const web3 = new Web3(window.ethereum);
-    const accounts = await web3.eth.requestAccounts()
+    const accounts = await web3.eth.requestAccounts();
 
-    localStorageService.set('nickName', nickName);
-    localStorageService.set('account', accounts[0]);
+    localStorageService.set("nickName", nickName);
+    localStorageService.set("account", accounts[0]);
 
-    setServiceState('home');
+    setServiceState("home");
   };
   return (
     <>

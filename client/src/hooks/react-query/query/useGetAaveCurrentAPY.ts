@@ -11,11 +11,13 @@ const graphQLClient = new GraphQLClient(API_URL, {
 });
 
 export const useGetAaveCurrentAPY = (tokenAddresses: string[]) => {
-  return useQuery(["allShortcuts"], async () => {
+  return useQuery(["aaveCurrentAPY"], async () => {
     let len = tokenAddresses.length;
     let markets = [];
-    for (let i = 0; i < len; i += 1) {
-      const { market } = await graphQLClient.request(gql`
+    try {
+      for (let i = 0; i < len; i += 1) {
+        console.log(tokenAddresses[i].toLowerCase());
+        const { market } = await graphQLClient.request(gql`
       query {
         market (id: ${tokenAddresses[i].toLowerCase()}) {
           id
@@ -32,10 +34,11 @@ export const useGetAaveCurrentAPY = (tokenAddresses: string[]) => {
           }
         }
       }
-    `);
-
-      markets.push(market);
+      `);
+        markets.push(market);
+      }
+    } catch (e) {
+      console.log("aaveCurrentAPY graphql err", e);
     }
-    return markets;
   });
 };

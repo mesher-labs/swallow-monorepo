@@ -8,6 +8,7 @@ import { AddBuyShortCut } from "./pages/AddBuyShortcut";
 import { AddTokenBalanceShortcut } from "./pages/AddTokenBalanceShortcut";
 import { AddAaveApyShortcut } from "./pages/AddAaveApyShortcut";
 import { Header } from "./components/Header";
+import { Browse } from "./pages/Browse";
 
 const Layout = styled.div`
   margin-top: 50px;
@@ -34,12 +35,17 @@ export const Router = () => {
     case "browse":
       return (
         <>
+          <Header />
+          <Layout>
+            <LNB />
+            <Browse />;
+          </Layout>
         </>
-      )
+      );
     case "AddSendShortcut":
       return (
         <>
-          <Header/>
+          <Header />
           <div style={{ display: "flex", marginTop: "50px" }}>
             <AddSendShortCut />
           </div>
@@ -48,7 +54,7 @@ export const Router = () => {
     case "AddBuyShortcut":
       return (
         <>
-          <Header/>
+          <Header />
           <div style={{ display: "flex", marginTop: "50px" }}>
             <AddBuyShortCut />
           </div>
@@ -57,7 +63,7 @@ export const Router = () => {
     case "AddAaveShortcut":
       return (
         <>
-          <Header/>
+          <Header />
           <div style={{ display: "flex", marginTop: "50px" }}>
             <AddAaveApyShortcut />
           </div>
@@ -66,7 +72,7 @@ export const Router = () => {
     case "AddTokenBalanceShortcut":
       return (
         <>
-          <Header/>
+          <Header />
           <div style={{ display: "flex", marginTop: "50px" }}>
             <AddTokenBalanceShortcut />
           </div>

@@ -1,21 +1,19 @@
 import React, { createContext, useContext } from "react";
-import logo from "./logo.svg";
 import { GlobalStyle } from "./GlobalStyle";
-import { Header } from "./components/Header";
-import { SignIn } from "./pages/SignIn";
-import { LNB } from "./components/SideBar/LNB";
-import { AddBuyShortCut } from "./pages/AddBuyShortcut";
-import { AddSendShortCut } from "./pages/AddSendShortcut";
-import { AddAaveApyShortcut } from "./pages/AddAaveApyShortcut";
-import { Home } from "./pages/Home";
 import styled from "styled-components";
-import { AddTokenBalanceShortcut } from "./pages/AddTokenBalanceShortcut";
 import { useEffect, useState } from "react";
 import Web3 from "web3";
 import localStorageService from "./common/services/local-storage.service";
 import { Router } from "./router";
 
-type ServiceState = 'unSigned' | 'home' | 'browse' | 'AddBuyShortcut' | 'AddSendShortcut' | 'AddAaveShortcut' | 'AddTokenBalanceShortcut';
+type ServiceState =
+  | "unSigned"
+  | "home"
+  | "browse"
+  | "AddBuyShortcut"
+  | "AddSendShortcut"
+  | "AddAaveShortcut"
+  | "AddTokenBalanceShortcut";
 
 const Web3Context = createContext<{
   web3: Web3;
@@ -25,33 +23,33 @@ const Web3Context = createContext<{
 }>({
   web3: new Web3(),
   setWeb3: () => {},
-  serviceState: 'home',   
-  setServiceState: () => {}
+  serviceState: "home",
+  setServiceState: () => {},
 }); // 기본 값
 
 export const Web3Provider = ({ children }: any) => {
   const [web3, setWeb3] = useState<Web3>(new Web3());
-  const [serviceState, setServiceState] = useState<ServiceState>('home');
+  const [serviceState, setServiceState] = useState<ServiceState>("home");
 
   useEffect(() => {
     if (!window.ethereum) return alert("please install metamask first");
     window.ethereum.enable().then(() => {
       setWeb3(new Web3(window.ethereum));
-    })
+    });
   }, window.ethereum);
 
-  const account = localStorageService.get('account');
-  const nickName = localStorageService.get('nickName');
+  const account = localStorageService.get("account");
+  const nickName = localStorageService.get("nickName");
 
   useEffect(() => {
-    if(!account || !nickName) setServiceState('unSigned');
-  }, [account, nickName])
+    if (!account || !nickName) setServiceState("unSigned");
+  }, [account, nickName]);
 
   const value = {
     web3,
     setWeb3,
     serviceState,
-    setServiceState
+    setServiceState,
   };
 
   return <Web3Context.Provider value={value}>{children}</Web3Context.Provider>;
