@@ -19,7 +19,7 @@ import {
   DefaultAaveCurrentAPYShortcut,
   DefaultMultiSendShortcut,
   DefaultTokenBalanceShortcut,
-} from "./DefaultShortcuts";
+} from "./DefaultShortCuts";
 import { isUndefined, isNull } from "lodash-es";
 
 export interface HomePresenterProps {
