@@ -16,15 +16,15 @@ function App() {
     <>
       <GlobalStyle />
       <Header />
-      {/* <Layout>
+      <Layout>
         <LNB />
         <Home />
-      </Layout> */}
+      </Layout>
       {/* <SignIn /> */}
       {/* <AddBuyShortCut/> */}
       {/* <AddSendShortCut/> */}
       {/* <AddAaveApyShortcut /> */}
-      <AddTokenBalanceShortcut />
+      {/*<AddTokenBalanceShortcut /> */}
       {/* <LNB/> */}
     </>
   );
