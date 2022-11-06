@@ -1,14 +1,16 @@
 import Icon from "@mdi/react";
+import styled from "styled-components";
+import localStorageService from "../common/services/local-storage.service";
+
 import { mdiArrowLeft } from "@mdi/js";
 import { COLORS } from "../common/constants/colors";
-import styled from "styled-components";
 import { TextInput } from "../components/AddShortcut/TextInput";
 import { TokenDropDownList } from "../components/AddShortcut/TokenDropDownList";
 import { TokenDropDownInput } from "../components/AddShortcut/TokenDropDownInput";
 import { useState } from "react";
 import { AddShortCutButton } from "../components/AddShortcut/Button";
-import { useGetAllShortcuts } from '../hooks/react-query/query/useGetAllShortcuts';
-import localStorageService from "../common/services/local-storage.service";
+import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
+import { ShortcutRes } from "../common/types/short-cuts.types";
 
 const S = {
   Title: styled.h1`
@@ -38,24 +40,26 @@ export const AddBuyShortCut = () => {
     fromToken: "",
     amount: "",
   });
-   const {data: allShortcuts, isLoading} = useGetAllShortcuts();
+  const { data: allShortcuts, isLoading } = useGetAllShortcuts();
 
-   if(isLoading || !allShortcuts) return <></>;
+  if (isLoading || !allShortcuts) return <></>;
 
-   const addBuyShortCut = allShortcuts.find(shortCut => shortCut.shortcutType === 'BUY');
+  const addBuyShortCut = allShortcuts.find(
+    (shortCut: ShortcutRes) => shortCut.shortcutType === "BUY",
+  );
 
-   if(!addBuyShortCut) return <></>;
-   
+  if (!addBuyShortCut) return <></>;
+
   const onChangeToToken = (tokenSymbol: string) => {
-    if(tokenSymbol === shortCutData.fromToken) return;
+    if (tokenSymbol === shortCutData.fromToken) return;
     setShortCutData({
       ...shortCutData,
       toToken: tokenSymbol,
     });
-  }
-  
+  };
+
   const onChangeFromToken = (tokenSymbol: string) => {
-    if(tokenSymbol === shortCutData.toToken) return;
+    if (tokenSymbol === shortCutData.toToken) return;
     setShortCutData({
       ...shortCutData,
       fromToken: tokenSymbol,
@@ -72,13 +76,13 @@ export const AddBuyShortCut = () => {
     addBuyShortCut.userParams = [
       { name: "sellToken", value: shortCutData.fromToken },
       { name: "buyToken", value: shortCutData.toToken },
-      { name: "sellAmount", value: shortCutData.amount},
-    ]
-    localStorageService.add('myShortCut', addBuyShortCut);
-  }
+      { name: "sellAmount", value: shortCutData.amount },
+    ];
+    localStorageService.add("myShortCut", addBuyShortCut);
+  };
 
   return (
-    <div style={{marginLeft: '50px', width: '100vw'}}>
+    <div style={{ marginLeft: "50px", width: "100vw" }}>
       <S.Title>Add Buy ShortCuts</S.Title>
       <div style={{ display: "flex", marginTop: "67px", alignItems: "center" }}>
         <S.SubTitle>Buy</S.SubTitle>
@@ -103,7 +107,7 @@ export const AddBuyShortCut = () => {
           onClickSymbol={onChangeFromToken}
         ></TokenDropDownInput>
       </div>
-      <AddShortCutButton onClickHandler={onClickButton}/>
+      <AddShortCutButton onClickHandler={onClickButton} />
     </div>
   );
 };
