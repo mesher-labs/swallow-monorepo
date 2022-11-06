@@ -1,5 +1,9 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../common/constants/colors";
+import React from "react";
+import localStorageService from "../common/services/local-storage.service";
+import { ethers } from "ethers";
 const S = {
   Title: styled.h1`
     font-weight: 700;
@@ -52,14 +56,34 @@ const S = {
     cursor: pointer;
   `,
 };
-export const SignIn = () => (
-  <>
-    <S.Title>Swallow</S.Title>
-    <S.SubTitle>Swallowing all DeFi</S.SubTitle>
-    <S.Form>
-      <S.FormTitle>Make your own tag of address</S.FormTitle>
-      <S.FormInput placeholder="ex) @eth_sf" />
-      <S.FormButton>sign in</S.FormButton>
-    </S.Form>
-  </>
-);
+export const SignIn = () => {
+  const [nickName, setNickName] = useState<string>("");
+  const onChangeHandler = (e: React.FormEvent<HTMLInputElement>) => {
+    setNickName(e.currentTarget.value);
+  };
+  const onSignIn = async () => {
+    if (!nickName.length) return alert("please enter your nickname");
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+
+    localStorageService.set("swallow-nickName", nickName);
+    localStorageService.set("swallow-address", await signer.getAddress());
+  };
+  return (
+    <>
+      <S.Title>Swallow</S.Title>
+      <S.SubTitle>Swallowing all DeFi</S.SubTitle>
+      <S.Form>
+        <S.FormTitle>Make your own tag of address</S.FormTitle>
+        <S.FormInput
+          placeholder="ex) @eth_sf"
+          value={nickName}
+          onChange={onChangeHandler}
+        />
+        <S.FormButton onClick={onSignIn}>sign in</S.FormButton>
+      </S.Form>
+    </>
+  );
+};
