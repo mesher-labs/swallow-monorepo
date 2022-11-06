@@ -3,8 +3,16 @@ import {
   ShortcutTypes,
   ShortcutRes,
 } from "../../../common/types/short-cuts.types";
+import { GraphQLClient, gql } from "graphql-request";
 
-// TODO : the graph로 교체
+const API_URL = `https://api.thegraph.com/subgraphs/name/evergreengh/swallow`;
+
+const graphQLClient = new GraphQLClient(API_URL, {
+  headers: {
+    //Authorization: `Bearer ${process.env.API_KEY}`
+  },
+});
+
 const getAllShortcuts = (): ShortcutRes[] => {
   return [
     {
@@ -56,5 +64,23 @@ const getAllShortcuts = (): ShortcutRes[] => {
 
 export const useGetAllShortcuts = () => {
   const queryClient = useQueryClient();
-  return useQuery(["allShortcuts"], () => getAllShortcuts());
+  return useQuery(["allShortcuts"], async () => {
+    const { shortcuts } = await graphQLClient.request(gql`
+      query {
+        shortcuts {
+          id
+          index
+          shortcutType
+          userParams {
+            name
+            value
+          }
+          endpoint
+          isReady
+        }
+      }
+    `);
+    console.log("gogogogogogogog", shortcuts);
+    return shortcuts;
+  });
 };
