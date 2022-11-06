@@ -6,6 +6,7 @@ import { mdiPlus } from "@mdi/js";
 import { useEffect, useState } from "react";
 import Icon from "@mdi/react";
 import localStorageService from "../common/services/local-storage.service";
+import { useGetAllShortcuts } from "../hooks/react-query/query/useGetAllShortcuts";
 
 const S = {
   Title: styled.h1`
@@ -49,11 +50,27 @@ export const AddTokenBalanceShortcut = () => {
     setAccount(localStorageService.get("account") || "");
   }, []);
 
+  const { data: allShortcuts, isLoading } = useGetAllShortcuts();
+
+  if (isLoading || !allShortcuts) return <></>;
+
+  const shortCut = allShortcuts.find(
+    (shortCut: any) => shortCut.shortcutType === "TOKEN_BALANCE"
+  );
+
+  if (!shortCut) return <></>;
+
   const onClickIcon = () => {
     setShortCutsState([...shortCutsState, { tokenSymbol: "" }]);
   };
+
+  const onClickButton = () => {
+    shortCut.userParams = shortCutsState.map(state => ({ name : 'tokenSymbol', value : state.tokenSymbol}));
+    localStorageService.add('myShortCut', shortCut);
+  }
+
   return (
-    <div style={{marginLeft: '50px', width: '100vw'}}>
+    <div style={{ marginLeft: "50px", width: "100vw" }}>
       <S.Title>Add Token Balance Shortcuts</S.Title>
       <S.Caption>
         *target Address: {nickName}({account})
@@ -111,7 +128,7 @@ export const AddTokenBalanceShortcut = () => {
           ))}
         </div>
       </div>
-      <AddShortCutButton onClickHandler={() => console.log("asdf")} />
+      <AddShortCutButton onClickHandler={onClickButton} />
     </div>
   );
 };

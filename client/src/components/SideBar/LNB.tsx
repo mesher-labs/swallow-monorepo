@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiHome, mdiEarthPlus } from "@mdi/js";
 import { COLORS } from "../../common/constants/colors";
+import { useWeb3 } from "../../App";
 
 const S = {
   LNB: styled.div`
@@ -30,18 +31,30 @@ const commonStyle = {
   cursor: "pointer",
 };
 
-export const LNB = () => (
-  <>
-    <S.LNB>
-      <Icon
-        path={mdiHome}
-        style={{ ...commonStyle, color: COLORS.white }}
-      ></Icon>
-      <S.Line />
-      <Icon
-        path={mdiEarthPlus}
-        style={{ ...commonStyle, color: COLORS.blueGray }}
-      ></Icon>
-    </S.LNB>
-  </>
-);
+type SideBarType = "HOME" | "BROWSE";
+export const LNB = () => {
+  const { setServiceState } = useWeb3();
+  const onClickLNB = (sideBarType: SideBarType) => {
+    if (sideBarType === "HOME") setServiceState("home");
+    if (sideBarType === "BROWSE") setServiceState("browse");
+  };
+  return (
+    <>
+      <S.LNB>
+        <div onClick={() => onClickLNB("HOME")}>
+          <Icon
+            path={mdiHome}
+            style={{ ...commonStyle, color: COLORS.white }}
+          ></Icon>
+        </div>
+        <S.Line />
+        <div onClick={() => onClickLNB("BROWSE")}>
+          <Icon
+            path={mdiEarthPlus}
+            style={{ ...commonStyle, color: COLORS.blueGray }}
+          ></Icon>
+        </div>
+      </S.LNB>
+    </>
+  );
+};

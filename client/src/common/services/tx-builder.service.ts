@@ -6,7 +6,7 @@ import localStorageService from "./local-storage.service";
 import { ethers } from "ethers";
 import { TokenService } from "./tokens.service";
 
-type TransactionTypes = ShortcutTypes | "APPROVE" | "ALLOWANCE";
+type TransactionTypes = ShortcutTypes | "APPROVE" | "ALLOWANCE" | "BALANCE_OF";
 
 class TxBuilderService {
   constructor() {}
@@ -14,12 +14,20 @@ class TxBuilderService {
     const from = localStorageService.get("account") || "";
     switch (type) {
       case "SEND": {
-        const data = EthersUtil.encodeFunctionData("transfer", this.toParams(type, paramsDto));
-        return {
-          data,
-          to: TokenService.findAddressBySymbol(paramsDto.token),
-          from,
-        };
+        if (paramsDto.token === "MATIC") {
+          return {
+            from,
+            to: paramsDto.recipientAddress,
+            value: ethers.utils.parseEther(paramsDto.amount),
+          };
+        } else {
+          const data = EthersUtil.encodeFunctionData("transfer", this.toParams(type, paramsDto));
+          return {
+            data,
+            to: TokenService.findAddressBySymbol(paramsDto.token),
+            from,
+          };
+        }
       }
       case "BUY": {
         const params: SwapQuoteParams = {
@@ -48,6 +56,13 @@ class TxBuilderService {
           from,
         };
       }
+      case "BALANCE_OF": {
+        const data = EthersUtil.encodeFunctionData("balanceOf", this.toParams(type, paramsDto));
+        return {
+          data,
+          to: TokenService.findAddressBySymbol(paramsDto.token),
+        };
+      }
       default:
         throw new Error("");
     }
@@ -60,6 +75,8 @@ class TxBuilderService {
         return [paramsDto.spender, ethers.constants.MaxUint256];
       case "ALLOWANCE":
         return [paramsDto.owner, paramsDto.spender];
+      case "BALANCE_OF":
+        return [paramsDto.account];
       default:
         throw new Error("");
     }
