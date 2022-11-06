@@ -110,20 +110,6 @@ export const AddTokenBalanceShortcut = () => {
             </div>
           ))}
         </div>
-        {/* <div style={{ marginLeft: "10px" }}>
-          <TokenDropDownInput
-            placeholder={placeholder}
-            tokenSymbol="USDT"
-            onClickSymbol={() => console.log("asdf")}
-          />
-        </div>
-        <div style={{ marginLeft: "10px" }}>
-          <TokenDropDownInput
-            placeholder={placeholder}
-            tokenSymbol="USDT"
-            onClickSymbol={() => console.log("asdf")}
-          />
-        </div> */}
       </div>
       <AddShortCutButton onClickHandler={() => console.log("asdf")} />
     </div>

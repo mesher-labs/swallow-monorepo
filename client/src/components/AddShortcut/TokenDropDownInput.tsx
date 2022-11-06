@@ -5,6 +5,7 @@ import { COLORS } from "../../common/constants/colors";
 import { TokenDropDownList } from "./TokenDropDownList";
 import { useState } from "react";
 import { ShortCutData } from "../../pages/AddBuyShortcut";
+import { TOKENS } from "../../common/constants/tokens";
 
 const S = {
   Form: styled.div`
@@ -29,37 +30,6 @@ const S = {
   `,
 };
 
-const dummyData = {
-  tokenList: [
-    {
-      symbol: "BTC",
-    },
-    {
-      symbol: "USDT",
-    },
-    {
-      symbol: "ETH",
-    },
-    {
-      symbol: "USDT",
-    },
-    {
-      symbol: "USDT",
-    },
-    {
-      symbol: "USDT",
-    },
-    {
-      symbol: "USDT",
-    },
-    {
-      symbol: "USDT",
-    },
-    {
-      symbol: "USDT",
-    },
-  ],
-};
 
 interface Props {
   placeholder: string;
@@ -96,7 +66,7 @@ export const TokenDropDownInput = ({ placeholder, tokenSymbol, onClickSymbol }: 
       {isClicked ? (
         <div style={{ position: "absolute", right: "0", zIndex: 999 }}>
           <TokenDropDownList
-            tokenList={dummyData.tokenList}
+            tokenList={TOKENS}
             onClickHanlder={onClickHanlder}
           ></TokenDropDownList>
         </div>

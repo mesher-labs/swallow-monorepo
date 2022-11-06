@@ -72,7 +72,7 @@ export const AddBuyShortCut = () => {
     addBuyShortCut.userParams = [
       { name: "sellToken", value: shortCutData.fromToken },
       { name: "buyToken", value: shortCutData.toToken },
-      { name: "buyAmount", value: shortCutData.amount},
+      { name: "sellAmount", value: shortCutData.amount},
     ]
     localStorageService.add('myShortCut', addBuyShortCut);
   }
