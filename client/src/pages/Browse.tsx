@@ -6,7 +6,7 @@ import {
   DefaultAaveCurrentAPYShortcut,
   DefaultMultiSendShortcut,
   DefaultTokenBalanceShortcut,
-} from "../components/Home/DefaultShortcuts";
+} from "../components/Home/DefaultShortCuts";
 
 export const Browse = () => {
   return (
